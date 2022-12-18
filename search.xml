@@ -1,31 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>网站搭建以及优化改造</title>
-    <url>/2022/12/17/%E5%A6%82%E4%BD%95%E7%94%A8hexo%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%BD%91%E7%AB%99%E5%B9%B6%E4%BB%A5Next%E4%B8%BB%E9%A2%98%E4%B8%BA%E4%BE%8B%E6%9D%A5%E8%BF%9B%E8%A1%8C%E4%BC%98%E5%8C%96%E6%94%B9%E9%80%A0/</url>
-    <content><![CDATA[<p>如果你也有搭个网站的想法，那么恭喜你看完这篇文章后，你也可以拥有一个类似的博客！</p>
-<span id="more"></span>
-<h1 id="如何用hexo搭建一个网站"><a href="#如何用hexo搭建一个网站" class="headerlink" title="如何用hexo搭建一个网站"></a>如何用hexo搭建一个网站</h1><ul>
-<li>列表1</li>
-<li>列表2<br>  a子列表1<br>  b子列表2</li>
-</ul>
-<hr>
-<p>分割线</p>
-<h1 id="以Next主题为例来进行优化改造"><a href="#以Next主题为例来进行优化改造" class="headerlink" title="以Next主题为例来进行优化改造"></a>以Next主题为例来进行优化改造</h1><p><a href="https://www.bilibili.com/video/BV16W411t7mq?p=1&vd_source=1e56c5282fb34ebc3bc5d2b2b4c8d5a7">参考视频</a><br><em>斜线字体</em><br><strong>加粗字体</strong><br><code>&lt;html&gt;&lt;\html&gt;</code></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>试一试引用</p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>博客搭建</category>
-      </categories>
-      <tags>
-        <tag>分享</tag>
-        <tag>博客搭建</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>如何使用Markdown+ Typora</title>
     <url>/2022/12/18/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8Markdown-Typora/</url>
     <content><![CDATA[<h1 id="如何使用Markdown-Typora"><a href="#如何使用Markdown-Typora" class="headerlink" title="如何使用Markdown+ Typora"></a>如何使用Markdown+ Typora</h1><h2 id="简要介绍"><a href="#简要介绍" class="headerlink" title="简要介绍"></a>简要介绍</h2><p><strong>Markdown</strong> 是一种轻量型标记语言, 是一种语法. 以 <code>.md</code> 结尾的文本文件就是 Markdown 文件. 相较于 <strong>Word</strong>, 它更加像是 <strong>HTML</strong> 语言或是 $\LaTeX$, 并不是最淳朴的那种”所见即所得”. 它处处透露着一种极简主义. 高效简洁清晰的同时, 又很简单. 看起来舒服, 语法简单, 尤其在处理纯文本上有很大的优势. </p>
@@ -288,6 +263,31 @@
 ]]></content>
       <tags>
         <tag>-Tyraro -Markdown</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>网站搭建以及优化改造</title>
+    <url>/2022/12/17/%E5%A6%82%E4%BD%95%E7%94%A8hexo%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%BD%91%E7%AB%99%E5%B9%B6%E4%BB%A5Next%E4%B8%BB%E9%A2%98%E4%B8%BA%E4%BE%8B%E6%9D%A5%E8%BF%9B%E8%A1%8C%E4%BC%98%E5%8C%96%E6%94%B9%E9%80%A0/</url>
+    <content><![CDATA[<p>如果你也有搭个网站的想法，那么恭喜你看完这篇文章后，你也可以拥有一个类似的博客！</p>
+<span id="more"></span>
+<h1 id="如何用hexo搭建一个网站"><a href="#如何用hexo搭建一个网站" class="headerlink" title="如何用hexo搭建一个网站"></a>如何用hexo搭建一个网站</h1><ul>
+<li>列表1</li>
+<li>列表2<br>  a子列表1<br>  b子列表2</li>
+</ul>
+<hr>
+<p>分割线</p>
+<h1 id="以Next主题为例来进行优化改造"><a href="#以Next主题为例来进行优化改造" class="headerlink" title="以Next主题为例来进行优化改造"></a>以Next主题为例来进行优化改造</h1><p><a href="https://www.bilibili.com/video/BV16W411t7mq?p=1&vd_source=1e56c5282fb34ebc3bc5d2b2b4c8d5a7">参考视频</a><br><em>斜线字体</em><br><strong>加粗字体</strong><br><code>&lt;html&gt;&lt;\html&gt;</code></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>试一试引用</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>博客搭建</category>
+      </categories>
+      <tags>
+        <tag>分享</tag>
+        <tag>博客搭建</tag>
       </tags>
   </entry>
   <entry>
