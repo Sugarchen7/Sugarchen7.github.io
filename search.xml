@@ -1,6 +1,315 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>LaTex的基本语法</title>
+    <url>/2022/12/20/LaTex%E7%9A%84%E4%BD%BF%E7%94%A8/</url>
+    <content><![CDATA[<p>本文是B站以下两视频的学习笔记<br><a href="https://www.bilibili.com/video/BV15x411j7k6?p=1&amp;vd_source=1e56c5282fb34ebc3bc5d2b2b4c8d5a7">latex中文教程-15集从入门到精通包</a></p>
+<p><a href="https://www.bilibili.com/video/BV1Zh411y7ps/?spm_id_from=333.337.search-card.all.click&amp;vd_source=1e56c5282fb34ebc3bc5d2b2b4c8d5a7">数模&amp;美赛之LaTeX攻破</a></p>
+<h1 id="LaTeX-的基本框架"><a href="#LaTeX-的基本框架" class="headerlink" title="$LaTeX$的基本框架"></a>$LaTeX$的基本框架</h1><figure class="highlight less"><table><tr><td class="code"><pre><span class="line">%导言区</span><br><span class="line">\<span class="selector-tag">documentclass</span>&#123;<span class="selector-tag">article</span>&#125; %这里有<span class="selector-tag">article</span> <span class="selector-tag">book</span> <span class="selector-tag">letter</span> <span class="selector-tag">report</span>等格式</span><br><span class="line">\<span class="selector-tag">usepackage</span>&#123;<span class="selector-tag">ctex</span>&#125; % 引入中文包,可以在正文区里输入中文</span><br><span class="line">\<span class="selector-tag">author</span>&#123;<span class="selector-tag">Carl</span>&#125;</span><br><span class="line">\<span class="selector-tag">date</span> &#123;\<span class="selector-tag">today</span>&#125;</span><br><span class="line">\<span class="selector-tag">title</span>&#123;<span class="selector-tag">My</span> <span class="selector-tag">first</span> <span class="selector-tag">document</span>&#125;</span><br><span class="line">%正文区<span class="selector-tag">-</span>一个<span class="selector-tag">LaTeX</span>文件中只有一个正文去</span><br><span class="line">\<span class="selector-tag">begin</span>&#123;<span class="selector-tag">document</span>&#125;	</span><br><span class="line">	\<span class="selector-tag">maketitle</span>	%在<span class="selector-tag">letter</span>中无法使用此命令</span><br><span class="line">	</span><br><span class="line">	<span class="selector-tag">hello</span> <span class="selector-tag">world</span></span><br><span class="line">	你好世界</span><br><span class="line">			%这里用空行可以另起一行</span><br><span class="line">	这是一个公式:$<span class="selector-tag">f</span>(x)=<span class="selector-tag">x</span>^<span class="number">2</span>+<span class="number">2</span><span class="selector-tag">x</span>+<span class="number">1</span>$ %单美元符号 接在后面输入公式</span><br><span class="line">	</span><br><span class="line">	这是另一个公式:$$<span class="selector-tag">f</span>(x)=<span class="number">3</span><span class="selector-tag">x</span>^<span class="number">2</span>+<span class="number">2</span><span class="selector-tag">x</span>+<span class="number">1</span>$$ %双美元符号 另起一行输入公式</span><br><span class="line">\<span class="selector-tag">end</span>&#123;<span class="selector-tag">document</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="LaTeX-中文架构的搭建"><a href="#LaTeX-中文架构的搭建" class="headerlink" title="$LaTeX$ 中文架构的搭建"></a>$LaTeX$ 中文架构的搭建</h1><h2 id="首先设置"><a href="#首先设置" class="headerlink" title="首先设置"></a>首先设置</h2><ul>
+<li>选项-构建-XeLaTeX</li>
+<li>编译器-UTF-8</li>
+</ul>
+<h2 id="搭建中文架构"><a href="#搭建中文架构" class="headerlink" title="搭建中文架构"></a>搭建中文架构</h2><p>ctex 宏包和文档类2进一步封装了 CJK、xeCJK、luatexja 等宏包，使得用户在排版中文时 不用再考虑排版引擎等细节。</p>
+<p>ctex 宏包本身用于配合各种文档类排版中文，而 ctex 文档类对 LATEX 的标准文档类进行了封装，对一些排版根据中文排版习惯做了调整，包括 ctexart / ctexrep / ctexbook。ctex 宏包和文档类能够识别操作系统和 TEX 发行版中安装的中文字体，因此基本 无需额外配置即可排版中文文档。<a href="lshort-zh-cn">^1</a></p>
+<p>下面举一个使用 ctex 文档类排版中文的最简例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">\documentclass&#123;ctexart&#125;</span><br><span class="line">\begin&#123;document&#125;</span><br><span class="line">在\LaTeX&#123;&#125;中排版中文。</span><br><span class="line">汉字和English单词混排，通常不需要在中英文之间添加额外的空格。</span><br><span class="line">当然，为了代码的可读性，加上汉字和 English 之间的空格也无妨。</span><br><span class="line">汉字换行时不会引入多余的空格。</span><br><span class="line">\end&#123;document&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="LaTeX-字体字号的设置"><a href="#LaTeX-字体字号的设置" class="headerlink" title="$LaTeX$ 字体字号的设置"></a>$LaTeX$ 字体字号的设置</h1><h2 id="字体设置的两种方式"><a href="#字体设置的两种方式" class="headerlink" title="字体设置的两种方式"></a>字体设置的两种方式</h2><ul>
+<li>字体声明 <code>\texterm&#123;Roman Family&#125;</code></li>
+<li>字体命令<code>&#123;\texterm Roman Family&#125; %这里的大括号表示作用的范围</code></li>
+</ul>
+<h2 id="字体族的设置"><a href="#字体族的设置" class="headerlink" title="字体族的设置"></a>字体族的设置</h2><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+<th align="center"></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>\rmfamily</td>
+<td>\textrm{…}</td>
+<td>roman</td>
+<td align="center">衬线字体（罗马体）</td>
+</tr>
+<tr>
+<td>\sffamily</td>
+<td>\textsf{…}</td>
+<td>sans serif</td>
+<td align="center">无衬线字体</td>
+</tr>
+<tr>
+<td>\ttfamily</td>
+<td>\texttt{…}</td>
+<td>typewriter</td>
+<td align="center">等宽字体</td>
+</tr>
+</tbody></table>
+<h2 id="字体系列的设置-粗细"><a href="#字体系列的设置-粗细" class="headerlink" title="字体系列的设置(粗细)"></a>字体系列的设置(粗细)</h2><table>
+<thead>
+<tr>
+<th>\mdseries</th>
+<th>\textmd{…}</th>
+<th>medium</th>
+<th>正常粗细（中等）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>\bfseries</td>
+<td>\textbf{…}</td>
+<td><strong>bold face</strong></td>
+<td>粗体</td>
+</tr>
+</tbody></table>
+<h2 id="字体形状的设置"><a href="#字体形状的设置" class="headerlink" title="字体形状的设置"></a>字体形状的设置</h2><table>
+<thead>
+<tr>
+<th>\upshape</th>
+<th>\upshape</th>
+<th>upright</th>
+<th>直立体</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>\itshape</td>
+<td>\textit{…}</td>
+<td>italic</td>
+<td>意大利斜体</td>
+</tr>
+<tr>
+<td>\slshape</td>
+<td>\textsl{…}</td>
+<td>slanted</td>
+<td>倾斜体</td>
+</tr>
+<tr>
+<td>\scshape</td>
+<td>\textsc{…}</td>
+<td>SMALL CAPS</td>
+<td>小型大写字母</td>
+</tr>
+</tbody></table>
+<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="comment">%字体字号设置</span></span><br><span class="line"><span class="keyword">\documentclass</span>[10pt]&#123;article&#125;<span class="comment">%10磅是默认正常的字体大小，即下文中的normalsize</span></span><br><span class="line"><span class="keyword">\usepackage</span>&#123;ctex&#125;</span><br><span class="line"><span class="keyword">\newcommand</span>&#123;<span class="keyword">\myfont</span>&#125;&#123;<span class="keyword">\textbf</span>&#123;<span class="keyword">\textsf</span>&#123;Fancy Text&#125;&#125;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">%正文区</span></span><br><span class="line"><span class="keyword">\begin</span>&#123;document&#125;</span><br><span class="line"><span class="comment">%字体族设置(罗马字体、无衬线字体、打字机字体)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">\textrm</span>&#123;Roman Family&#125; <span class="keyword">\textsf</span>&#123;Scan Serif Family&#125;<span class="keyword">\texttt</span>&#123;Typewriter Family&#125;<span class="comment">%\textrm等是字体命令，大括号里是作用到的文字</span></span><br><span class="line"></span><br><span class="line">&#123;<span class="keyword">\rmfamily</span> Roman Family&#125; &#123;<span class="keyword">\sffamily</span> Scan Serif Family&#125;&#123;<span class="keyword">\ttfamily</span> Typewriter Family&#125;<span class="comment">%\rmfamily是字体声明，后面紧跟的文字是作用到的文字</span></span><br><span class="line"></span><br><span class="line">&#123;<span class="keyword">\sffamily</span> Who are you?you find self on everyone around.take you as the same as others!&#125;</span><br><span class="line">&#123;<span class="keyword">\ttfamily</span> Are you aiser than others?&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">%字体系列设置(粗细、宽度)，\textbf可以对字体加粗</span></span><br><span class="line"><span class="keyword">\textmd</span>&#123;Medium Series&#125; <span class="keyword">\textbf</span>&#123;Boldface Series&#125;<span class="comment">%\textmd等是字体命令，大括号里是作用到的文字</span></span><br><span class="line">&#123;<span class="keyword">\mdseries</span> Medium Series&#125; &#123;<span class="keyword">\bfseries</span> Boldface Series&#125;<span class="comment">%字体声明</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">%字体形状(直立、斜体、伪斜体、小型大写)</span></span><br><span class="line"><span class="keyword">\textup</span>&#123;Upright Shape&#125; <span class="keyword">\textit</span>&#123;Italic Shape&#125; <span class="comment">%字体命令</span></span><br><span class="line"><span class="keyword">\textsl</span>&#123;Slanted Shape&#125; <span class="keyword">\textsc</span>&#123;Small Caps Shape&#125;</span><br><span class="line"></span><br><span class="line">&#123;<span class="keyword">\upshape</span> Upright Shape&#125; &#123;<span class="keyword">\itshape</span> Italic Shape &#125;<span class="comment">%字体声明</span></span><br><span class="line">&#123;<span class="keyword">\slshape</span> Slanted Shape&#125;</span><br><span class="line">&#123;<span class="keyword">\scshape</span> Small Caps Shape&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="英文字体大小的设置"><a href="#英文字体大小的设置" class="headerlink" title="英文字体大小的设置"></a>英文字体大小的设置</h2><p>控制文档的参数:<code>\documentclass[11pt]&#123;article&#125;</code>                 </p>
+<table>
+<thead>
+<tr>
+<th>字号</th>
+<th>10pt 选项（默认）</th>
+<th>11pt 选项</th>
+<th>12pt 选项</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>\tiny</td>
+<td>5pt</td>
+<td>6pt</td>
+<td>6pt</td>
+</tr>
+<tr>
+<td>\scriptsize</td>
+<td>7pt</td>
+<td>8pt</td>
+<td>8pt</td>
+</tr>
+<tr>
+<td>\footnotesize</td>
+<td>8pt</td>
+<td>9pt</td>
+<td>10pt</td>
+</tr>
+<tr>
+<td>\small</td>
+<td>9pt</td>
+<td>10pt</td>
+<td>10.95pt</td>
+</tr>
+<tr>
+<td>\normalsize</td>
+<td>10pt</td>
+<td>10.95pt</td>
+<td>12pt</td>
+</tr>
+<tr>
+<td>\large</td>
+<td>12pt</td>
+<td>12pt</td>
+<td>14.4pt</td>
+</tr>
+<tr>
+<td>\Large</td>
+<td>14.4pt</td>
+<td>14.4pt</td>
+<td>17.28pt</td>
+</tr>
+<tr>
+<td>\LARGE</td>
+<td>17.28pt</td>
+<td>17.28pt</td>
+<td>20.74pt</td>
+</tr>
+<tr>
+<td>\huge</td>
+<td>20.74pt</td>
+<td>20.74pt</td>
+<td>24.88pt</td>
+</tr>
+<tr>
+<td>\Huge</td>
+<td>24.88pt</td>
+<td>24.88pt</td>
+<td>24.88pt</td>
+</tr>
+</tbody></table>
+<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="comment">%字体大小</span></span><br><span class="line">&#123;<span class="keyword">\tiny</span>  Hello &#125;<span class="keyword">\\</span></span><br><span class="line">&#123;<span class="keyword">\scriptsize</span>  Hello &#125;<span class="keyword">\\</span></span><br><span class="line">&#123;<span class="keyword">\footnotesize</span>  Hello &#125;<span class="keyword">\\</span></span><br><span class="line">&#123;<span class="keyword">\small</span>  Hello &#125;<span class="keyword">\\</span></span><br><span class="line">&#123;<span class="keyword">\normalsize</span>  Hello &#125;<span class="keyword">\\</span></span><br><span class="line">&#123;<span class="keyword">\large</span>  Hello &#125;<span class="keyword">\\</span></span><br><span class="line">&#123;<span class="keyword">\Large</span>  Hello &#125;<span class="keyword">\\</span></span><br><span class="line">&#123;<span class="keyword">\LARGE</span>  Hello &#125;<span class="keyword">\\</span></span><br><span class="line">&#123;<span class="keyword">\huge</span>  Hello &#125;<span class="keyword">\\</span> </span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="中文字体的设置"><a href="#中文字体的设置" class="headerlink" title="中文字体的设置"></a>中文字体的设置</h2><p>在引入了中文宏包后</p>
+<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line">&#123;<span class="keyword">\songti</span> 宋体&#125; <span class="keyword">\quad</span> &#123;<span class="keyword">\heiti</span> 黑体&#125; <span class="keyword">\quad</span> &#123;<span class="keyword">\fangsong</span> 仿宋&#125; <span class="keyword">\quad</span> &#123;<span class="keyword">\kaiti</span> 楷体&#125;</span><br><span class="line"><span class="comment">%中文的粗细设置</span></span><br><span class="line"><span class="keyword">\textbf</span>&#123;粗体&#125; <span class="keyword">\quad</span> <span class="keyword">\textit</span>&#123;斜体&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="中文字体大小的设置"><a href="#中文字体大小的设置" class="headerlink" title="中文字体大小的设置"></a>中文字体大小的设置</h2><figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\zihao</span>&#123;5&#125; <span class="comment">%里面填字号</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="函数与字体设置分离的思想"><a href="#函数与字体设置分离的思想" class="headerlink" title="函数与字体设置分离的思想"></a>函数与字体设置分离的思想</h2><p>在导言区中设置函数<code>\newcommand&#123;\myfont&#125;&#123;\textbf&#123;\textbf&#125;&#123;\textsf&#123;Fancy Text&#125;&#125;&#125;</code></p>
+<p>在正文中使用命令<code>\myfont</code></p>
+<hr>
+<h1 id="LaTeX-的篇章结构"><a href="#LaTeX-的篇章结构" class="headerlink" title="$LaTeX$ 的篇章结构"></a>$LaTeX$ 的篇章结构</h1><h3 id="标题的设置"><a href="#标题的设置" class="headerlink" title="标题的设置"></a>标题的设置</h3><ul>
+<li><code>\section</code>为一级标题</li>
+<li><code>\subsection</code>为二级标题</li>
+<li><code>\subsubsection</code>为三级标题 ….</li>
+</ul>
+<p>在导言区可以设置标题的格式[^2]</p>
+<p>[^2]:详情见ctext 第七章标题格式的设置</p>
+<h2 id="换行"><a href="#换行" class="headerlink" title="换行"></a>换行</h2><ol>
+<li><strong>空一行</strong>  (推荐使用这个)</li>
+<li>\ \ 两个反斜杠 注意此时首行不缩进</li>
+<li><code>\par</code>使用命令</li>
+</ol>
+<h2 id="ctextbook"><a href="#ctextbook" class="headerlink" title="ctextbook"></a>ctextbook</h2><ul>
+<li><code>\chart</code>设置章节</li>
+<li><code>\tableofcontents</code>设置目录</li>
+</ul>
+<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="comment">%文档基本结构</span></span><br><span class="line"><span class="keyword">\documentclass</span>&#123;article&#125;</span><br><span class="line"><span class="keyword">\title</span>&#123;First Tex File&#125;</span><br><span class="line"><span class="keyword">\author</span>&#123;Carl&#125;</span><br><span class="line"><span class="keyword">\date</span>&#123;<span class="keyword">\today</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">\usepackage</span>&#123;ctex&#125;</span><br><span class="line"><span class="comment">%正文区</span></span><br><span class="line"><span class="keyword">\begin</span>&#123;document&#125;</span><br><span class="line">	<span class="keyword">\maketitle</span><span class="comment">%使得导言区的设置生效</span></span><br><span class="line">	<span class="keyword">\section</span>&#123;引言&#125;</span><br><span class="line">	中国人口模式的转变发生于民国时期 关于民国的进步,我只讲两个过去人们比较忽略的问题。	一是人口模式。如前所述,传统时代人口的增减是王朝兴衰的显示器。</span><br><span class="line">	</span><br><span class="line">	中国人口模式的转变发生于民国时期 关于民国的进步,我只讲两个过去人们比较忽略的问题。	一是人口模式。如前所述,传统时代人口的增减是王朝兴衰的显示器。<span class="keyword">\par</span></span><br><span class="line">	中国人口模式的转变发生于民国时期 关于民国的进步,我只讲两个过去人们比较忽略的问题。	一是人口模式。如前所述,传统时代人口的增减是王朝兴衰的显示器。<span class="keyword">\\</span>中国人口模式的转变发生于民国时期 关于民国的进步,我只讲两个过去人们比较忽略的问题。	一是人口模式。如前所述,传统时代人口的增减是王朝兴衰的显示器。</span><br><span class="line">	<span class="keyword">\section</span>&#123;实验方法&#125;</span><br><span class="line">	<span class="keyword">\section</span>&#123;实验结果&#125;</span><br><span class="line">	<span class="keyword">\subsection</span>&#123;数据&#125;</span><br><span class="line">	<span class="keyword">\subsection</span>&#123;图表&#125;</span><br><span class="line">	<span class="keyword">\subsubsection</span>&#123;实验过程&#125;</span><br><span class="line">	<span class="keyword">\section</span>&#123;结论&#125;</span><br><span class="line">	<span class="keyword">\section</span>&#123;致谢&#125;	</span><br><span class="line">	</span><br><span class="line"><span class="keyword">\end</span>&#123;document&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="特殊符号"><a href="#特殊符号" class="headerlink" title="特殊符号"></a>特殊符号</h1><h2 id="空格"><a href="#空格" class="headerlink" title="空格"></a>空格</h2><ul>
+<li>在英文段落中两个单词直接空一格，注意此时不管几个空格都当作一个空格</li>
+<li>中文段落中，两个中文之间加空格，视作无空格</li>
+<li>在中文英文都有的段落中，中文和因为之间会存在一个空格</li>
+<li>段落首行的缩进是自动产生的！不可以用空格代替!!!</li>
+</ul>
+<p>手动加入空格</p>
+<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\quad</span> <span class="comment">%一个空格</span></span><br><span class="line"><span class="keyword">\qquad</span> <span class="comment">%两个空格</span></span><br><span class="line"><span class="comment">%... 更多可以查询手册</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="控制符"><a href="#控制符" class="headerlink" title="控制符"></a>控制符</h2><figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\#</span> <span class="keyword">\$</span> <span class="keyword">\&#123;</span>  <span class="keyword">\&#125;</span> <span class="keyword">\~</span>&#123;&#125; <span class="keyword">\_</span>&#123;&#125; <span class="keyword">\^</span>&#123;&#125; <span class="keyword">\textbackslash</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="排版符号"><a href="#排版符号" class="headerlink" title="排版符号"></a>排版符号</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">\S \P \dag \ddag \copyright \pounds</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="标志符号"><a href="#标志符号" class="headerlink" title="标志符号"></a>标志符号</h2><figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\ </span>TeX&#123;&#125; <span class="keyword">\ </span>LaTeX&#123;&#125;  <span class="keyword">\ </span>LaTeXe&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">%XlLaTeX用xltxtra宏包提供</span></span><br><span class="line"><span class="keyword">\XlLaTeX</span></span><br><span class="line"></span><br><span class="line"><span class="comment">%其他标志符号见手册</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="引号"><a href="#引号" class="headerlink" title="引号"></a>引号</h2><figure class="highlight latex"><table><tr><td class="code"><pre><span class="line">` <span class="comment">%左单引号 </span></span><br><span class="line">&#x27; <span class="comment">%右单引号 </span></span><br><span class="line">`` <span class="comment">%左双引号 </span></span><br><span class="line">&#x27;&#x27; <span class="comment">%右双引号 </span></span><br></pre></td></tr></table></figure>
+
+<h2 id="连字符"><a href="#连字符" class="headerlink" title="连字符"></a>连字符</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">- -- ---</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="插入图片"><a href="#插入图片" class="headerlink" title="插入图片"></a>插入图片</h1><ul>
+<li><em><strong>texstudio最上方向导里有图片插入，可以不用自己写代码，不过导言区需要加个\usepackage{graphicx}命令</strong></em></li>
+</ul>
+<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="comment">%导言区内</span></span><br><span class="line"><span class="keyword">\usepackage</span>&#123;graphicx&#125; <span class="comment">%导入宏包</span></span><br><span class="line"><span class="keyword">\graphicspath</span>&#123;&#123;figures/&#125;,&#123;pics/&#125;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">% 正文区内</span></span><br><span class="line"><span class="keyword">\includegraphics</span>[设置参数]&#123;图像名字&#125;</span><br><span class="line"><span class="comment">% 这里推荐用 texstudio最上方向导里的图片插入</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="表格的制作"><a href="#表格的制作" class="headerlink" title="表格的制作"></a>表格的制作</h1><ul>
+<li>\\   表示换行</li>
+<li>&amp;    连接不同的列</li>
+<li>l      表示左对齐</li>
+<li>c      表示居中对齐</li>
+<li>r      表示右对齐</li>
+<li>p{宽度}  控制宽度,注意单位</li>
+</ul>
+<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="comment">% 在正文区中</span></span><br><span class="line"><span class="keyword">\begin</span>&#123;tabular&#125;&#123;|l| c| c| c| p&#123;宽度&#125;|&#125;<span class="comment">%会有5列，指定每列的居中形式,|表示每列中间有竖线分开.||表示双竖线</span></span><br><span class="line">	<span class="keyword">\hline</span> <span class="comment">%每行之间由横线分开.\hline \hline 表示双横线</span></span><br><span class="line">	姓名<span class="built_in">&amp;</span>语文<span class="built_in">&amp;</span>数学<span class="built_in">&amp;</span>外语<span class="built_in">&amp;</span>政治<span class="keyword">\\</span><span class="comment">%\\表示换行</span></span><br><span class="line">	<span class="keyword">\hline</span></span><br><span class="line">	张三<span class="built_in">&amp;</span>87<span class="built_in">&amp;</span>120<span class="built_in">&amp;</span>25<span class="built_in">&amp;</span>36<span class="keyword">\\</span></span><br><span class="line">	<span class="keyword">\hline</span></span><br><span class="line">	张1<span class="built_in">&amp;</span>87<span class="built_in">&amp;</span>120<span class="built_in">&amp;</span>25<span class="built_in">&amp;</span>36<span class="keyword">\\</span></span><br><span class="line">	<span class="keyword">\hline</span></span><br><span class="line">	张2<span class="built_in">&amp;</span>87<span class="built_in">&amp;</span>120<span class="built_in">&amp;</span>25<span class="built_in">&amp;</span>36<span class="keyword">\\</span></span><br><span class="line">	<span class="keyword">\hline</span></span><br><span class="line"><span class="keyword">\end</span>&#123;tabular&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="浮动体"><a href="#浮动体" class="headerlink" title="浮动体"></a>浮动体</h1><ul>
+<li>灵活分页</li>
+<li>给图标加标题</li>
+<li>交叉引用</li>
+</ul>
+<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="comment">%图片的浮动体</span></span><br><span class="line"><span class="keyword">\LaTeX</span>&#123;&#125;中<span class="keyword">\TeX</span> 系统的吉祥物--小狮子见图<span class="keyword">\ref</span>&#123;fig-lion&#125; <span class="comment">%交叉引用</span></span><br><span class="line"><span class="keyword">\begin</span>&#123;figure&#125;[htbp] <span class="comment">%[htbp]表示浮动体的排版位置</span></span><br><span class="line">	<span class="keyword">\centering</span> <span class="comment">%使得以下内容居中的命令</span></span><br><span class="line">	<span class="keyword">\includegraphics</span>&#123;two2.jpg&#125; <span class="comment">%插入图片</span></span><br><span class="line">	<span class="comment">%\label命令为浮动体设置标签，\ref引用该标签</span></span><br><span class="line">	<span class="keyword">\caption</span>&#123;<span class="keyword">\TeX</span> 系统的吉祥物---小狮子&#125;<span class="keyword">\label</span>&#123;fig-lion&#125;</span><br><span class="line"><span class="keyword">\end</span>&#123;figure&#125; </span><br><span class="line"></span><br><span class="line"><span class="comment">%表格的浮动体</span></span><br><span class="line">在<span class="keyword">\LaTeX</span>&#123;&#125;中也可以使用表<span class="keyword">\ref</span>&#123;tab-score&#125;所示的表格</span><br><span class="line">	<span class="keyword">\begin</span>&#123;table&#125;[htbp]</span><br><span class="line">		<span class="keyword">\centering</span></span><br><span class="line">		<span class="keyword">\caption</span>&#123;成绩单&#125;<span class="keyword">\label</span>&#123;tab-score&#125;</span><br><span class="line">		<span class="keyword">\begin</span>&#123;tabular&#125;&#123;|l|c|c|c|r|&#125;</span><br><span class="line">			<span class="keyword">\hline</span><span class="comment">%每行之间由横线分开</span></span><br><span class="line">			姓名<span class="built_in">&amp;</span>语文<span class="built_in">&amp;</span>数学<span class="built_in">&amp;</span>外语<span class="built_in">&amp;</span>政治<span class="keyword">\\</span><span class="comment">%\\表示换行</span></span><br><span class="line">			<span class="keyword">\hline</span></span><br><span class="line">			张三<span class="built_in">&amp;</span>87<span class="built_in">&amp;</span>120<span class="built_in">&amp;</span>25<span class="built_in">&amp;</span>36<span class="keyword">\\</span></span><br><span class="line">			<span class="keyword">\hline</span></span><br><span class="line">			张1<span class="built_in">&amp;</span>87<span class="built_in">&amp;</span>120<span class="built_in">&amp;</span>25<span class="built_in">&amp;</span>36<span class="keyword">\\</span></span><br><span class="line">			<span class="keyword">\hline</span></span><br><span class="line">			张2<span class="built_in">&amp;</span>87<span class="built_in">&amp;</span>120<span class="built_in">&amp;</span>25<span class="built_in">&amp;</span>36<span class="keyword">\\</span></span><br><span class="line">			<span class="keyword">\hline</span></span><br><span class="line">		<span class="keyword">\end</span>&#123;tabular&#125;</span><br><span class="line">	<span class="keyword">\end</span>&#123;table&#125;	</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="数学公式"><a href="#数学公式" class="headerlink" title="数学公式"></a>数学公式</h1><p>可以使用软件直接生成公式复制到$LaTeX$中</p>
+<p>软件名: Mathpix</p>
+<h2 id="行内公式"><a href="#行内公式" class="headerlink" title="行内公式"></a>行内公式</h2><figure class="highlight latex"><table><tr><td class="code"><pre><span class="line">1.美元符号 <span class="built_in">$</span>a+b=b+a <span class="built_in">$</span></span><br><span class="line">2.小括号 <span class="keyword">\(</span>a+b=b+a<span class="keyword">\)</span></span><br><span class="line">3.浮动体math环境</span><br><span class="line"><span class="keyword">\begin</span>&#123;math&#125;</span><br><span class="line">a+b=b+a</span><br><span class="line"><span class="keyword">\end</span>&#123;math&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="上下标"><a href="#上下标" class="headerlink" title="上下标"></a>上下标</h2><h3 id="上标"><a href="#上标" class="headerlink" title="上标"></a>上标</h3><ul>
+<li>使用<code>^</code> 符号</li>
+</ul>
+<p>比如<code>2^2</code>的效果是 $2^2$.但是后面只能跟一个字符</p>
+<p>如果需要跟多个字符则需要使用^{}</p>
+<p>比如2^{20}的效果是:  $2^{20}$</p>
+<h3 id="下标"><a href="#下标" class="headerlink" title="下标"></a>下标</h3><p>使用_符号</p>
+<p>比如a_1,a_2,a_3. $a_1,a_2,a_3$. 但是后面也只能跟一个字符</p>
+<p>如果需要跟多个字符则需要使用_{}</p>
+<p>比如a_{20}的效果是:   </p>
+<p>$a_{20}$</p>
+<h2 id="希腊字母"><a href="#希腊字母" class="headerlink" title="希腊字母"></a>希腊字母</h2><figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="built_in">$</span><span class="keyword">\alpha</span><span class="built_in">$</span></span><br><span class="line"><span class="built_in">$</span><span class="keyword">\beta</span><span class="built_in">$</span></span><br><span class="line"><span class="built_in">$</span><span class="keyword">\gamma</span><span class="built_in">$</span></span><br><span class="line"><span class="built_in">$</span><span class="keyword">\epsilon</span><span class="built_in">$</span></span><br><span class="line"><span class="built_in">$</span><span class="keyword">\pi</span><span class="built_in">$</span></span><br><span class="line"><span class="built_in">$</span><span class="keyword">\omega</span><span class="built_in">$</span>	</span><br><span class="line"><span class="built_in">$</span><span class="keyword">\Gamma</span><span class="built_in">$</span></span><br><span class="line"><span class="built_in">$</span><span class="keyword">\Delta</span><span class="built_in">$</span></span><br><span class="line"><span class="built_in">$</span><span class="keyword">\Theta</span><span class="built_in">$</span></span><br><span class="line"><span class="built_in">$</span><span class="keyword">\Pi</span><span class="built_in">$</span></span><br><span class="line"><span class="built_in">$</span><span class="keyword">\Omega</span><span class="built_in">$</span></span><br></pre></td></tr></table></figure>
+
+<p>得到:</p>
+<p>$\alpha$<br>$\beta$<br>$\gamma$<br>$\epsilon$<br>$\pi$<br>$\omega$<br>$\Gamma$<br>$\Delta$<br>$\Theta$<br>$\Pi$<br>$\Omega$</p>
+<h2 id="数学公式-1"><a href="#数学公式-1" class="headerlink" title="数学公式"></a>数学公式</h2><figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="built_in">$</span><span class="keyword">\log</span><span class="built_in">$</span></span><br><span class="line"><span class="built_in">$</span><span class="keyword">\sin</span><span class="built_in">$</span></span><br><span class="line"><span class="built_in">$</span><span class="keyword">\cos</span><span class="built_in">$</span></span><br><span class="line"><span class="built_in">$</span><span class="keyword">\arccos</span><span class="built_in">$</span></span><br><span class="line"><span class="built_in">$</span><span class="keyword">\arcsin</span><span class="built_in">$</span></span><br><span class="line"><span class="built_in">$</span><span class="keyword">\ln</span><span class="built_in">$</span></span><br><span class="line"></span><br><span class="line"><span class="comment">%以及联合使用</span></span><br><span class="line"><span class="built_in">$</span><span class="keyword">\sin</span><span class="built_in">^</span>2x+<span class="keyword">\cos</span><span class="built_in">^</span>2x=1<span class="built_in">$</span></span><br><span class="line"><span class="built_in">$</span><span class="keyword">\sqrt</span>&#123;2&#125;<span class="built_in">$</span></span><br><span class="line"><span class="built_in">$</span><span class="keyword">\sqrt</span>&#123;x<span class="built_in">^</span>2+y<span class="built_in">^</span>2&#125;<span class="built_in">$</span></span><br><span class="line"><span class="built_in">$</span><span class="keyword">\sqrt</span>&#123;2+<span class="keyword">\sqrt</span>&#123;2&#125;&#125;<span class="built_in">$</span></span><br><span class="line"><span class="built_in">$</span><span class="keyword">\sqrt</span>[4]&#123;x&#125;<span class="built_in">$</span></span><br></pre></td></tr></table></figure>
+
+<p>得到:</p>
+<p>$\log$<br>$\sin$<br>$\cos$<br>$\arccos$<br>$\arcsin$<br>$\ln$</p>
+<p>$\sin^2x+\cos^2x=1$<br>$\sqrt{2}$<br>$\sqrt{x^2+y^2}$<br>$\sqrt{2+\sqrt{2}}$<br>$\sqrt[4]{x}$</p>
+<h2 id="分式"><a href="#分式" class="headerlink" title="分式"></a>分式</h2><figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="comment">%两种写法</span></span><br><span class="line">1.大约是原体积的<span class="built_in">$</span>3/4<span class="built_in">$</span></span><br><span class="line">2.大约是原体积的<span class="built_in">$</span><span class="keyword">\frac</span>&#123;3&#125;&#123;4&#125;<span class="built_in">$</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="行间公式"><a href="#行间公式" class="headerlink" title="行间公式"></a>行间公式</h2><figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="comment">%1.</span></span><br><span class="line"><span class="keyword">\[</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">\]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">%不会自动编号</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">\begin</span>&#123;displaymath&#125;</span><br><span class="line">		2x<span class="built_in">^</span>2+5x+3=6	</span><br><span class="line">	<span class="keyword">\end</span>&#123;displaymath&#125;</span><br><span class="line">	</span><br><span class="line"><span class="comment">%会自动编号!这个很重要</span></span><br><span class="line"></span><br><span class="line">	交换律见式<span class="keyword">\ref</span>&#123;eq:commutative&#125;</span><br><span class="line">	<span class="keyword">\begin</span>&#123;equation&#125;</span><br><span class="line">		a+b=b+a <span class="keyword">\label</span>&#123;eq:commutative&#125;</span><br><span class="line">	<span class="keyword">\end</span>&#123;equation&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">%不会自动编号的equation环境</span></span><br><span class="line"><span class="comment">%注意要引用一个宏包</span></span><br><span class="line"><span class="keyword">\usepackage</span>&#123;amsmath&#125;</span><br><span class="line">	<span class="keyword">\begin</span>&#123;equation*&#125;</span><br><span class="line">		a+b=b+a <span class="keyword">\label</span>&#123;eq:commutative&#125;</span><br><span class="line">	<span class="keyword">\end</span>&#123;equation*&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="矩阵的生成"><a href="#矩阵的生成" class="headerlink" title="矩阵的生成"></a>矩阵的生成</h1><ul>
+<li>省略号: <code>\dots(水平), \vdots(垂直), \ddots(斜的), adots(需要自己配置)</code></li>
+<li><code>\adot</code>的效果.可以直接用<code>\iddots</code>生成，但要调用<code>mathdots</code>宏包</li>
+</ul>
+<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="comment">%需要导入宏包</span></span><br><span class="line"><span class="keyword">\usepackage</span>&#123;amsmath&#125;</span><br><span class="line"><span class="comment">%正文区</span></span><br><span class="line"><span class="keyword">\begin</span>&#123;matrix&#125;<span class="comment">%&amp;分列 \\分行</span></span><br><span class="line">  0<span class="built_in">&amp;</span>1<span class="keyword">\\</span></span><br><span class="line">  1<span class="built_in">&amp;</span>0</span><br><span class="line"><span class="keyword">\end</span>&#123;matrix&#125;<span class="keyword">\quad</span></span><br><span class="line"><span class="keyword">\]</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">\[</span><span class="keyword">\begin</span>&#123;pmatrix&#125;<span class="comment">%括号包裹的矩阵</span></span><br><span class="line"> 0<span class="built_in">&amp;</span>1<span class="keyword">\\</span></span><br><span class="line">1<span class="built_in">&amp;</span>0</span><br><span class="line"><span class="keyword">\end</span>&#123;pmatrix&#125;</span><br><span class="line"><span class="keyword">\]</span>	</span><br><span class="line"></span><br><span class="line"><span class="keyword">\[</span><span class="keyword">\begin</span>&#123;vmatrix&#125;<span class="comment">%长竖线包裹的矩阵</span></span><br><span class="line">0<span class="built_in">&amp;</span>1<span class="keyword">\\</span></span><br><span class="line">1<span class="built_in">&amp;</span>0</span><br><span class="line"><span class="keyword">\end</span>&#123;vmatrix&#125;</span><br><span class="line"><span class="keyword">\]</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">\[</span><span class="keyword">\begin</span>&#123;bmatrix&#125;<span class="comment">%长中括号包裹的矩阵</span></span><br><span class="line">0<span class="built_in">&amp;</span>1<span class="keyword">\\</span></span><br><span class="line">1<span class="built_in">&amp;</span>0</span><br><span class="line"><span class="keyword">\end</span>&#123;bmatrix&#125;</span><br><span class="line"><span class="keyword">\]</span></span><br><span class="line">------------------------------------------------------------------------</span><br><span class="line"><span class="keyword">\[</span><span class="keyword">\begin</span>&#123;pmatrix&#125;<span class="comment">%括号包裹的矩阵</span></span><br><span class="line">a<span class="built_in">_</span>&#123;11&#125;<span class="built_in">^</span>2<span class="built_in">&amp;</span>a<span class="built_in">_</span>&#123;12&#125;<span class="built_in">^</span>2<span class="built_in">&amp;</span>a<span class="built_in">_</span>&#123;13&#125;<span class="built_in">^</span>2<span class="keyword">\\</span></span><br><span class="line">0<span class="built_in">&amp;</span>a<span class="built_in">_</span>&#123;22&#125;<span class="built_in">&amp;</span>a<span class="built_in">_</span>&#123;33&#125;</span><br><span class="line"><span class="keyword">\end</span>&#123;pmatrix&#125;</span><br><span class="line"><span class="keyword">\]</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">\[</span><span class="keyword">\begin</span>&#123;bmatrix&#125;<span class="comment">%长中括号包裹的矩阵</span></span><br><span class="line">a<span class="built_in">_</span>&#123;11&#125;<span class="built_in">&amp;</span><span class="keyword">\dots</span><span class="built_in">&amp;</span>a<span class="built_in">_</span>&#123;1n&#125;<span class="keyword">\\</span></span><br><span class="line"><span class="built_in">&amp;</span><span class="keyword">\ddots</span><span class="built_in">&amp;</span><span class="keyword">\vdots</span><span class="keyword">\\</span></span><br><span class="line"><span class="keyword">\end</span>&#123;bmatrix&#125;<span class="built_in">_</span>&#123;n <span class="keyword">\times</span> n&#125;</span><br><span class="line"><span class="keyword">\]</span></span><br><span class="line">-------------------------------------------------------------------------</span><br><span class="line"><span class="keyword">\[</span><span class="keyword">\begin</span>&#123;pmatrix&#125;<span class="comment">%分块矩阵(矩阵嵌套)</span></span><br><span class="line"><span class="keyword">\begin</span>&#123;matrix&#125;</span><br><span class="line">1<span class="built_in">&amp;</span>0<span class="keyword">\\</span>0<span class="built_in">&amp;</span>1</span><br><span class="line"><span class="keyword">\end</span>&#123;matrix&#125;</span><br><span class="line"><span class="built_in">&amp;</span> <span class="keyword">\text</span>&#123;<span class="keyword">\Large</span> 0&#125;<span class="keyword">\\</span>  <span class="comment">%生成一个很大的0</span></span><br><span class="line"><span class="keyword">\text</span>&#123;<span class="keyword">\Large</span> 0&#125;<span class="built_in">&amp;</span><span class="keyword">\begin</span>&#123;matrix&#125;</span><br><span class="line">1<span class="built_in">&amp;</span>0<span class="keyword">\\</span>0<span class="built_in">&amp;</span>1</span><br><span class="line"><span class="keyword">\end</span>&#123;matrix&#125;</span><br><span class="line"><span class="keyword">\end</span>&#123;pmatrix&#125;</span><br><span class="line"><span class="keyword">\]</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">\[</span><span class="keyword">\begin</span>&#123;pmatrix&#125;<span class="comment">%括号包裹的矩阵</span></span><br><span class="line">a<span class="built_in">_</span>&#123;11&#125;<span class="built_in">&amp;</span>a<span class="built_in">_</span>&#123;12&#125;<span class="built_in">&amp;</span><span class="keyword">\cdots</span><span class="built_in">&amp;</span>a<span class="built_in">_</span>&#123;ln&#125;<span class="keyword">\\</span></span><br><span class="line"><span class="built_in">&amp;</span>a<span class="built_in">_</span>&#123;22&#125;<span class="built_in">&amp;</span><span class="keyword">\cdots</span><span class="built_in">&amp;</span>a<span class="built_in">_</span>&#123;2n&#125;<span class="keyword">\\</span></span><br><span class="line"><span class="built_in">&amp;</span>		<span class="built_in">&amp;</span><span class="keyword">\dots</span> <span class="built_in">&amp;</span><span class="keyword">\vdots</span> <span class="keyword">\\</span></span><br><span class="line"><span class="keyword">\multicolumn</span>&#123;2&#125;&#123;c&#125;&#123;<span class="keyword">\raisebox</span>&#123;1.3ex&#125;[0pt]&#123;<span class="keyword">\Huge</span> 0&#125;&#125; <span class="comment">%合并行和列;设置大小</span></span><br><span class="line"><span class="built_in">&amp;</span>		<span class="built_in">&amp;</span>a<span class="built_in">_</span>&#123;nn&#125;</span><br><span class="line"><span class="keyword">\end</span>&#123;pmatrix&#125;</span><br><span class="line"><span class="keyword">\]</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">\[</span><span class="keyword">\begin</span>&#123;pmatrix&#125;</span><br><span class="line">1<span class="built_in">&amp;</span><span class="keyword">\frac</span> 12 <span class="built_in">&amp;</span><span class="keyword">\dots</span> <span class="built_in">&amp;</span><span class="keyword">\frac</span> ln <span class="keyword">\\</span></span><br><span class="line"><span class="keyword">\hdotsfor</span>&#123;4&#125;<span class="keyword">\\</span>  <span class="comment">%跨列的省略号：\hdotsfor&#123;&lt;列数&gt;&#125;</span></span><br><span class="line">m<span class="built_in">&amp;</span><span class="keyword">\frac</span> m2<span class="built_in">&amp;</span> <span class="keyword">\dots</span> <span class="built_in">&amp;</span><span class="keyword">\frac</span> mn</span><br><span class="line"><span class="keyword">\end</span>&#123;pmatrix&#125;</span><br><span class="line"><span class="keyword">\]</span></span><br><span class="line">-----------------------------------------------</span><br><span class="line"><span class="comment">%行内小矩阵(smallmatrix)环境</span></span><br><span class="line">复数<span class="built_in">$</span>z=(x,y)<span class="built_in">$</span>也可以用矩阵</span><br><span class="line"><span class="keyword">\begin</span>&#123;math&#125;</span><br><span class="line">   <span class="keyword">\left</span>(<span class="comment">%需手动加上左括号</span></span><br><span class="line">   <span class="keyword">\begin</span>&#123;smallmatrix&#125;</span><br><span class="line">  x<span class="built_in">&amp;</span> -y<span class="keyword">\\</span>y<span class="built_in">&amp;</span>x</span><br><span class="line">   <span class="keyword">\end</span>&#123;smallmatrix&#125;</span><br><span class="line">   <span class="keyword">\right</span>)<span class="comment">%需手动加上右括号</span></span><br><span class="line"><span class="keyword">\end</span>&#123;math&#125;来表示</span><br><span class="line"></span><br><span class="line"><span class="comment">%array环境(类似表格环境tabular)</span></span><br><span class="line"><span class="keyword">\[</span></span><br><span class="line"><span class="keyword">\begin</span>&#123;array&#125;&#123;r|r&#125;</span><br><span class="line"><span class="keyword">\frac</span> 12<span class="built_in">&amp;</span>0<span class="keyword">\\</span></span><br><span class="line"><span class="keyword">\hline</span></span><br><span class="line">0<span class="built_in">&amp;</span> -<span class="keyword">\frac</span> abc<span class="keyword">\\</span></span><br><span class="line"><span class="keyword">\end</span>&#123;array&#125;</span><br><span class="line"><span class="keyword">\]</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="多行数学公式"><a href="#多行数学公式" class="headerlink" title="多行数学公式"></a>多行数学公式</h1><figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="comment">% 导言区引入宏包</span></span><br><span class="line"><span class="keyword">\usepackage</span>&#123;amsmath&#125;</span><br><span class="line"><span class="keyword">\usepackage</span>&#123;amssymb&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">% 正文区</span></span><br><span class="line">	<span class="comment">%gather和gather*环境(可以使用\\换行)</span></span><br><span class="line">	<span class="comment">%带编号</span></span><br><span class="line"><span class="keyword">\begin</span>&#123;gather&#125;</span><br><span class="line">	a+b=b+a<span class="keyword">\\</span></span><br><span class="line">	ab  ba</span><br><span class="line"><span class="keyword">\end</span>&#123;gather&#125;</span><br><span class="line">	</span><br><span class="line"><span class="comment">%不带编号</span></span><br><span class="line"><span class="keyword">\begin</span>&#123;gather*&#125;</span><br><span class="line">	3+5=5+3<span class="keyword">\\</span></span><br><span class="line">	3 <span class="keyword">\times</span> 5=5<span class="keyword">\times</span> 3</span><br><span class="line"><span class="keyword">\end</span>&#123;gather*&#125;</span><br><span class="line">	</span><br><span class="line"><span class="comment">%在\\前使用\notetag阻止编号</span></span><br><span class="line"><span class="keyword">\begin</span>&#123;gather&#125;</span><br><span class="line">	3<span class="built_in">^</span>2+4<span class="built_in">^</span>2=5<span class="built_in">^</span>2</span><br><span class="line"><span class="keyword">\end</span>&#123;gather&#125;</span><br><span class="line">	</span><br><span class="line"><span class="comment">%align和align*环境(用&amp;对齐)</span></span><br><span class="line"><span class="comment">%带编号</span></span><br><span class="line"><span class="keyword">\begin</span>&#123;align&#125;</span><br><span class="line">	x <span class="built_in">&amp;</span>=t+<span class="keyword">\cos</span> t+1<span class="keyword">\\</span></span><br><span class="line">	y <span class="built_in">&amp;</span>=2 <span class="keyword">\sin</span> t</span><br><span class="line"><span class="keyword">\end</span>&#123;align&#125;</span><br><span class="line"><span class="comment">%不带编号</span></span><br><span class="line"><span class="keyword">\begin</span>&#123;align*&#125;</span><br><span class="line">x <span class="built_in">&amp;</span>=t+<span class="keyword">\cos</span> t+1<span class="keyword">\\</span></span><br><span class="line">y <span class="built_in">&amp;</span>=2 <span class="keyword">\sin</span> t</span><br><span class="line"><span class="keyword">\end</span>&#123;align*&#125;</span><br><span class="line">	</span><br><span class="line"><span class="comment">%split环境(对齐采用align环境的方式，编号在中间)</span></span><br><span class="line"><span class="keyword">\begin</span>&#123;equation&#125;</span><br><span class="line"><span class="keyword">\begin</span>&#123;split&#125;</span><br><span class="line">	<span class="keyword">\cos</span> 2x <span class="built_in">&amp;</span>=<span class="keyword">\cos</span><span class="built_in">^</span>2 x- <span class="keyword">\sin</span><span class="built_in">^</span>2 x<span class="keyword">\\</span></span><br><span class="line">	<span class="built_in">&amp;</span>=2<span class="keyword">\cos</span><span class="built_in">^</span>2 x-1</span><br><span class="line"><span class="keyword">\end</span>&#123;split&#125;</span><br><span class="line"><span class="keyword">\end</span>&#123;equation&#125;		</span><br><span class="line">	</span><br><span class="line"><span class="comment">%case环境</span></span><br><span class="line"><span class="comment">%每行公式中使用&amp;分隔为两部分</span></span><br><span class="line"><span class="comment">%通常表示值和后面的条件</span></span><br><span class="line"><span class="keyword">\begin</span>&#123;equation&#125;</span><br><span class="line">	D(x)=<span class="keyword">\begin</span>&#123;cases&#125;</span><br><span class="line">	1,<span class="built_in">&amp;</span> <span class="keyword">\text</span>&#123;如果&#125; x <span class="keyword">\in</span> <span class="keyword">\mathbb</span>&#123;Q&#125;;<span class="keyword">\\</span></span><br><span class="line">	0,<span class="built_in">&amp;</span> <span class="keyword">\text</span>&#123;如果&#125; x <span class="keyword">\in</span> <span class="keyword">\mathbb</span>&#123;R&#125;<span class="keyword">\setminus</span><span class="keyword">\mathbb</span>&#123;Q&#125;</span><br><span class="line">	<span class="keyword">\end</span>&#123;cases&#125;</span><br><span class="line"><span class="keyword">\end</span>&#123;equation&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="使用zotero实现参考文献的导入"><a href="#使用zotero实现参考文献的导入" class="headerlink" title="使用zotero实现参考文献的导入"></a>使用zotero实现参考文献的导入</h1><ul>
+<li>下载zotero</li>
+<li>在扩展程序中下载 save to zotero</li>
+<li>在文章页面中点击 save to zotero 保存到文库中</li>
+<li>在文库中导出 导出格式为BiBTeX</li>
+<li>用记事本打开导出文件,复制到所写的latex文件中</li>
+<li>ref,改为文章的题目方便查找</li>
+<li>在正文内使用命令<code>\cite</code>选择所引用的文章即可</li>
+<li><strong>注意检查格式!!!</strong></li>
+</ul>
+<p>在参考文献位置输入命令</p>
+<p><code>\bibligraphy&#123;book&#125;</code>生成参考文献</p>
+<hr>
+<h1 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h1><p>新起一页 <code>\newpage</code></p>
+<p><code>\appendix</code> 表示是附录部分</p>
+<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\section</span></span><br><span class="line"><span class="keyword">\begin</span>&#123;lstlisting&#125;[language=matlab] <span class="comment">% 语言可以自己选择</span></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> <span class="comment">%这里面粘贴代码</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">\end</span>&#123;lstlisting&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <tags>
+        <tag>LaTeX</tag>
+        <tag>数学建模</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>如何使用Markdown+ Typora</title>
     <url>/2022/12/18/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8Markdown-Typora/</url>
     <content><![CDATA[<h1 id="如何使用Markdown-Typora"><a href="#如何使用Markdown-Typora" class="headerlink" title="如何使用Markdown+ Typora"></a>如何使用Markdown+ Typora</h1><h2 id="简要介绍"><a href="#简要介绍" class="headerlink" title="简要介绍"></a>简要介绍</h2><p><strong>Markdown</strong> 是一种轻量型标记语言, 是一种语法. 以 <code>.md</code> 结尾的文本文件就是 Markdown 文件. 相较于 <strong>Word</strong>, 它更加像是 <strong>HTML</strong> 语言或是 $\LaTeX$, 并不是最淳朴的那种”所见即所得”. 它处处透露着一种极简主义. 高效简洁清晰的同时, 又很简单. 看起来舒服, 语法简单, 尤其在处理纯文本上有很大的优势. </p>
