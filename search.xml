@@ -310,6 +310,438 @@
       </tags>
   </entry>
   <entry>
+    <title>51单片机学习笔记</title>
+    <url>/2022/12/22/51%E5%8D%95%E7%89%87%E6%9C%BA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<p>本文是<a href="%5B%E6%97%A0%E9%BC%A0%E6%A0%87%E5%A3%B0%E9%9F%B3__%E6%9C%80%E5%85%A8__%E9%83%AD%E5%A4%A9%E7%A5%A5%E5%8D%81%E5%A4%A9%E5%B8%A6%E4%BD%A0%E7%B2%BE%E9%80%9A51%E5%8D%95%E7%89%87%E6%9C%BA__%E5%B8%A6%E6%A0%87%E9%A2%98__%E5%B8%A6%E7%BD%91%E7%9B%98%E8%B5%84%E6%96%99_%E5%93%94%E5%93%A9%E5%93%94%E5%93%A9_bilibili%5D(https://www.bilibili.com/video/BV1DW411a7mz/?spm_id_from=333.337.search-card.all.click&vd_source=1e56c5282fb34ebc3bc5d2b2b4c8d5a7)">郭天祥老师的课堂</a>笔记</p>
+<h1 id="预备知识：C51的基本语法"><a href="#预备知识：C51的基本语法" class="headerlink" title="预备知识：C51的基本语法"></a>预备知识：C51的基本语法</h1><h2 id="变量类型的大小"><a href="#变量类型的大小" class="headerlink" title="变量类型的大小"></a>变量类型的大小</h2><table>
+<thead>
+<tr>
+<th align="center">变量类型</th>
+<th align="center">位数</th>
+<th align="center">范围</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">int</td>
+<td align="center">16</td>
+<td align="center">$2^{-15} - 2^{15}-1$</td>
+</tr>
+<tr>
+<td align="center">long</td>
+<td align="center">32</td>
+<td align="center">$2^{-31} - 2^{31}-1$</td>
+</tr>
+<tr>
+<td align="center">char</td>
+<td align="center">8</td>
+<td align="center">\</td>
+</tr>
+<tr>
+<td align="center">float</td>
+<td align="center">32</td>
+<td align="center">\</td>
+</tr>
+<tr>
+<td align="center">doubt</td>
+<td align="center">64</td>
+<td align="center">\</td>
+</tr>
+<tr>
+<td align="center">unsigned int</td>
+<td align="center">16</td>
+<td align="center">$0-2^{16}-1$</td>
+</tr>
+<tr>
+<td align="center">unsigned char</td>
+<td align="center">8</td>
+<td align="center">\</td>
+</tr>
+<tr>
+<td align="center">unsigned long</td>
+<td align="center">32</td>
+<td align="center">$0-2^{32}-1$</td>
+</tr>
+</tbody></table>
+<p>一般会使用 <code>typedef</code>改名</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="type">unsigned</span> <span class="type">int</span> u16;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">unsigned</span> <span class="type">char</span> u8;</span><br></pre></td></tr></table></figure>
+
+<h2 id="C51特有的类型"><a href="#C51特有的类型" class="headerlink" title="C51特有的类型"></a>C51特有的类型</h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line">sfr		<span class="comment">//特殊功能寄存器声明 长度:8位	0-255</span></span><br><span class="line">sfr16	<span class="comment">//特殊功能寄存器声明 长度:16位	0-65535</span></span><br><span class="line">sbit	<span class="comment">//特殊功能位声明 长度:1位  这个用的比较多</span></span><br><span class="line">bit		<span class="comment">//位变量声明 长度:1位  </span></span><br></pre></td></tr></table></figure>
+
+<h2 id="头文件"><a href="#头文件" class="headerlink" title="头文件"></a>头文件</h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 一般使用以下两个头文件</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;reg52.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;math.h&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<h1 id="51单片机学习的重点"><a href="#51单片机学习的重点" class="headerlink" title="51单片机学习的重点"></a>51单片机学习的重点</h1><ul>
+<li>51单片机能够运行的基本要求: 电源, 晶振(相当于人的心脏), 复位电路</li>
+<li>如何控制输入输出的高低电平</li>
+<li>定时器</li>
+<li>中断</li>
+<li>串口通信</li>
+</ul>
+<hr>
+<h1 id="电亮一盏灯"><a href="#电亮一盏灯" class="headerlink" title="电亮一盏灯"></a>电亮一盏灯</h1><p>本文使用的软件是KEIL4, 端口烧录使用的是: PZ-ISP(不需要冷启动)</p>
+<ul>
+<li>首先观察开发板上第一个发光二极管的接口是P2^0</li>
+<li>创建一个程序和 <code>.c</code>文件</li>
+<li>在.<code>c</code>文件中编写代码</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;reg52.h&gt;</span> <span class="comment">//定义51单片机的各个串口</span></span></span><br><span class="line">sbit D1=P2^<span class="number">0</span>;  \\把串口P2^<span class="number">0</span>赋值给D1</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">	<span class="comment">//	D1=0; //这里是低电平高效 让D1等于0的时候灯亮</span></span><br><span class="line">	P2=<span class="number">0xFE</span>;  <span class="comment">//也可以之间控制端口的值,控制第一个发光二极管亮</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="灯的闪烁和流水灯"><a href="#灯的闪烁和流水灯" class="headerlink" title="灯的闪烁和流水灯"></a>灯的闪烁和流水灯</h1><h2 id="延时函数的编写"><a href="#延时函数的编写" class="headerlink" title="延时函数的编写"></a>延时函数的编写</h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">delay</span><span class="params">(u16 t)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">while</span>(t--);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//写延时函数注意不要超过变量的范围</span></span><br><span class="line"><span class="comment">//可以用二重函数编写</span></span><br><span class="line"><span class="comment">//编写后将晶振改为11.0592进行调试,一般不是很准确.</span></span><br></pre></td></tr></table></figure>
+
+<p>灯的闪烁只需要，让灯亮如何延时一段时间</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;reg52.h&gt;</span></span></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">unsigned</span> <span class="type">int</span> u16;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">unsigned</span> <span class="type">char</span> u8;</span><br><span class="line">sbit D1=P2^<span class="number">0</span>;</span><br><span class="line"><span class="type">void</span> <span class="title function_">delay</span><span class="params">(u16 t)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">while</span>(t--);</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">void</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		D1=<span class="number">0</span>;</span><br><span class="line">		delay(<span class="number">20000</span>);</span><br><span class="line">		D1=<span class="number">1</span>;</span><br><span class="line">		delay(<span class="number">20000</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="流水灯的编写"><a href="#流水灯的编写" class="headerlink" title="流水灯的编写"></a>流水灯的编写</h3><p>这里需要调用一个位变换函数</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#include&lt;intrins.h&gt;</span><br><span class="line">a=_crol_(a,b)//让a左移b位</span><br></pre></td></tr></table></figure>
+
+<p>流水灯编写如下</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;reg52.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;intrins.h&gt;</span></span></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">unsigned</span> <span class="type">int</span> u16;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">unsigned</span> <span class="type">char</span> u8;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">delay</span><span class="params">(u16 t)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">while</span>(t--);</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">void</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">	u8 temp=<span class="number">0xfe</span>;</span><br><span class="line">	P2=temp;</span><br><span class="line">	<span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		temp=_crol_(temp,<span class="number">1</span>);</span><br><span class="line">		delay(<span class="number">20000</span>);</span><br><span class="line">		P2=temp;</span><br><span class="line">		delay(<span class="number">20000</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">---------------------------------</span><br><span class="line"><span class="comment">//不使用该函数的方法</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">	u8 t=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span>(t=<span class="number">0</span>;t&lt;<span class="number">8</span>;t++)</span><br><span class="line">		&#123;</span><br><span class="line">				P2=~(<span class="number">0x01</span>&lt;&lt;t);</span><br><span class="line">			delay(<span class="number">50000</span>);</span><br><span class="line">		&#125;	</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="蜂鸣器-的使用"><a href="#蜂鸣器-的使用" class="headerlink" title="蜂鸣器 的使用"></a>蜂鸣器 的使用</h1><p><strong>这里是无源蜂鸣器</strong></p>
+<p>普中开发板上使用的蜂鸣器是无源蜂鸣器，属于压电式蜂鸣器类型。这里说的有源和无源，并不是指电源的意思，而是指蜂鸣器内部是否含有振荡电路，有源蜂鸣器内部自带振荡电路，只需提供电源即可发声，而无源蜂鸣器则需提供一 定频率的脉冲信号才能发声，频率大小通常在 1.5-5KHz 之间。</p>
+<p>普中的板子使用了五线四项步进电机控制蜂鸣器,接在了P25上</p>
+<p>让<strong>无源</strong>蜂鸣器响的操作如下</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">//这里是无源蜂鸣器的代码!</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;reg52.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">unsigned</span> <span class="type">int</span> u16;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">unsigned</span> <span class="type">int</span> u8;</span><br><span class="line">sbit beep=P2^<span class="number">5</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">delay</span><span class="params">(u16 time)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">while</span>(time--);	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">	u16 t = <span class="number">2000</span>;</span><br><span class="line">	<span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">while</span>(t--)</span><br><span class="line">		&#123;</span><br><span class="line">			beep=!beep;</span><br><span class="line">			delay(<span class="number">100</span>);</span><br><span class="line">		&#125;			</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="51单片机各个引脚的功能"><a href="#51单片机各个引脚的功能" class="headerlink" title="51单片机各个引脚的功能"></a>51单片机各个引脚的功能</h1><ul>
+<li>1-8: P1 端口</li>
+<li>9：复位</li>
+<li>10-17:P3端口（注意它有第二功能）见书本P16</li>
+<li>18，19分别对应X1，X2，是晶振</li>
+<li>20: Vss接电源</li>
+<li>21-28: P2端口</li>
+<li>29：PSEN: 一般不用</li>
+<li>30：ALE: 会输出$1/6$的时针周期方波,接到示波器,识别单片机是否工作正常</li>
+<li>31:</li>
+<li>32-39: P0端口, 一般接入上拉电阻</li>
+<li>40: VCC</li>
+</ul>
+<hr>
+<h1 id="静态数码管的显示"><a href="#静态数码管的显示" class="headerlink" title="静态数码管的显示"></a>静态数码管的显示</h1><h2 id="数码管的显示"><a href="#数码管的显示" class="headerlink" title="数码管的显示"></a>数码管的显示</h2><p>数字8每一个位置放了一个发光二极管, 通过控制不同位置发光二极管的亮灭来显示不同的数字</p>
+<p>数码管有两种接法</p>
+<ol>
+<li>共阴极接法:给高电平有效,即通过输入1来控制</li>
+<li>共阳极接法:给低电平有效,即通过输入0来控制</li>
+</ol>
+<p>以共阴极接法为例不同数字的16进制编码如下所示</p>
+<p>![数码管](51 单片机的学习/数码管.png)</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">0x3f, 0x06, 0x5b, 0x4f, 0x66, 0x6d,</span><br><span class="line">0      1     2     3     4     5</span><br><span class="line">0x7d, 0x07, 0x7f, 0x6f, 0x77, 0x7c,</span><br><span class="line">6       7     8     9     A    B</span><br><span class="line">0x39, 0x5e, 0x79, 0x71,  0x00,</span><br><span class="line">C       D     E     F    无显示</span><br></pre></td></tr></table></figure>
+
+<h3 id="编码表"><a href="#编码表" class="headerlink" title="编码表"></a>编码表</h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">//可用此代码</span></span><br><span class="line">u8 code[]=&#123;<span class="number">0x3f</span>,<span class="number">0x06</span>,<span class="number">0x5b</span>,<span class="number">0x4f</span>,<span class="number">0x66</span>,<span class="number">0x6d</span>,<span class="number">0x7d</span>,<span class="number">0x07</span>,</span><br><span class="line"><span class="number">0x7f</span>,<span class="number">0x6f</span>,<span class="number">0x77</span>,<span class="number">0x7c</span>,<span class="number">0x39</span>,<span class="number">0x5e</span>,<span class="number">0x79</span>,<span class="number">0x71</span>&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="静态显示"><a href="#静态显示" class="headerlink" title="静态显示"></a>静态显示</h2><ul>
+<li>位选:控制哪个数码管亮</li>
+<li>段选: 每个数码管abcdefg都相互连接起来, 控制亮什么</li>
+</ul>
+<p>普中开发板利用的是三八译码器</p>
+<p>郭天祥视频教程使用是寄存器控制方法大同小异</p>
+<p>本文中介绍锁存器的存储方式: 先给高电平,然后放入数据,再给低电平.完成输出</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">wela= ;<span class="comment">//位选端口</span></span><br><span class="line">dula= ;<span class="comment">//段选端口</span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		wela=<span class="number">1</span>;</span><br><span class="line">		P0=   ;选择哪个灯亮</span><br><span class="line">		wela=<span class="number">0</span>;</span><br><span class="line">	</span><br><span class="line">		dula=<span class="number">1</span>;</span><br><span class="line">		P0=   ;<span class="comment">//选择亮的数字</span></span><br><span class="line">		dula=<span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="中断"><a href="#中断" class="headerlink" title="中断"></a>中断</h1><h2 id="什么是中断"><a href="#什么是中断" class="headerlink" title="什么是中断"></a>什么是中断</h2><ol>
+<li>处理main函数的A时,发生了B</li>
+<li>停止处理A,开始处理中断程序B</li>
+<li>B处理完成后,接着继续处理A</li>
+</ol>
+<p>![中断](51 单片机的学习/中断.png)</p>
+<p>![中断流程](51 单片机的学习/中断流程.png)</p>
+<h2 id="中断允许寄存器-IE"><a href="#中断允许寄存器-IE" class="headerlink" title="中断允许寄存器 IE"></a>中断允许寄存器 IE</h2><p>MCS-51的CPU对中断源的开放或屏蔽,是由片内的中断允许寄存器E控制的。E的字节地址为A8H,可进行位寻址。<br>中断允许寄存器E对中断的开放和关闭实现两级控制。所谓两级控制,就是有一个总的开关中断控制位EA(E.7位),<strong>当EA=0时,所有的中断请求被屏蔽</strong>,CPU对任何中断请求都不接受;<strong>当EA= 1时,CPU开放中断,但五个中断源的中断请求是否允许,还要由企中的低5位所对应的5个中断请求允许控制位的状态来决定</strong>.<a href="%E9%83%AD%E5%A4%A9%E7%A5%A5%E6%95%99%E7%A8%8BP55">^1</a></p>
+<p>AH8表示可以直接控制每个位的值</p>
+<p>![中断允许控制位](51 单片机的学习/中断允许控制位.png)</p>
+<h2 id="中断处理的优先级"><a href="#中断处理的优先级" class="headerlink" title="中断处理的优先级"></a>中断处理的优先级</h2><p>![中断处理的优先级](51 单片机的学习/中断处理的优先级.png)</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">这上面的优先级从高到低分别对应 0 1 2 3 4</span><br><span class="line">用于写中断服务程序中的interrupt ?  后面的数字</span><br></pre></td></tr></table></figure>
+
+<h2 id="中断响应的条件"><a href="#中断响应的条件" class="headerlink" title="中断响应的条件"></a>中断响应的条件</h2><p>一个中断源的中断请求被响应,需满足以下条件:</p>
+<ol>
+<li>该中断源发出中断请求。</li>
+<li>CPU开中断,即中断总允许位EA = 1。</li>
+<li>申请中断的中断源的中断允许位=1,即该中断没有被屏蔽。</li>
+<li>无同级或更高级中断正在被服务。</li>
+</ol>
+<h2 id="外部中断器功能的选择"><a href="#外部中断器功能的选择" class="headerlink" title="外部中断器功能的选择"></a>外部中断器功能的选择</h2><p>外部中断的触发有两种触发方式:电平触发方式和跳沿触发方式。</p>
+<h3 id="电平触发方式-默认"><a href="#电平触发方式-默认" class="headerlink" title="电平触发方式(默认)"></a>电平触发方式(默认)</h3><p>若外部中断定义为电平触发方式,外部中断申请触发器的状态随着CPU在每个机器周期采样到的外部中断输入线的电平变化而变化,这能提高CPU对外部中断请求的响应速度。<strong>当外部中断源被设定为电平触发方式时,在中断服务程序返回之前,外部中断请求输人必须无效(即变为高电平),否则CPU返回主程序后会再次响应中断。</strong>所以电平触发方式适合于外部中断以低电平输人而且中断服务程序能清除外部中断请求源(即外部中断输入电平又变为高电平)的情况。</p>
+<h3 id="跳沿触发方式"><a href="#跳沿触发方式" class="headerlink" title="跳沿触发方式"></a>跳沿触发方式</h3><p>外部中断若定义为跳沿触发方式,外部中断申请触发器能锁存外部中断输人线上的负跳变。即便是CPU暂时不能响应,中断申请标志也不会丢失。在这种方式里,如果相继连续两次采样，<strong>一个机器周期采样到外部中断输人为高，下一个机器周期采样为低,则置“1”中断申请触发器,直到CPU响应此中断时才清0。</strong>这样不会丢失中断,但输人的负脉冲宽度至少<strong>保持12个时钟周期</strong>(若晶振频率为6MHz,则为2pS),才能被CPU采样到。外部中断的跳沿触发方式适合于以负脉冲形式输入的外部中断请求。</p>
+<h2 id="中断程序的编写"><a href="#中断程序的编写" class="headerlink" title="中断程序的编写"></a>中断程序的编写</h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">EA=<span class="number">1</span>; <span class="comment">//开启总中断</span></span><br><span class="line">EX0=<span class="number">1</span>;<span class="comment">//打开外部中断0</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">//主程序</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="type">void</span> <span class="title function_">extero</span><span class="params">()</span> interrupt 0</span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">//中断服务程序,无需声明</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="定时器"><a href="#定时器" class="headerlink" title="定时器"></a>定时器</h1><h2 id="定时器的工作模式"><a href="#定时器的工作模式" class="headerlink" title="定时器的工作模式"></a>定时器的工作模式</h2><p>51单片机内有两个可编程的定时器/计数器T1、T0,。两个定时器/计数器都具有定时器和计数器两种工作模式.</p>
+<ol>
+<li><strong>定时工作模式</strong></li>
+</ol>
+<ul>
+<li><p>定时功能也是通过计数器的计数来实现的,不过此时的计数脉冲来自单片机的内部,即每个机器周期产生一个计数脉冲,也就是每经过1个机器周期的时间,计数器加1。如果MCS -51采用12MHz晶体,则计数频率为1MHz,即每过1us的时间计数器加1。这样可以根据计数值计算出定时时间,也可根据定时时间的要求计算出计数器的初值。</p>
+</li>
+<li><p>MCS-51单片机的定时器/计数器具有4种工作方式(方式0、方式1、方式2和方式3),其控制字均在相应的特殊功能寄存器中,通过对特殊功能寄存器的编程,用户可方便地选择定时器/计数器两种工作模式和4种工作方式。</p>
+</li>
+</ul>
+<ol start="2">
+<li>计数工作模式</li>
+</ol>
+<ul>
+<li>计数功能是对外来脉冲进行计数。MCS -51芯片有TD(P3.4)和TI(P3.5)两个输入引脚分别是这两个计数器的计数脉冲输入端。每当外部输人的脉冲发生负跳变时,计数器加1。</li>
+</ul>
+<h2 id="定时器的结构"><a href="#定时器的结构" class="headerlink" title="定时器的结构"></a>定时器的结构</h2><p> 51单片机的定时器/计数器结构.<strong>定时器/计数器TO</strong>由特殊功能寄存器**THO(高四位)、TLO(低四位)**构成,定时器/计数器T1由特殊功能寄存器TH1、TL1构成。</p>
+<p>![定时器的结构](51 单片机的学习/定时器的结构.png)</p>
+<p>特殊功能寄存器<strong>TMOD</strong>用于选择<strong>定时器/计数器TO、T1</strong>的工作模式和工作方式。</p>
+<p>特殊功能寄存器<strong>TCON</strong>用于控制TO、T1的<strong>启动和停止计数</strong>,同时包含了TO、T1的状态。</p>
+<p><strong>TMOD、TCON这两个寄存器的内容由软件设置</strong>。单片机复位时,两个寄存器的所有位都被清0。</p>
+<h3 id="TMOD工作方式寄存器"><a href="#TMOD工作方式寄存器" class="headerlink" title="TMOD工作方式寄存器"></a>TMOD工作方式寄存器</h3><p>工作方式寄存器‘<strong>TMOD</strong>用于<strong>选择</strong>定时器/计数器的<strong>工作模式和工作方式</strong>,它的字节地址为89H,不能进行位寻址。TMOD一共有八位</p>
+<p>前四位为M1,后四位为M2, 控制M1,M2的编码可以选择工作方式</p>
+<table>
+<thead>
+<tr>
+<th align="center">M1</th>
+<th align="center">M0</th>
+<th align="center">工作方式</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">方式0,为13位定时器/计数器</td>
+</tr>
+<tr>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center"><strong>方式1,为16位定时器/计数器</strong></td>
+</tr>
+<tr>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">方式2,8位初值自动重新装人的8位定时器/计数器</td>
+</tr>
+<tr>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">方式3,仅适用于T0,分成两个8位计数器，T1停止计数</td>
+</tr>
+</tbody></table>
+<h3 id="定时器-计数器控制寄存器TCON"><a href="#定时器-计数器控制寄存器TCON" class="headerlink" title="定时器/计数器控制寄存器TCON"></a>定时器/计数器控制寄存器TCON</h3><p>TCON一共有八位</p>
+<p>工作方式的不同,tocn的功能也就不同</p>
+<p>TCOC是在不同方式下,</p>
+<p>计数溢出标志位: 如果装满即功能位全都是1时,进入中断服务程序.</p>
+<h2 id="定时器的工作方式"><a href="#定时器的工作方式" class="headerlink" title="定时器的工作方式"></a>定时器的工作方式</h2><p>四种见郭天祥老师教程的70页</p>
+<ul>
+<li>当前视频使用的是方式1</li>
+</ul>
+<p>TLO是低8位, THO是高8位</p>
+<p> $X(计数个数)=2^{16}-N(计数初值)$</p>
+<p>控制计数初值的大小,来控制定时的时间</p>
+<p>t为时间</p>
+<p>$THO=(2^{16}-t)/256$ ,即取前四位</p>
+<p>$TLO=(2^{16}-t)$ % $256$ ,即取后四位</p>
+<h2 id="定时器的使用步骤"><a href="#定时器的使用步骤" class="headerlink" title="定时器的使用步骤"></a>定时器的使用步骤</h2><p><strong>初始化程序应完成如下工作:</strong></p>
+<ol>
+<li><p>对TMOD赋值，以确定TO和T1的工作方式。</p>
+</li>
+<li><p>计算初值,并将其写入THO、TLO或TH1、TL1。</p>
+</li>
+<li><p>中断方式时，则对IE赋值，开放中断。</p>
+</li>
+<li><p>使TRO或TR1置位，启动定时/计数器定时或计数。</p>
+</li>
+</ol>
+<p><strong>以方式1为例</strong>:</p>
+<ol>
+<li><p>对TMOD赋值: TMOD=0x01; 选择方式1 定时器0</p>
+</li>
+<li><p>计算THO和TLO: 控制定时器的时间 t=50000时候为50ms</p>
+</li>
+<li><p>开启中断: EA=1(开启总中断) ETO1=1(开启定时器0) 这里看优先级就知道是ETO</p>
+</li>
+<li><p>TRO=1 启动定时器0</p>
+</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">	tt=<span class="number">0</span>;</span><br><span class="line">    TOMD=<span class="number">0x01</span>;<span class="comment">//设置工作模式</span></span><br><span class="line">	THO=(<span class="number">2</span>^&#123;<span class="number">16</span>&#125;-t)/<span class="number">256</span>;</span><br><span class="line">    TLO=(<span class="number">2</span>^&#123;<span class="number">16</span>&#125;-t)%<span class="number">256</span>;</span><br><span class="line">    EA=<span class="number">1</span>;<span class="comment">//开总断</span></span><br><span class="line">    ETO=<span class="number">1</span>;<span class="comment">//开定时器0中断</span></span><br><span class="line">    TRO=<span class="number">1</span>;<span class="comment">//启动定时器0 ,定时器加满进入一次中断</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(tt=?)<span class="comment">//进入中断的次数 即tt个50ms</span></span><br><span class="line">        &#123;</span><br><span class="line">            tt=<span class="number">0</span>; <span class="comment">//tt清零 方便下次进入</span></span><br><span class="line">            <span class="comment">//执行程序</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">exter0</span><span class="params">()</span> interrupt 1</span><br><span class="line">&#123;</span><br><span class="line">	tt++;</span><br><span class="line">    THO=(<span class="number">2</span>^&#123;<span class="number">16</span>&#125;-t)/<span class="number">256</span>;</span><br><span class="line">    TLO=(<span class="number">2</span>^&#123;<span class="number">16</span>&#125;-t)%<span class="number">256</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">//后续使用中可以增加一个初始化函数</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">init</span><span class="params">()</span>; <span class="comment">//初始化函数的声明</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    init(); <span class="comment">//初始化</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//因为里面的变量都是全局变量 以及在头文件中定义好了的</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">init</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">	tt=<span class="number">0</span>;</span><br><span class="line">    TOMD=<span class="number">0x01</span>;<span class="comment">//设置工作模式</span></span><br><span class="line">	THO=(<span class="number">2</span>^&#123;<span class="number">16</span>&#125;-t)/<span class="number">256</span>;</span><br><span class="line">    TLO=(<span class="number">2</span>^&#123;<span class="number">16</span>&#125;-t)%<span class="number">256</span>;</span><br><span class="line">    EA=<span class="number">1</span>;<span class="comment">//开总断</span></span><br><span class="line">    ETO=<span class="number">1</span>;<span class="comment">//开定时器0中断</span></span><br><span class="line">    TRO=<span class="number">1</span>;<span class="comment">//启动定时器0 ,定时器加满进入一次中断</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>这里需要注意,中断函数和delay同时在主函数中时,可能会出现问题. 因为当中断到 <strong>tt=?</strong> 时,该程序可能还在delay函数中</p>
+<hr>
+<h1 id="动态显示"><a href="#动态显示" class="headerlink" title="动态显示"></a>动态显示</h1><h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><ul>
+<li>位选:控制哪个数码管亮</li>
+<li>段选: 每个数码管abcdefg都相互连接起来, 控制亮什么</li>
+</ul>
+<p>分别控制需要的数码管亮,利用位选</p>
+<p>利用段选控制数码管里亮的内容</p>
+<p>减少数码管亮的延时时间,当小于人眼可以分辨的快慢时.相当于同时显示了需要的数码管,以及里面的内容</p>
+<h2 id="代码控制"><a href="#代码控制" class="headerlink" title="代码控制"></a>代码控制</h2><p>这里是普中芯片使用三八译码器的代码:</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;reg52.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">unsigned</span> <span class="type">int</span> u16;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">unsigned</span> <span class="type">char</span> u8;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> Gs P0</span></span><br><span class="line">sbit LSA=P2^<span class="number">2</span>;</span><br><span class="line">sbit LSB=P2^<span class="number">3</span>;</span><br><span class="line">sbit LSC=P2^<span class="number">4</span>; <span class="comment">//普中芯片的三八译码器</span></span><br><span class="line"></span><br><span class="line">u8 i=<span class="number">0</span>;</span><br><span class="line">u8 GS[]=&#123;<span class="number">0x3f</span>,<span class="number">0x06</span>,<span class="number">0x5b</span>,<span class="number">0x4f</span>,<span class="number">0x66</span>,<span class="number">0x6d</span>,<span class="number">0x7d</span>,<span class="number">0x07</span>,<span class="number">0x7f</span>,<span class="number">0x6f</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">delay</span><span class="params">(u16 time)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">while</span>(time--);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">smg_display</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;<span class="number">8</span>;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">switch</span>(i)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">case</span> <span class="number">0</span>:LSA=<span class="number">1</span>;LSB=<span class="number">1</span>;LSC=<span class="number">1</span>;<span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">case</span> <span class="number">1</span>:LSC=<span class="number">1</span>;LSB=<span class="number">1</span>;LSA=<span class="number">0</span>;<span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">case</span> <span class="number">2</span>:LSC=<span class="number">1</span>;LSB=<span class="number">0</span>;LSA=<span class="number">1</span>;<span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">case</span> <span class="number">3</span>:LSC=<span class="number">1</span>;LSB=<span class="number">0</span>;LSA=<span class="number">0</span>;<span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">case</span> <span class="number">4</span>:LSC=<span class="number">0</span>;LSB=<span class="number">1</span>;LSA=<span class="number">1</span>;<span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">case</span> <span class="number">5</span>:LSC=<span class="number">0</span>;LSB=<span class="number">1</span>;LSA=<span class="number">0</span>;<span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">case</span> <span class="number">6</span>:LSC=<span class="number">0</span>;LSB=<span class="number">0</span>;LSA=<span class="number">1</span>;<span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">case</span> <span class="number">7</span>:LSC=<span class="number">0</span>;LSB=<span class="number">0</span>;LSA=<span class="number">0</span>;<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">        <span class="comment">//用swich语句控制位选,选择哪个灯亮,此处普中芯片使用了三八译码器</span></span><br><span class="line">		Gs=GS[i];</span><br><span class="line">		delay(<span class="number">100</span>);</span><br><span class="line">		Gs=<span class="number">0x00</span>; <span class="comment">//这句代码是消影的过程,就是显示完之后让段选为什么都不显示的状态. 防止下次位选后直接                    显示值.</span></span><br><span class="line">	&#125;	</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">void</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		smg_display(); <span class="comment">//动态显示的子函数</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里是郭天祥老师视频中使用寄存器的代码</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;reg52.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">unsigned</span> <span class="type">int</span> u16;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">unsigned</span> <span class="type">char</span> u8;</span><br><span class="line"></span><br><span class="line">wela= ;<span class="comment">//位选端口</span></span><br><span class="line">dula= ;<span class="comment">//段选端口</span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">delay</span><span class="params">(u16 time)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">while</span>(time--);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		wela=<span class="number">1</span>;</span><br><span class="line">		P0=   ;<span class="comment">//选择第一个灯亮</span></span><br><span class="line">		wela=<span class="number">0</span>;</span><br><span class="line">	</span><br><span class="line">		dula=<span class="number">1</span>;</span><br><span class="line">		P0=   ;<span class="comment">//选择亮的数字</span></span><br><span class="line">		dula=<span class="number">0</span>;</span><br><span class="line">        p0=<span class="number">0xff</span>;<span class="comment">//这句代码是消影的过程,就是显示完之后让段选为什么都不显示的状态. 防止下次位选后直接                   显示值. 这里郭天祥老师视频中什么都不显示是0xff,之后试验中具体内容具体分析</span></span><br><span class="line">        </span><br><span class="line">        delay(<span class="number">100</span>); <span class="comment">//延时一小段时间</span></span><br><span class="line">        </span><br><span class="line">        wela=<span class="number">1</span>;</span><br><span class="line">		P0=   ;<span class="comment">//选择第二个灯亮</span></span><br><span class="line">		wela=<span class="number">0</span>;</span><br><span class="line">	</span><br><span class="line">		dula=<span class="number">1</span>;</span><br><span class="line">		P0=   ;<span class="comment">//选择亮的数字</span></span><br><span class="line">		dula=<span class="number">0</span>;</span><br><span class="line">        delay(<span class="number">100</span>);</span><br><span class="line">        p0=<span class="number">0xff</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//后面需要加显示数码管 只需复制上面代码即可.</span></span><br><span class="line">        </span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="动态消影"><a href="#动态消影" class="headerlink" title="动态消影"></a>动态消影</h3><p>在段选显示数字后,的延时函数后面,加一句代码让显示的值处于没有的状态. 防止下一次段选后直接显示上一次的内容.</p>
+<hr>
+<h1 id="独立键盘和矩阵键盘的检测原理及实现"><a href="#独立键盘和矩阵键盘的检测原理及实现" class="headerlink" title="独立键盘和矩阵键盘的检测原理及实现"></a>独立键盘和矩阵键盘的检测原理及实现</h1><h2 id="键盘的分类"><a href="#键盘的分类" class="headerlink" title="键盘的分类"></a>键盘的分类</h2><ul>
+<li>编码键盘</li>
+<li>非编码键盘: 分为独立键盘和矩阵键盘</li>
+</ul>
+<h2 id="独立键盘的检测原理"><a href="#独立键盘的检测原理" class="headerlink" title="独立键盘的检测原理"></a>独立键盘的检测原理</h2><p>独立键盘的原理图 如图所示</p>
+<p>本文用的是普中开发板</p>
+<p>![独立键盘的原理](51 单片机的学习/独立键盘的原理.png)</p>
+<p>当有按键按下时 相应端口会收到一个0的信号</p>
+<p>检测的代码如图所示(使用普中开发板)</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">//按下灯亮</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;reg52.h&gt;</span></span></span><br><span class="line">sbit K1=P3^<span class="number">1</span>;</span><br><span class="line">sbit D1=P2^<span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">	D1=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">if</span>(K1==<span class="number">0</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		D1=<span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">//按下灯亮加计数</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;reg52.h&gt;</span></span></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">unsigned</span> <span class="type">int</span> u16;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">unsigned</span> <span class="type">char</span> u8;</span><br><span class="line"></span><br><span class="line">sbit K1=P3^<span class="number">1</span>;</span><br><span class="line">sbit D1=P2^<span class="number">0</span>;</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> Gs P0</span></span><br><span class="line">u8 GS[]=&#123;<span class="number">0x3f</span>,<span class="number">0x06</span>,<span class="number">0x5b</span>,<span class="number">0x4f</span>,<span class="number">0x66</span>,<span class="number">0x6d</span>,<span class="number">0x7d</span>,<span class="number">0x07</span>,<span class="number">0x7f</span>,<span class="number">0x6f</span>&#125;;</span><br><span class="line">u8 num;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">delay</span><span class="params">(u16 time)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">while</span>(time--);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">	num=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(K1==<span class="number">0</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			delay(<span class="number">10</span>); <span class="comment">//消除振动的影响</span></span><br><span class="line">			<span class="keyword">if</span>(K1==<span class="number">0</span>) <span class="comment">//如果按下</span></span><br><span class="line">			&#123;</span><br><span class="line">				D1=<span class="number">0</span>;</span><br><span class="line">				num++;</span><br><span class="line">				<span class="keyword">if</span>(num==<span class="number">10</span>)</span><br><span class="line">				&#123;</span><br><span class="line">					num=<span class="number">0</span>;</span><br><span class="line">				&#125;<span class="comment">//等价于 num=num%10;防止越界</span></span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			D1=<span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">while</span>(K1==<span class="number">0</span>); <span class="comment">//松手检测 松手了再加一</span></span><br><span class="line">		P0=GS[num];</span><br><span class="line">		delay(<span class="number">20000</span>);</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="矩阵键盘的检测原理"><a href="#矩阵键盘的检测原理" class="headerlink" title="矩阵键盘的检测原理"></a>矩阵键盘的检测原理</h2><p>矩阵键盘的原理图</p>
+<p>![矩阵键盘原理图](51 单片机的学习/矩阵键盘原理图.png)</p>
+<p>检测代码如下所示</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;reg52.h&gt;</span></span></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">unsigned</span> <span class="type">int</span> u16;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">unsigned</span> <span class="type">char</span> u8;</span><br><span class="line"></span><br><span class="line">u8 GS[]=&#123;<span class="number">0x3f</span>,<span class="number">0x06</span>,<span class="number">0x5b</span>,<span class="number">0x4f</span>,<span class="number">0x66</span>,<span class="number">0x6d</span>,<span class="number">0x7d</span>,<span class="number">0x07</span>,</span><br><span class="line"><span class="number">0x7f</span>,<span class="number">0x6f</span>,<span class="number">0x77</span>,<span class="number">0x7c</span>,<span class="number">0x39</span>,<span class="number">0x5e</span>,<span class="number">0x79</span>,<span class="number">0x71</span>,<span class="number">0</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">delay</span><span class="params">(u16 time)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">while</span>(time--);</span><br><span class="line">&#125;</span><br><span class="line">u8 temp,num;</span><br><span class="line"><span class="type">void</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">	num=<span class="number">17</span>;</span><br><span class="line">	<span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">	 	P1=<span class="number">0x7f</span>;    <span class="comment">//第一行检测 先给第一行0,其他行 为1</span></span><br><span class="line">		temp=P1;</span><br><span class="line">		temp=temp&amp;<span class="number">0x0f</span>;</span><br><span class="line">		<span class="keyword">if</span>(temp!=<span class="number">0x0f</span>) <span class="comment">//检测第一行是否有按键按下去</span></span><br><span class="line">		&#123;</span><br><span class="line">			delay(<span class="number">20</span>);</span><br><span class="line">			temp=<span class="number">0x0f</span>;</span><br><span class="line">			temp=temp&amp;P1; <span class="comment">//防止抖动</span></span><br><span class="line">			<span class="keyword">if</span>(temp!=<span class="number">0x0f</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">switch</span>(temp)</span><br><span class="line">				&#123;</span><br><span class="line">					<span class="keyword">case</span> <span class="number">0x07</span>: num=<span class="number">0</span>; <span class="comment">//第一个按键被按下去了,从原理图中可以看出</span></span><br><span class="line">						<span class="keyword">break</span>;</span><br><span class="line">					<span class="keyword">case</span> <span class="number">0x0b</span>: num=<span class="number">1</span>;</span><br><span class="line">						<span class="keyword">break</span>;</span><br><span class="line">					<span class="keyword">case</span> <span class="number">0x0d</span>: num=<span class="number">2</span>;</span><br><span class="line">						<span class="keyword">break</span>;</span><br><span class="line">					<span class="keyword">case</span> <span class="number">0x0e</span>: num=<span class="number">3</span>;</span><br><span class="line">						<span class="keyword">break</span>;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			P0=GS[num];</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">//第二行的检测</span></span><br><span class="line">	 	P1=<span class="number">0xbf</span>;</span><br><span class="line">		temp=P1;</span><br><span class="line">		temp=temp&amp;<span class="number">0x0f</span>;</span><br><span class="line">		<span class="keyword">if</span>(temp!=<span class="number">0x0f</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			delay(<span class="number">20</span>);</span><br><span class="line">			temp=<span class="number">0x0f</span>;</span><br><span class="line">			temp=temp&amp;P1;</span><br><span class="line">			<span class="keyword">if</span>(temp!=<span class="number">0x0f</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">switch</span>(temp)</span><br><span class="line">				&#123;</span><br><span class="line">					<span class="keyword">case</span> <span class="number">0x07</span>: num=<span class="number">4</span>;</span><br><span class="line">						<span class="keyword">break</span>;</span><br><span class="line">					<span class="keyword">case</span> <span class="number">0x0b</span>: num=<span class="number">5</span>;</span><br><span class="line">						<span class="keyword">break</span>;</span><br><span class="line">					<span class="keyword">case</span> <span class="number">0x0d</span>: num=<span class="number">6</span>;</span><br><span class="line">						<span class="keyword">break</span>;</span><br><span class="line">					<span class="keyword">case</span> <span class="number">0x0e</span>: num=<span class="number">7</span>;</span><br><span class="line">						<span class="keyword">break</span>;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		P0=GS[num];</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">//第三行的检测</span></span><br><span class="line">	 	P1=<span class="number">0xdf</span>;</span><br><span class="line">		temp=P1;</span><br><span class="line">		temp=temp&amp;<span class="number">0x0f</span>;</span><br><span class="line">		<span class="keyword">if</span>(temp!=<span class="number">0x0f</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			delay(<span class="number">20</span>);</span><br><span class="line">			temp=<span class="number">0x0f</span>;</span><br><span class="line">			temp=temp&amp;P1;</span><br><span class="line">			<span class="keyword">if</span>(temp!=<span class="number">0x0f</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">switch</span>(temp)</span><br><span class="line">				&#123;</span><br><span class="line">					<span class="keyword">case</span> <span class="number">0x07</span>: num=<span class="number">8</span>;</span><br><span class="line">						<span class="keyword">break</span>;</span><br><span class="line">					<span class="keyword">case</span> <span class="number">0x0b</span>: num=<span class="number">9</span>;</span><br><span class="line">						<span class="keyword">break</span>;</span><br><span class="line">					<span class="keyword">case</span> <span class="number">0x0d</span>: num=<span class="number">10</span>;</span><br><span class="line">						<span class="keyword">break</span>;</span><br><span class="line">					<span class="keyword">case</span> <span class="number">0x0e</span>: num=<span class="number">11</span>;</span><br><span class="line">						<span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		P0=GS[num];</span><br><span class="line">		&#125;</span><br><span class="line">	 		<span class="comment">//第四行的检测</span></span><br><span class="line">	 	P1=<span class="number">0xef</span>;</span><br><span class="line">		temp=P1;</span><br><span class="line">		temp=temp&amp;<span class="number">0x0f</span>;</span><br><span class="line">		<span class="keyword">if</span>(temp!=<span class="number">0x0f</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			delay(<span class="number">20</span>);</span><br><span class="line">			temp=<span class="number">0x0f</span>;</span><br><span class="line">			temp=temp&amp;P1;</span><br><span class="line">			<span class="keyword">if</span>(temp!=<span class="number">0x0f</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">switch</span>(temp)</span><br><span class="line">				&#123;</span><br><span class="line">					<span class="keyword">case</span> <span class="number">0x07</span>: num=<span class="number">12</span>;</span><br><span class="line">						<span class="keyword">break</span>;</span><br><span class="line">					<span class="keyword">case</span> <span class="number">0x0b</span>: num=<span class="number">13</span>;</span><br><span class="line">						<span class="keyword">break</span>;</span><br><span class="line">					<span class="keyword">case</span> <span class="number">0x0d</span>: num=<span class="number">14</span>;</span><br><span class="line">						<span class="keyword">break</span>;</span><br><span class="line">					<span class="keyword">case</span> <span class="number">0x0e</span>: num=<span class="number">15</span>;</span><br><span class="line">						<span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		P0=GS[num];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>将这个主函数的内容写入子函数中,会出现一个,没有按下去时候不知道会显示什么东西的bug,<strong>还有待改进.</strong></p>
+<hr>
+<h1 id="AD-DA-的工作原理及其实现"><a href="#AD-DA-的工作原理及其实现" class="headerlink" title="AD,DA 的工作原理及其实现"></a>AD,DA 的工作原理及其实现</h1><p>AD DA ,D表示数字信号,A表示模拟信号</p>
+<ul>
+<li>DA即数字信号转换为模拟信号</li>
+</ul>
+<h2 id="T型电阻网络D-A转换器"><a href="#T型电阻网络D-A转换器" class="headerlink" title="T型电阻网络D/A转换器"></a>T型电阻网络D/A转换器</h2><p>![DA转换器](51 单片机的学习/DA转换器.png)</p>
+<p>![1](51 单片机的学习/1.png)</p>
+<p><strong>输出电压的大小与数据量有很大的关系</strong></p>
+<h2 id="ADC简介"><a href="#ADC简介" class="headerlink" title="ADC简介"></a>ADC简介</h2><p>ADC（analog to digital converter）也称为模数转换器，是指一个将模拟信号转变为数字信号。单片机在采集模拟信号时，通常都需要在前端加上 A/D 芯片.下面我们看ADC的几个主要数据指标</p>
+<h3 id="分辨率"><a href="#分辨率" class="headerlink" title="分辨率"></a>分辨率</h3><p>ADC 的分辨率是指对于允许范围内的模拟信号，它能输出离散数字信号值的 个数。这些信号值通常用二进制数来存储，因此分辨率经常用比特作为单位，且 这些离散值的个数是 2 的幂指数。 例如：12 位 ADC 的分辨率就是 12 位，或者说分辨率为满刻度的 1/(2^12)。 一个 10V 满刻度的 12 位 ADC 能分辨输入电压变化最小值是</p>
+<p>$10V×1/(2^{12})=2.4mV$</p>
+<h3 id="转换误差"><a href="#转换误差" class="headerlink" title="转换误差"></a>转换误差</h3><p>转换误差通常是以输出误差的最大值形式给出。它表示 A/D 转换器实际输出 的数字量和理论上的输出数字量之间的差别。常用最低有效位的倍数表示。例如 给出相对误差≤±LSB/2，这就表明实际输出的数字量和理论上应得到的输出数 字量之间的误差小于最低位的半个字。</p>
+<h3 id="转换速率"><a href="#转换速率" class="headerlink" title="转换速率"></a>转换速率</h3><p>ADC 的转换速率是能够重复进行数据转换的速度，即每秒转换的次数。而完 成一次 A/D 转换所需的时间（包括稳定时间），则是转换速率的倒数。</p>
+<h3 id="串行和并行"><a href="#串行和并行" class="headerlink" title="串行和并行"></a>串行和并行</h3><ul>
+<li>串行:先进行一个再进行另一个</li>
+<li>并行:多个同时进行,但浪费IO口</li>
+</ul>
+<h3 id="DAC0832"><a href="#DAC0832" class="headerlink" title="DAC0832"></a>DAC0832</h3><ul>
+<li>看一个芯片的资料我们可以去 <a href="www.21ic.com">网站</a> 查找他的相关资料</li>
+<li>主要看</li>
+</ul>
+<ol>
+<li>串行还是并行</li>
+<li>接口的说明</li>
+<li>转换位数和转换效率</li>
+<li>操作时序</li>
+</ol>
+<h2 id="DAC0832-的使用"><a href="#DAC0832-的使用" class="headerlink" title="DAC0832 的使用"></a>DAC0832 的使用</h2><h3 id="DAC0832的电路图"><a href="#DAC0832的电路图" class="headerlink" title="DAC0832的电路图"></a>DAC0832的电路图</h3><p>![DA原理图](51 单片机的学习/DA原理图.png)</p>
+<p>单片机通过控制D0到D7的0/1;来控死发光二极管的电流大小           </p>
+<h2 id="XPT2046-芯片的使用"><a href="#XPT2046-芯片的使用" class="headerlink" title="XPT2046 芯片的使用"></a>XPT2046 芯片的使用</h2><p>因为手上的是普中的开发板，所以本文使用的是XPT2046来实现数模转换。</p>
+<h3 id="XPT2046芯片管脚的说明"><a href="#XPT2046芯片管脚的说明" class="headerlink" title="XPT2046芯片管脚的说明"></a>XPT2046芯片管脚的说明</h3><p>![xpt2096](51 单片机的学习/xpt2096.png)</p>
+<p>![xpt2096管脚说明](51 单片机的学习/xpt2096管脚说明.png)</p>
+<h3 id="XPT2046-的输入配置"><a href="#XPT2046-的输入配置" class="headerlink" title="XPT2046 的输入配置"></a>XPT2046 的输入配置</h3><p>通过控制A2,A1,A0各个值来控制 接收哪一个引脚检测的的数值</p>
+<p>![xpt2096输入配置](51 单片机的学习/xpt2096输入配置.png)</p>
+<h3 id="XPT2046-控制位的命令"><a href="#XPT2046-控制位的命令" class="headerlink" title="XPT2046 控制位的命令"></a>XPT2046 控制位的命令</h3><p>![XPT制表位的命令](51 单片机的学习/XPT制表位的命令.png)</p>
+<p>![2](51 单片机的学习/2.png)</p>
+<h3 id="XPT2046的时序图"><a href="#XPT2046的时序图" class="headerlink" title="XPT2046的时序图"></a>XPT2046的时序图</h3><p>这是编程数模转换器的重点,通过看各个管脚的时序,来编程.</p>
+<p>![](51 单片机的学习/xpt2096时序图.png)</p>
+<h3 id="XPT2046的连接"><a href="#XPT2046的连接" class="headerlink" title="XPT2046的连接"></a>XPT2046的连接</h3><p>![xpt2046的连接](51 单片机的学习/xpt2046的连接.png)</p>
+<h3 id="XPT2046的编程"><a href="#XPT2046的编程" class="headerlink" title="XPT2046的编程"></a>XPT2046的编程</h3><p>本文是将 XPT2046 的AIN0检测到的电压值,传输到单片机,并在数码管上显示出来</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;reg52.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;intrins.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">unsigned</span> <span class="type">int</span> u16;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">unsigned</span> <span class="type">char</span> u8;</span><br><span class="line">sbit CS=P3^<span class="number">5</span>;</span><br><span class="line">sbit DIN=P3^<span class="number">2</span>;</span><br><span class="line">sbit CLK=P3^<span class="number">6</span>;</span><br><span class="line">sbit DOUT=P3^<span class="number">7</span>;</span><br><span class="line">sbit LSA=P2^<span class="number">2</span>;</span><br><span class="line">sbit LSB=P2^<span class="number">3</span>;</span><br><span class="line">sbit LSC=P2^<span class="number">4</span>;</span><br><span class="line"></span><br><span class="line">u8 GS[]=&#123;<span class="number">0x3f</span>,<span class="number">0x06</span>,<span class="number">0x5b</span>,<span class="number">0x4f</span>,<span class="number">0x66</span>,<span class="number">0x6d</span>,<span class="number">0x7d</span>,<span class="number">0x07</span>,<span class="number">0x7f</span>,<span class="number">0x6f</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">delay</span><span class="params">(u16 time)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">while</span>(time--);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span>  <span class="title function_">xpt2046_wirte_data</span><span class="params">(u8 cmd)</span> <span class="comment">//读取命令 控制XPT2046的模式</span></span><br><span class="line">&#123;</span><br><span class="line">	u8 i=<span class="number">0</span>;</span><br><span class="line">	CLK=<span class="number">0</span>;</span><br><span class="line">	_nop_(); <span class="comment">//延时一微秒</span></span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;<span class="number">8</span>;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		DIN=cmd&gt;&gt;<span class="number">7</span>; <span class="comment">//先读取高位</span></span><br><span class="line">		cmd&lt;&lt;=<span class="number">1</span>;		<span class="comment">//将下一位设置为最高位</span></span><br><span class="line">		CLK=<span class="number">1</span>;		<span class="comment">//CLK 由低到高产生一个上升沿，从而写入数据</span></span><br><span class="line">		_nop_();</span><br><span class="line">		CLK=<span class="number">0</span>;</span><br><span class="line">		_nop_();</span><br><span class="line">	&#125;	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">u16 <span class="title function_">xpt2046_read_data</span><span class="params">()</span> <span class="comment">//从XPT2046中读取数据</span></span><br><span class="line">&#123;</span><br><span class="line">	</span><br><span class="line">	u8 i;</span><br><span class="line">	u16 dat=<span class="number">0</span>;</span><br><span class="line">	CLK = <span class="number">0</span>;</span><br><span class="line">	_nop_();</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;<span class="number">12</span>;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		</span><br><span class="line">		CLK=<span class="number">1</span>;		<span class="comment">//CLK 由低到高产生一个上升沿，从而写入数据</span></span><br><span class="line">		_nop_();</span><br><span class="line">		CLK=<span class="number">0</span>;</span><br><span class="line">		_nop_();</span><br><span class="line">		dat|= DOUT;<span class="comment">//先读取高位，再读取低位</span></span><br><span class="line">		dat&lt;&lt;=<span class="number">1</span>;		</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> dat;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">u16 <span class="title function_">xpt2046_read_adc_value</span><span class="params">(u8 cmd)</span> <span class="comment">//在da模块读取到数据,函数整合</span></span><br><span class="line">&#123;</span><br><span class="line">	u8 i=<span class="number">0</span>;</span><br><span class="line">	u16 dat;</span><br><span class="line">	CS=<span class="number">0</span>;</span><br><span class="line">	CLK=<span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">	xpt2046_wirte_data(cmd);</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">6</span>;i&gt;<span class="number">0</span>;i--); <span class="comment">//延时一会等待命令结束</span></span><br><span class="line"></span><br><span class="line">	CLK = <span class="number">0</span>;</span><br><span class="line">	_nop_();</span><br><span class="line">	CLK = <span class="number">1</span>;<span class="comment">//发送一个时钟，清除 BUSY</span></span><br><span class="line">	_nop_();</span><br><span class="line"></span><br><span class="line">	dat=xpt2046_read_data(); <span class="comment">//读取数据</span></span><br><span class="line">	CS=<span class="number">1</span>; <span class="comment">//关闭</span></span><br><span class="line">	<span class="keyword">return</span> dat;</span><br><span class="line">		</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">smg_display</span><span class="params">(u8 A[],u8 i)</span><span class="comment">//动态显示</span></span><br><span class="line">&#123;</span><br><span class="line">	u8 pos = i;</span><br><span class="line">	<span class="keyword">for</span>(;i&lt;<span class="number">8</span>;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">switch</span>(i)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">case</span> <span class="number">0</span>:LSA=<span class="number">1</span>;LSB=<span class="number">1</span>;LSC=<span class="number">1</span>;<span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">case</span> <span class="number">1</span>:LSC=<span class="number">1</span>;LSB=<span class="number">1</span>;LSA=<span class="number">0</span>;<span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">case</span> <span class="number">2</span>:LSC=<span class="number">1</span>;LSB=<span class="number">0</span>;LSA=<span class="number">1</span>;<span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">case</span> <span class="number">3</span>:LSC=<span class="number">1</span>;LSB=<span class="number">0</span>;LSA=<span class="number">0</span>;<span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">case</span> <span class="number">4</span>:LSC=<span class="number">0</span>;LSB=<span class="number">1</span>;LSA=<span class="number">1</span>;<span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">case</span> <span class="number">5</span>:LSC=<span class="number">0</span>;LSB=<span class="number">1</span>;LSA=<span class="number">0</span>;<span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">case</span> <span class="number">6</span>:LSC=<span class="number">0</span>;LSB=<span class="number">0</span>;LSA=<span class="number">1</span>;<span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">case</span> <span class="number">7</span>:LSC=<span class="number">0</span>;LSB=<span class="number">0</span>;LSA=<span class="number">0</span>;<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">        <span class="comment">//用swich语句控制位选,选择哪个灯亮,此处普中芯片使用了三八译码器</span></span><br><span class="line">		P0=A[i-pos];</span><br><span class="line">		delay(<span class="number">100</span>);</span><br><span class="line">		P0=<span class="number">0x00</span>; <span class="comment">//这句代码是消影的过程,就是显示完之后让段选为什么都不显示的状态. 防止下次位选后直接                    显示值.</span></span><br><span class="line">	&#125;	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">	u8 cmd;</span><br><span class="line">	u16 dat;</span><br><span class="line">	<span class="type">float</span> dat_v;</span><br><span class="line">	u16 det_val;</span><br><span class="line">	u8 adc_buf[<span class="number">3</span>];</span><br><span class="line">	<span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">	 	cmd=<span class="number">0x94</span>;	<span class="comment">//测量电位器</span></span><br><span class="line">		dat=xpt2046_read_adc_value(cmd);  </span><br><span class="line">		dat_v = dat*<span class="number">5.0</span>/<span class="number">4096</span>;  <span class="comment">//将读取的 AD 值转换成电压</span></span><br><span class="line">		det_val=dat_v*<span class="number">10</span>;	   <span class="comment">//读取前两位有效数字</span></span><br><span class="line">		adc_buf[<span class="number">0</span>]=	GS[det_val/<span class="number">10</span>]|<span class="number">0x80</span>; <span class="comment">//个位加上小数点</span></span><br><span class="line">		adc_buf[<span class="number">1</span>]=	GS[det_val%<span class="number">10</span>];		 <span class="comment">//小数点后一位</span></span><br><span class="line">		adc_buf[<span class="number">2</span>]=	<span class="number">0x3e</span>;				<span class="comment">//单位V</span></span><br><span class="line">		smg_display(adc_buf,<span class="number">5</span>);			<span class="comment">//动态显示</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="串口通信"><a href="#串口通信" class="headerlink" title="串口通信"></a>串口通信</h1><h2 id="通信的分类"><a href="#通信的分类" class="headerlink" title="通信的分类"></a>通信的分类</h2><h3 id="串行通信与并行通信"><a href="#串行通信与并行通信" class="headerlink" title="串行通信与并行通信"></a>串行通信与并行通信</h3><ol>
+<li>串行通信</li>
+</ol>
+<p>串行通信是指使用一条数据线，将数据一位一位地依次传输，每一位数据占据一个固定的时间长度.其只需要少数几条线就可以在系统间交换信息，特别适 用于计算机与计算机、计算机与外设之间的远距离通信.</p>
+<p>特点: 传输线少，长距离传送时成本低，且可以利用电话网等现 成的设备，但数据的传送控制比并行通信复杂.</p>
+<p>![img](51 单片机的学习/BSB]G}W5JNQ2}DPUXOT2L]H.png)</p>
+<p>2.并行通信</p>
+<p>并行通信通常是将数据字节的各位用多条数据线同时进行传送，通常是 8 位、16 位、32 位等数据一起传输。如下图所示：</p>
+<p>并行通信的特点：控制简单、传输速度快；由于传输线较多，长距离传送时成本高且接收方的各位同时接收存在困难，抗干扰能力差。</p>
+<p>![image-20221222195204103](51 单片机的学习/image-20221222195204103.png)</p>
+<h3 id="异步通信与同步通信"><a href="#异步通信与同步通信" class="headerlink" title="异步通信与同步通信"></a>异步通信与同步通信</h3><ol>
+<li><strong>异步通信</strong>(比较常用)</li>
+</ol>
+<p>异步通信是指通信的发送与接收设备使用<strong>各自的时钟</strong>控制数据的发送和接收过程。为使双方的收发协调，要求发送和接收设备的时钟尽可能一致。</p>
+<p>异步通信是以<strong>字符</strong>（构成的帧,8位）为单位进行传输，字符与字符之间<strong>的间隙（时间间隔）是任意的</strong>，但每个字符中的各位是以固定的时间传送的，即字符之间不 一定有“位间隔”的整数倍的关系，但同一字符内的各<strong>位之间的距离均为“ 位 间隔”的整数倍</strong>。如下图所示：</p>
+<p>![image-20221222195408401](51 单片机的学习/image-20221222195408401.png)</p>
+<p>一般启示位是0,即低电平; 终止位是1,即高电平.</p>
+<p>终止位前有一个检验位,用于检验是否存在传输错误. 常用的有奇偶校验, 用的比较多的是代码和校验.</p>
+<p>异步通信的特点：不要求收发双方时钟的严格一致，实现容易，设备开销较 小，但每个字符要附加 2～3 位用于起止位，各帧之间还有间隔，因此传输效率 不高。</p>
+<ol start="2">
+<li><strong>同步通信</strong></li>
+</ol>
+<p>同步通信时要建立发送方时钟对接收方时钟的直接控制，使双方达到完全同 步。此时，传输数据的位之间的距离均为“位间隔”的整数倍，同时传送的字符 间不留间隙，即保持位同步关系，也保持字符同步关系。发送方对接收方的同步 可以通过两种方法实现。</p>
+<p>![image-20221222195716522](51 单片机的学习/image-20221222195716522.png)</p>
+<h3 id="单工、半双工与全双工通信"><a href="#单工、半双工与全双工通信" class="headerlink" title="单工、半双工与全双工通信"></a>单工、半双工与全双工通信</h3><ol>
+<li><strong>单工通信</strong></li>
+</ol>
+<p>单工是指数据传输仅能沿一个方向，不能实现反向传输。如下图所示：</p>
+<p>![image-20221222195813958](51 单片机的学习/image-20221222195813958.png)</p>
+<ol start="2">
+<li><strong>半双工通信</strong></li>
+</ol>
+<p>半双工是指数据传输可以沿两个方向，但需要分时进行。如下图所示：</p>
+<p>![image-20221222195858398](51 单片机的学习/image-20221222195858398.png)</p>
+<p>3.<strong>全双工通信</strong></p>
+<p>全双工是指数据可以同时进行双向传输。如下图所示：</p>
+<p>![image-20221222195931136](51 单片机的学习/image-20221222195931136.png)</p>
+<h2 id="传输速率"><a href="#传输速率" class="headerlink" title="传输速率"></a>传输速率</h2><p>传输速率又叫比特率, 比特率是每秒钟传输二进制代码的位数，单位是：位／秒（ bps）。</p>
+<p><strong>波特率</strong>是每秒钟传输二进制代码的码数.</p>
+<h2 id="单片机串口介绍"><a href="#单片机串口介绍" class="headerlink" title="单片机串口介绍"></a>单片机串口介绍</h2><h2 id="串口通信简介"><a href="#串口通信简介" class="headerlink" title="串口通信简介"></a>串口通信简介</h2><ol>
+<li>接口标准</li>
+</ol>
+<p>这里我们就以 RS-232C 接口进行讲解。</p>
+<p>RS-232C 接口规定使用 25 针连接器，简称 DB25，连接器的尺寸及每个插 针的排列位置都有明确的定义，如下图所示：</p>
+<p>![image-20221222200845733](51 单片机的学习/image-20221222200845733.png)</p>
+<p>并且会分为公头和母头(这里很好理解) 并且注意 公头和母头的引脚顺序是不一样的</p>
+<p>![img](51 单片机的学习/D{YY7UPTU03`WY12{276DW.png)</p>
+<p>每个引脚的功能如下所示: </p>
+<p>![img](51 单片机的学习/7AIV49W9@6R%AKMC9}W0L43.png)</p>
+<p>串口通信中还需要注意的是，串口数据收发线要交叉连接，计算机的 TXD 要对应单片机的 RXD，计算机的 RXD 要对应单片机的 TXD，并且共 GND，如下 图</p>
+<p>![image-20221222201449669](51 单片机的学习/image-20221222201449669.png)</p>
+<ol start="2">
+<li><strong>通信协议</strong></li>
+</ol>
+<p>RS232 的通信协议比较简单，通常遵循 <strong>96-N-8-1</strong> 格式。</p>
+<p> <strong>“96”表示的是通信波特率为 9600</strong>。串口通信中通常使用的是异步串口通 信，即没有时钟线，所以两个设备要通信，必须要保持一致的波特率，当然，波特率常用值还有 4800、 115200 等.</p>
+<p><strong>“N”表示的是无校验位，</strong>由于串口通信相对更容易受到外部干扰导致传输 数据出现偏差，可以在传输过程加上校验位来解决这个问题。</p>
+<p><strong>“8”表示的是数据位数为 8 位</strong></p>
+<p><strong>“1”表示的是 1 位停止位</strong>，串口通讯的一个数据包从起始信号开始，直到停止信号结束。数据包的起始信号由一个逻辑 0 的数据位表示，而数据包的停 止信号可由 0.5,1,1.5 或 2 个逻辑 1 的数据位表示，只要双方约定一致即可.</p>
+<ol start="3">
+<li><strong>串口的内部结构</strong></li>
+</ol>
+<p>![串口通信内部结构](51 单片机的学习/串口通信内部结构.png)</p>
+<p>波特率 靠TH1,TL1 工作在定时器工作在模式2</p>
+<p>TXD 对应的是 P3.1 管脚，RXD 对 应的是 P3.0 管脚。</p>
+<p>输入和输出时注意读取SBUF缓存器</p>
+<ol start="4">
+<li><strong>串口控制寄存器 SCON</strong></li>
+</ol>
+<p>![3](51 单片机的学习/3.png)</p>
+<p><strong>SM0 和 SM1</strong> 为工作方式选择位： 一般选择工作在<strong>方式一</strong></p>
+<p>![4](51 单片机的学习/4.png)</p>
+<p><strong>SM2</strong>：多机通信控制位，<strong>这里设置为0即可</strong> ,因为它主要用于方式 2 和方式3.</p>
+<p><strong>REN</strong>：允许串行接收位。由软件置 <strong>REN=1</strong>，则启动串行口接收数据；若软件置 <strong>REN=0</strong>，则禁止接收.</p>
+<p><strong>TB8</strong>：在方式 2 或方式 3 中，是发送数据的第 9 位，可以用软件规定其作用。 可以用作数据的奇偶校验位，或在多机通信中，作为地址帧/数据帧的标志位。 <strong>在方式 0 和方式 1 中，该位未用到,设置为0即可.</strong></p>
+<p> <strong>RB8</strong>：在方式 2 或方式 3 中，是接收到数据的第 9 位，作为奇偶校验位或地 址帧/数据帧的标志位。<strong>在方式 1 时，若 SM2=0，则 RB8 是接收到的停止位。</strong></p>
+<p><strong>TI</strong>：发送中断标志位。<strong>主要使用在方式0</strong>, 在方式 0 时，当串行发送第 8 位数据结束时，或在其 它方式，串行发送停止位的开始时，由内部硬件使 TI 置 1，向 CPU 发中断申请。 在中断服务程序中，必须用软件将其清 0，取消此中断申请。</p>
+<p> <strong>RI</strong>：接收中断标志位, 主要使用在方式0。<strong>在方式 0 时</strong>，当串行接收第 8 位数据结束时，或在其 它方式，串行接收停止位的中间时，由内部硬件使 RI 置 1，向 CPU 发中断申请。 也必须在中断服务程序中，用软件将其清 0，取消此中断申请.</p>
+<p>电源控制寄存器 PCON中只有SMOD的第一位有关. </p>
+<p> <strong>SMOD</strong>：波特率倍增位。在串口方式 1、方式 2、方式 3 时，波特率与 SMOD 有 关，<strong>当 SMOD=1 时，波特率提高一倍</strong>。复位时，SMOD=0</p>
+<h2 id="方式一的工作"><a href="#方式一的工作" class="headerlink" title="方式一的工作"></a>方式一的工作</h2><p>方式 1 是 10 位数据的异步通信口。</p>
+<p>TXD 为数据发送引脚，RXD 为数据接收引 脚，传送一帧数据的格式如下所示</p>
+<p>其中 1 位起始位, 8 位数据位1 位停止位.</p>
+<p>![5](51 单片机的学习/5.png)</p>
+<h2 id="波特率的计算"><a href="#波特率的计算" class="headerlink" title="波特率的计算"></a>波特率的计算</h2><p>方式 0 的波特率 = $fosc/12$</p>
+<p> 方式 2 的波特率 =$（2^{SMOD} /64）· fosc $</p>
+<p>方式 3 的波特率 =$（2^{SMOD}/32）·（T1 溢出率)$</p>
+<p><strong>方式 1 的波特率 =$（2^{SMOD}/32）·（T1 溢出率） $</strong></p>
+<p>可以用 <em>51 波特率初值设定.exe</em> 软件</p>
+<h2 id="硬件设计"><a href="#硬件设计" class="headerlink" title="硬件设计"></a>硬件设计</h2><p>这里以普中开发板为例</p>
+<p>![6](51 单片机的学习/6.png)</p>
+<h2 id="软件设计"><a href="#软件设计" class="headerlink" title="软件设计"></a>软件设计</h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;reg52.h&quot;</span></span></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">unsigned</span> <span class="type">int</span> u16;<span class="comment">//对系统默认数据类型进行重定义</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">unsigned</span> <span class="type">char</span> u8;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">uart_init</span><span class="params">(u8 baud)</span></span><br><span class="line">&#123;</span><br><span class="line">	TMOD|=<span class="number">0X20</span>; <span class="comment">//设置计数器工作方式 2</span></span><br><span class="line">	SCON=<span class="number">0X50</span>; <span class="comment">//设置为工作方式 1</span></span><br><span class="line">	PCON=<span class="number">0X80</span>; <span class="comment">//波特率加倍</span></span><br><span class="line">	TH1=baud; <span class="comment">//计数器初始值设置</span></span><br><span class="line">	TL1=baud;</span><br><span class="line">	ES=<span class="number">1</span>; <span class="comment">//打开接收中断</span></span><br><span class="line">	EA=<span class="number">1</span>; <span class="comment">//打开总中断</span></span><br><span class="line">	TR1=<span class="number">1</span>; <span class="comment">//打开计数器</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">uart_init(<span class="number">0XFA</span>);<span class="comment">//波特率为 9600</span></span><br><span class="line">	<span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">        </span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">uart</span><span class="params">()</span> interrupt 4 <span class="comment">//串口通信中断函数</span></span><br><span class="line">&#123;</span><br><span class="line">u8 rec_data;</span><br><span class="line">RI = <span class="number">0</span>; <span class="comment">//清除接收中断标志位</span></span><br><span class="line">rec_data=SBUF; <span class="comment">//存储接收到的数据</span></span><br><span class="line">SBUF=rec_data; <span class="comment">//将接收到的数据放入到发送寄存器</span></span><br><span class="line"><span class="keyword">while</span>(!TI); <span class="comment">//等待发送数据完成</span></span><br><span class="line">TI=<span class="number">0</span>; <span class="comment">//清除发送完成标志位</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>单片机</category>
+      </categories>
+      <tags>
+        <tag>电赛准备</tag>
+        <tag>单片机</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>如何使用Markdown+ Typora</title>
     <url>/2022/12/18/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8Markdown-Typora/</url>
     <content><![CDATA[<h1 id="如何使用Markdown-Typora"><a href="#如何使用Markdown-Typora" class="headerlink" title="如何使用Markdown+ Typora"></a>如何使用Markdown+ Typora</h1><h2 id="简要介绍"><a href="#简要介绍" class="headerlink" title="简要介绍"></a>简要介绍</h2><p><strong>Markdown</strong> 是一种轻量型标记语言, 是一种语法. 以 <code>.md</code> 结尾的文本文件就是 Markdown 文件. 相较于 <strong>Word</strong>, 它更加像是 <strong>HTML</strong> 语言或是 $\LaTeX$, 并不是最淳朴的那种”所见即所得”. 它处处透露着一种极简主义. 高效简洁清晰的同时, 又很简单. 看起来舒服, 语法简单, 尤其在处理纯文本上有很大的优势. </p>
@@ -571,7 +1003,8 @@
 <p>其实 Markdown 只是标记语言的最开始, 我的感受是会了 Markdown 之后对于理解 HTML 也有帮助, 对于用 $\LaTeX$ 来写论文也有帮助. 标记语言正是为了摆脱 Word 那种虽然”所见即所得”, 但又过于花哨浮华, 很差的兼容性与闭源的编码的缺陷. 当你能掌握这样的”所写即所得”时, 你肯定会感受到用 Markdown 这类语言来处理文本的妙处!</p>
 ]]></content>
       <tags>
-        <tag>-Tyraro -Markdown</tag>
+        <tag>Tyraro</tag>
+        <tag>Markdown</tag>
       </tags>
   </entry>
   <entry>
