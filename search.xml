@@ -1,315 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>LaTex的基本语法</title>
-    <url>/2022/12/20/LaTex%E7%9A%84%E4%BD%BF%E7%94%A8/</url>
-    <content><![CDATA[<p>本文是B站以下两视频的学习笔记<br><a href="https://www.bilibili.com/video/BV15x411j7k6?p=1&amp;vd_source=1e56c5282fb34ebc3bc5d2b2b4c8d5a7">latex中文教程-15集从入门到精通包</a></p>
-<p><a href="https://www.bilibili.com/video/BV1Zh411y7ps/?spm_id_from=333.337.search-card.all.click&amp;vd_source=1e56c5282fb34ebc3bc5d2b2b4c8d5a7">数模&amp;美赛之LaTeX攻破</a></p>
-<h1 id="LaTeX-的基本框架"><a href="#LaTeX-的基本框架" class="headerlink" title="$LaTeX$的基本框架"></a>$LaTeX$的基本框架</h1><figure class="highlight less"><table><tr><td class="code"><pre><span class="line">%导言区</span><br><span class="line">\<span class="selector-tag">documentclass</span>&#123;<span class="selector-tag">article</span>&#125; %这里有<span class="selector-tag">article</span> <span class="selector-tag">book</span> <span class="selector-tag">letter</span> <span class="selector-tag">report</span>等格式</span><br><span class="line">\<span class="selector-tag">usepackage</span>&#123;<span class="selector-tag">ctex</span>&#125; % 引入中文包,可以在正文区里输入中文</span><br><span class="line">\<span class="selector-tag">author</span>&#123;<span class="selector-tag">Carl</span>&#125;</span><br><span class="line">\<span class="selector-tag">date</span> &#123;\<span class="selector-tag">today</span>&#125;</span><br><span class="line">\<span class="selector-tag">title</span>&#123;<span class="selector-tag">My</span> <span class="selector-tag">first</span> <span class="selector-tag">document</span>&#125;</span><br><span class="line">%正文区<span class="selector-tag">-</span>一个<span class="selector-tag">LaTeX</span>文件中只有一个正文去</span><br><span class="line">\<span class="selector-tag">begin</span>&#123;<span class="selector-tag">document</span>&#125;	</span><br><span class="line">	\<span class="selector-tag">maketitle</span>	%在<span class="selector-tag">letter</span>中无法使用此命令</span><br><span class="line">	</span><br><span class="line">	<span class="selector-tag">hello</span> <span class="selector-tag">world</span></span><br><span class="line">	你好世界</span><br><span class="line">			%这里用空行可以另起一行</span><br><span class="line">	这是一个公式:$<span class="selector-tag">f</span>(x)=<span class="selector-tag">x</span>^<span class="number">2</span>+<span class="number">2</span><span class="selector-tag">x</span>+<span class="number">1</span>$ %单美元符号 接在后面输入公式</span><br><span class="line">	</span><br><span class="line">	这是另一个公式:$$<span class="selector-tag">f</span>(x)=<span class="number">3</span><span class="selector-tag">x</span>^<span class="number">2</span>+<span class="number">2</span><span class="selector-tag">x</span>+<span class="number">1</span>$$ %双美元符号 另起一行输入公式</span><br><span class="line">\<span class="selector-tag">end</span>&#123;<span class="selector-tag">document</span>&#125;</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h1 id="LaTeX-中文架构的搭建"><a href="#LaTeX-中文架构的搭建" class="headerlink" title="$LaTeX$ 中文架构的搭建"></a>$LaTeX$ 中文架构的搭建</h1><h2 id="首先设置"><a href="#首先设置" class="headerlink" title="首先设置"></a>首先设置</h2><ul>
-<li>选项-构建-XeLaTeX</li>
-<li>编译器-UTF-8</li>
-</ul>
-<h2 id="搭建中文架构"><a href="#搭建中文架构" class="headerlink" title="搭建中文架构"></a>搭建中文架构</h2><p>ctex 宏包和文档类2进一步封装了 CJK、xeCJK、luatexja 等宏包，使得用户在排版中文时 不用再考虑排版引擎等细节。</p>
-<p>ctex 宏包本身用于配合各种文档类排版中文，而 ctex 文档类对 LATEX 的标准文档类进行了封装，对一些排版根据中文排版习惯做了调整，包括 ctexart / ctexrep / ctexbook。ctex 宏包和文档类能够识别操作系统和 TEX 发行版中安装的中文字体，因此基本 无需额外配置即可排版中文文档。<a href="lshort-zh-cn">^1</a></p>
-<p>下面举一个使用 ctex 文档类排版中文的最简例子：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">\documentclass&#123;ctexart&#125;</span><br><span class="line">\begin&#123;document&#125;</span><br><span class="line">在\LaTeX&#123;&#125;中排版中文。</span><br><span class="line">汉字和English单词混排，通常不需要在中英文之间添加额外的空格。</span><br><span class="line">当然，为了代码的可读性，加上汉字和 English 之间的空格也无妨。</span><br><span class="line">汉字换行时不会引入多余的空格。</span><br><span class="line">\end&#123;document&#125;</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h1 id="LaTeX-字体字号的设置"><a href="#LaTeX-字体字号的设置" class="headerlink" title="$LaTeX$ 字体字号的设置"></a>$LaTeX$ 字体字号的设置</h1><h2 id="字体设置的两种方式"><a href="#字体设置的两种方式" class="headerlink" title="字体设置的两种方式"></a>字体设置的两种方式</h2><ul>
-<li>字体声明 <code>\texterm&#123;Roman Family&#125;</code></li>
-<li>字体命令<code>&#123;\texterm Roman Family&#125; %这里的大括号表示作用的范围</code></li>
-</ul>
-<h2 id="字体族的设置"><a href="#字体族的设置" class="headerlink" title="字体族的设置"></a>字体族的设置</h2><table>
-<thead>
-<tr>
-<th></th>
-<th></th>
-<th></th>
-<th align="center"></th>
-</tr>
-</thead>
-<tbody><tr>
-<td>\rmfamily</td>
-<td>\textrm{…}</td>
-<td>roman</td>
-<td align="center">衬线字体（罗马体）</td>
-</tr>
-<tr>
-<td>\sffamily</td>
-<td>\textsf{…}</td>
-<td>sans serif</td>
-<td align="center">无衬线字体</td>
-</tr>
-<tr>
-<td>\ttfamily</td>
-<td>\texttt{…}</td>
-<td>typewriter</td>
-<td align="center">等宽字体</td>
-</tr>
-</tbody></table>
-<h2 id="字体系列的设置-粗细"><a href="#字体系列的设置-粗细" class="headerlink" title="字体系列的设置(粗细)"></a>字体系列的设置(粗细)</h2><table>
-<thead>
-<tr>
-<th>\mdseries</th>
-<th>\textmd{…}</th>
-<th>medium</th>
-<th>正常粗细（中等）</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>\bfseries</td>
-<td>\textbf{…}</td>
-<td><strong>bold face</strong></td>
-<td>粗体</td>
-</tr>
-</tbody></table>
-<h2 id="字体形状的设置"><a href="#字体形状的设置" class="headerlink" title="字体形状的设置"></a>字体形状的设置</h2><table>
-<thead>
-<tr>
-<th>\upshape</th>
-<th>\upshape</th>
-<th>upright</th>
-<th>直立体</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>\itshape</td>
-<td>\textit{…}</td>
-<td>italic</td>
-<td>意大利斜体</td>
-</tr>
-<tr>
-<td>\slshape</td>
-<td>\textsl{…}</td>
-<td>slanted</td>
-<td>倾斜体</td>
-</tr>
-<tr>
-<td>\scshape</td>
-<td>\textsc{…}</td>
-<td>SMALL CAPS</td>
-<td>小型大写字母</td>
-</tr>
-</tbody></table>
-<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="comment">%字体字号设置</span></span><br><span class="line"><span class="keyword">\documentclass</span>[10pt]&#123;article&#125;<span class="comment">%10磅是默认正常的字体大小，即下文中的normalsize</span></span><br><span class="line"><span class="keyword">\usepackage</span>&#123;ctex&#125;</span><br><span class="line"><span class="keyword">\newcommand</span>&#123;<span class="keyword">\myfont</span>&#125;&#123;<span class="keyword">\textbf</span>&#123;<span class="keyword">\textsf</span>&#123;Fancy Text&#125;&#125;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">%正文区</span></span><br><span class="line"><span class="keyword">\begin</span>&#123;document&#125;</span><br><span class="line"><span class="comment">%字体族设置(罗马字体、无衬线字体、打字机字体)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">\textrm</span>&#123;Roman Family&#125; <span class="keyword">\textsf</span>&#123;Scan Serif Family&#125;<span class="keyword">\texttt</span>&#123;Typewriter Family&#125;<span class="comment">%\textrm等是字体命令，大括号里是作用到的文字</span></span><br><span class="line"></span><br><span class="line">&#123;<span class="keyword">\rmfamily</span> Roman Family&#125; &#123;<span class="keyword">\sffamily</span> Scan Serif Family&#125;&#123;<span class="keyword">\ttfamily</span> Typewriter Family&#125;<span class="comment">%\rmfamily是字体声明，后面紧跟的文字是作用到的文字</span></span><br><span class="line"></span><br><span class="line">&#123;<span class="keyword">\sffamily</span> Who are you?you find self on everyone around.take you as the same as others!&#125;</span><br><span class="line">&#123;<span class="keyword">\ttfamily</span> Are you aiser than others?&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">%字体系列设置(粗细、宽度)，\textbf可以对字体加粗</span></span><br><span class="line"><span class="keyword">\textmd</span>&#123;Medium Series&#125; <span class="keyword">\textbf</span>&#123;Boldface Series&#125;<span class="comment">%\textmd等是字体命令，大括号里是作用到的文字</span></span><br><span class="line">&#123;<span class="keyword">\mdseries</span> Medium Series&#125; &#123;<span class="keyword">\bfseries</span> Boldface Series&#125;<span class="comment">%字体声明</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">%字体形状(直立、斜体、伪斜体、小型大写)</span></span><br><span class="line"><span class="keyword">\textup</span>&#123;Upright Shape&#125; <span class="keyword">\textit</span>&#123;Italic Shape&#125; <span class="comment">%字体命令</span></span><br><span class="line"><span class="keyword">\textsl</span>&#123;Slanted Shape&#125; <span class="keyword">\textsc</span>&#123;Small Caps Shape&#125;</span><br><span class="line"></span><br><span class="line">&#123;<span class="keyword">\upshape</span> Upright Shape&#125; &#123;<span class="keyword">\itshape</span> Italic Shape &#125;<span class="comment">%字体声明</span></span><br><span class="line">&#123;<span class="keyword">\slshape</span> Slanted Shape&#125;</span><br><span class="line">&#123;<span class="keyword">\scshape</span> Small Caps Shape&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="英文字体大小的设置"><a href="#英文字体大小的设置" class="headerlink" title="英文字体大小的设置"></a>英文字体大小的设置</h2><p>控制文档的参数:<code>\documentclass[11pt]&#123;article&#125;</code>                 </p>
-<table>
-<thead>
-<tr>
-<th>字号</th>
-<th>10pt 选项（默认）</th>
-<th>11pt 选项</th>
-<th>12pt 选项</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>\tiny</td>
-<td>5pt</td>
-<td>6pt</td>
-<td>6pt</td>
-</tr>
-<tr>
-<td>\scriptsize</td>
-<td>7pt</td>
-<td>8pt</td>
-<td>8pt</td>
-</tr>
-<tr>
-<td>\footnotesize</td>
-<td>8pt</td>
-<td>9pt</td>
-<td>10pt</td>
-</tr>
-<tr>
-<td>\small</td>
-<td>9pt</td>
-<td>10pt</td>
-<td>10.95pt</td>
-</tr>
-<tr>
-<td>\normalsize</td>
-<td>10pt</td>
-<td>10.95pt</td>
-<td>12pt</td>
-</tr>
-<tr>
-<td>\large</td>
-<td>12pt</td>
-<td>12pt</td>
-<td>14.4pt</td>
-</tr>
-<tr>
-<td>\Large</td>
-<td>14.4pt</td>
-<td>14.4pt</td>
-<td>17.28pt</td>
-</tr>
-<tr>
-<td>\LARGE</td>
-<td>17.28pt</td>
-<td>17.28pt</td>
-<td>20.74pt</td>
-</tr>
-<tr>
-<td>\huge</td>
-<td>20.74pt</td>
-<td>20.74pt</td>
-<td>24.88pt</td>
-</tr>
-<tr>
-<td>\Huge</td>
-<td>24.88pt</td>
-<td>24.88pt</td>
-<td>24.88pt</td>
-</tr>
-</tbody></table>
-<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="comment">%字体大小</span></span><br><span class="line">&#123;<span class="keyword">\tiny</span>  Hello &#125;<span class="keyword">\\</span></span><br><span class="line">&#123;<span class="keyword">\scriptsize</span>  Hello &#125;<span class="keyword">\\</span></span><br><span class="line">&#123;<span class="keyword">\footnotesize</span>  Hello &#125;<span class="keyword">\\</span></span><br><span class="line">&#123;<span class="keyword">\small</span>  Hello &#125;<span class="keyword">\\</span></span><br><span class="line">&#123;<span class="keyword">\normalsize</span>  Hello &#125;<span class="keyword">\\</span></span><br><span class="line">&#123;<span class="keyword">\large</span>  Hello &#125;<span class="keyword">\\</span></span><br><span class="line">&#123;<span class="keyword">\Large</span>  Hello &#125;<span class="keyword">\\</span></span><br><span class="line">&#123;<span class="keyword">\LARGE</span>  Hello &#125;<span class="keyword">\\</span></span><br><span class="line">&#123;<span class="keyword">\huge</span>  Hello &#125;<span class="keyword">\\</span> </span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="中文字体的设置"><a href="#中文字体的设置" class="headerlink" title="中文字体的设置"></a>中文字体的设置</h2><p>在引入了中文宏包后</p>
-<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line">&#123;<span class="keyword">\songti</span> 宋体&#125; <span class="keyword">\quad</span> &#123;<span class="keyword">\heiti</span> 黑体&#125; <span class="keyword">\quad</span> &#123;<span class="keyword">\fangsong</span> 仿宋&#125; <span class="keyword">\quad</span> &#123;<span class="keyword">\kaiti</span> 楷体&#125;</span><br><span class="line"><span class="comment">%中文的粗细设置</span></span><br><span class="line"><span class="keyword">\textbf</span>&#123;粗体&#125; <span class="keyword">\quad</span> <span class="keyword">\textit</span>&#123;斜体&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="中文字体大小的设置"><a href="#中文字体大小的设置" class="headerlink" title="中文字体大小的设置"></a>中文字体大小的设置</h2><figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\zihao</span>&#123;5&#125; <span class="comment">%里面填字号</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="函数与字体设置分离的思想"><a href="#函数与字体设置分离的思想" class="headerlink" title="函数与字体设置分离的思想"></a>函数与字体设置分离的思想</h2><p>在导言区中设置函数<code>\newcommand&#123;\myfont&#125;&#123;\textbf&#123;\textbf&#125;&#123;\textsf&#123;Fancy Text&#125;&#125;&#125;</code></p>
-<p>在正文中使用命令<code>\myfont</code></p>
-<hr>
-<h1 id="LaTeX-的篇章结构"><a href="#LaTeX-的篇章结构" class="headerlink" title="$LaTeX$ 的篇章结构"></a>$LaTeX$ 的篇章结构</h1><h3 id="标题的设置"><a href="#标题的设置" class="headerlink" title="标题的设置"></a>标题的设置</h3><ul>
-<li><code>\section</code>为一级标题</li>
-<li><code>\subsection</code>为二级标题</li>
-<li><code>\subsubsection</code>为三级标题 ….</li>
-</ul>
-<p>在导言区可以设置标题的格式[^2]</p>
-<p>[^2]:详情见ctext 第七章标题格式的设置</p>
-<h2 id="换行"><a href="#换行" class="headerlink" title="换行"></a>换行</h2><ol>
-<li><strong>空一行</strong>  (推荐使用这个)</li>
-<li>\ \ 两个反斜杠 注意此时首行不缩进</li>
-<li><code>\par</code>使用命令</li>
-</ol>
-<h2 id="ctextbook"><a href="#ctextbook" class="headerlink" title="ctextbook"></a>ctextbook</h2><ul>
-<li><code>\chart</code>设置章节</li>
-<li><code>\tableofcontents</code>设置目录</li>
-</ul>
-<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="comment">%文档基本结构</span></span><br><span class="line"><span class="keyword">\documentclass</span>&#123;article&#125;</span><br><span class="line"><span class="keyword">\title</span>&#123;First Tex File&#125;</span><br><span class="line"><span class="keyword">\author</span>&#123;Carl&#125;</span><br><span class="line"><span class="keyword">\date</span>&#123;<span class="keyword">\today</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">\usepackage</span>&#123;ctex&#125;</span><br><span class="line"><span class="comment">%正文区</span></span><br><span class="line"><span class="keyword">\begin</span>&#123;document&#125;</span><br><span class="line">	<span class="keyword">\maketitle</span><span class="comment">%使得导言区的设置生效</span></span><br><span class="line">	<span class="keyword">\section</span>&#123;引言&#125;</span><br><span class="line">	中国人口模式的转变发生于民国时期 关于民国的进步,我只讲两个过去人们比较忽略的问题。	一是人口模式。如前所述,传统时代人口的增减是王朝兴衰的显示器。</span><br><span class="line">	</span><br><span class="line">	中国人口模式的转变发生于民国时期 关于民国的进步,我只讲两个过去人们比较忽略的问题。	一是人口模式。如前所述,传统时代人口的增减是王朝兴衰的显示器。<span class="keyword">\par</span></span><br><span class="line">	中国人口模式的转变发生于民国时期 关于民国的进步,我只讲两个过去人们比较忽略的问题。	一是人口模式。如前所述,传统时代人口的增减是王朝兴衰的显示器。<span class="keyword">\\</span>中国人口模式的转变发生于民国时期 关于民国的进步,我只讲两个过去人们比较忽略的问题。	一是人口模式。如前所述,传统时代人口的增减是王朝兴衰的显示器。</span><br><span class="line">	<span class="keyword">\section</span>&#123;实验方法&#125;</span><br><span class="line">	<span class="keyword">\section</span>&#123;实验结果&#125;</span><br><span class="line">	<span class="keyword">\subsection</span>&#123;数据&#125;</span><br><span class="line">	<span class="keyword">\subsection</span>&#123;图表&#125;</span><br><span class="line">	<span class="keyword">\subsubsection</span>&#123;实验过程&#125;</span><br><span class="line">	<span class="keyword">\section</span>&#123;结论&#125;</span><br><span class="line">	<span class="keyword">\section</span>&#123;致谢&#125;	</span><br><span class="line">	</span><br><span class="line"><span class="keyword">\end</span>&#123;document&#125;</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h1 id="特殊符号"><a href="#特殊符号" class="headerlink" title="特殊符号"></a>特殊符号</h1><h2 id="空格"><a href="#空格" class="headerlink" title="空格"></a>空格</h2><ul>
-<li>在英文段落中两个单词直接空一格，注意此时不管几个空格都当作一个空格</li>
-<li>中文段落中，两个中文之间加空格，视作无空格</li>
-<li>在中文英文都有的段落中，中文和因为之间会存在一个空格</li>
-<li>段落首行的缩进是自动产生的！不可以用空格代替!!!</li>
-</ul>
-<p>手动加入空格</p>
-<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\quad</span> <span class="comment">%一个空格</span></span><br><span class="line"><span class="keyword">\qquad</span> <span class="comment">%两个空格</span></span><br><span class="line"><span class="comment">%... 更多可以查询手册</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="控制符"><a href="#控制符" class="headerlink" title="控制符"></a>控制符</h2><figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\#</span> <span class="keyword">\$</span> <span class="keyword">\&#123;</span>  <span class="keyword">\&#125;</span> <span class="keyword">\~</span>&#123;&#125; <span class="keyword">\_</span>&#123;&#125; <span class="keyword">\^</span>&#123;&#125; <span class="keyword">\textbackslash</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="排版符号"><a href="#排版符号" class="headerlink" title="排版符号"></a>排版符号</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">\S \P \dag \ddag \copyright \pounds</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="标志符号"><a href="#标志符号" class="headerlink" title="标志符号"></a>标志符号</h2><figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\ </span>TeX&#123;&#125; <span class="keyword">\ </span>LaTeX&#123;&#125;  <span class="keyword">\ </span>LaTeXe&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">%XlLaTeX用xltxtra宏包提供</span></span><br><span class="line"><span class="keyword">\XlLaTeX</span></span><br><span class="line"></span><br><span class="line"><span class="comment">%其他标志符号见手册</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="引号"><a href="#引号" class="headerlink" title="引号"></a>引号</h2><figure class="highlight latex"><table><tr><td class="code"><pre><span class="line">` <span class="comment">%左单引号 </span></span><br><span class="line">&#x27; <span class="comment">%右单引号 </span></span><br><span class="line">`` <span class="comment">%左双引号 </span></span><br><span class="line">&#x27;&#x27; <span class="comment">%右双引号 </span></span><br></pre></td></tr></table></figure>
-
-<h2 id="连字符"><a href="#连字符" class="headerlink" title="连字符"></a>连字符</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">- -- ---</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h1 id="插入图片"><a href="#插入图片" class="headerlink" title="插入图片"></a>插入图片</h1><ul>
-<li><em><strong>texstudio最上方向导里有图片插入，可以不用自己写代码，不过导言区需要加个\usepackage{graphicx}命令</strong></em></li>
-</ul>
-<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="comment">%导言区内</span></span><br><span class="line"><span class="keyword">\usepackage</span>&#123;graphicx&#125; <span class="comment">%导入宏包</span></span><br><span class="line"><span class="keyword">\graphicspath</span>&#123;&#123;figures/&#125;,&#123;pics/&#125;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">% 正文区内</span></span><br><span class="line"><span class="keyword">\includegraphics</span>[设置参数]&#123;图像名字&#125;</span><br><span class="line"><span class="comment">% 这里推荐用 texstudio最上方向导里的图片插入</span></span><br></pre></td></tr></table></figure>
-
-<hr>
-<h1 id="表格的制作"><a href="#表格的制作" class="headerlink" title="表格的制作"></a>表格的制作</h1><ul>
-<li>\\   表示换行</li>
-<li>&amp;    连接不同的列</li>
-<li>l      表示左对齐</li>
-<li>c      表示居中对齐</li>
-<li>r      表示右对齐</li>
-<li>p{宽度}  控制宽度,注意单位</li>
-</ul>
-<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="comment">% 在正文区中</span></span><br><span class="line"><span class="keyword">\begin</span>&#123;tabular&#125;&#123;|l| c| c| c| p&#123;宽度&#125;|&#125;<span class="comment">%会有5列，指定每列的居中形式,|表示每列中间有竖线分开.||表示双竖线</span></span><br><span class="line">	<span class="keyword">\hline</span> <span class="comment">%每行之间由横线分开.\hline \hline 表示双横线</span></span><br><span class="line">	姓名<span class="built_in">&amp;</span>语文<span class="built_in">&amp;</span>数学<span class="built_in">&amp;</span>外语<span class="built_in">&amp;</span>政治<span class="keyword">\\</span><span class="comment">%\\表示换行</span></span><br><span class="line">	<span class="keyword">\hline</span></span><br><span class="line">	张三<span class="built_in">&amp;</span>87<span class="built_in">&amp;</span>120<span class="built_in">&amp;</span>25<span class="built_in">&amp;</span>36<span class="keyword">\\</span></span><br><span class="line">	<span class="keyword">\hline</span></span><br><span class="line">	张1<span class="built_in">&amp;</span>87<span class="built_in">&amp;</span>120<span class="built_in">&amp;</span>25<span class="built_in">&amp;</span>36<span class="keyword">\\</span></span><br><span class="line">	<span class="keyword">\hline</span></span><br><span class="line">	张2<span class="built_in">&amp;</span>87<span class="built_in">&amp;</span>120<span class="built_in">&amp;</span>25<span class="built_in">&amp;</span>36<span class="keyword">\\</span></span><br><span class="line">	<span class="keyword">\hline</span></span><br><span class="line"><span class="keyword">\end</span>&#123;tabular&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<hr>
-<h1 id="浮动体"><a href="#浮动体" class="headerlink" title="浮动体"></a>浮动体</h1><ul>
-<li>灵活分页</li>
-<li>给图标加标题</li>
-<li>交叉引用</li>
-</ul>
-<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="comment">%图片的浮动体</span></span><br><span class="line"><span class="keyword">\LaTeX</span>&#123;&#125;中<span class="keyword">\TeX</span> 系统的吉祥物--小狮子见图<span class="keyword">\ref</span>&#123;fig-lion&#125; <span class="comment">%交叉引用</span></span><br><span class="line"><span class="keyword">\begin</span>&#123;figure&#125;[htbp] <span class="comment">%[htbp]表示浮动体的排版位置</span></span><br><span class="line">	<span class="keyword">\centering</span> <span class="comment">%使得以下内容居中的命令</span></span><br><span class="line">	<span class="keyword">\includegraphics</span>&#123;two2.jpg&#125; <span class="comment">%插入图片</span></span><br><span class="line">	<span class="comment">%\label命令为浮动体设置标签，\ref引用该标签</span></span><br><span class="line">	<span class="keyword">\caption</span>&#123;<span class="keyword">\TeX</span> 系统的吉祥物---小狮子&#125;<span class="keyword">\label</span>&#123;fig-lion&#125;</span><br><span class="line"><span class="keyword">\end</span>&#123;figure&#125; </span><br><span class="line"></span><br><span class="line"><span class="comment">%表格的浮动体</span></span><br><span class="line">在<span class="keyword">\LaTeX</span>&#123;&#125;中也可以使用表<span class="keyword">\ref</span>&#123;tab-score&#125;所示的表格</span><br><span class="line">	<span class="keyword">\begin</span>&#123;table&#125;[htbp]</span><br><span class="line">		<span class="keyword">\centering</span></span><br><span class="line">		<span class="keyword">\caption</span>&#123;成绩单&#125;<span class="keyword">\label</span>&#123;tab-score&#125;</span><br><span class="line">		<span class="keyword">\begin</span>&#123;tabular&#125;&#123;|l|c|c|c|r|&#125;</span><br><span class="line">			<span class="keyword">\hline</span><span class="comment">%每行之间由横线分开</span></span><br><span class="line">			姓名<span class="built_in">&amp;</span>语文<span class="built_in">&amp;</span>数学<span class="built_in">&amp;</span>外语<span class="built_in">&amp;</span>政治<span class="keyword">\\</span><span class="comment">%\\表示换行</span></span><br><span class="line">			<span class="keyword">\hline</span></span><br><span class="line">			张三<span class="built_in">&amp;</span>87<span class="built_in">&amp;</span>120<span class="built_in">&amp;</span>25<span class="built_in">&amp;</span>36<span class="keyword">\\</span></span><br><span class="line">			<span class="keyword">\hline</span></span><br><span class="line">			张1<span class="built_in">&amp;</span>87<span class="built_in">&amp;</span>120<span class="built_in">&amp;</span>25<span class="built_in">&amp;</span>36<span class="keyword">\\</span></span><br><span class="line">			<span class="keyword">\hline</span></span><br><span class="line">			张2<span class="built_in">&amp;</span>87<span class="built_in">&amp;</span>120<span class="built_in">&amp;</span>25<span class="built_in">&amp;</span>36<span class="keyword">\\</span></span><br><span class="line">			<span class="keyword">\hline</span></span><br><span class="line">		<span class="keyword">\end</span>&#123;tabular&#125;</span><br><span class="line">	<span class="keyword">\end</span>&#123;table&#125;	</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h1 id="数学公式"><a href="#数学公式" class="headerlink" title="数学公式"></a>数学公式</h1><p>可以使用软件直接生成公式复制到$LaTeX$中</p>
-<p>软件名: Mathpix</p>
-<h2 id="行内公式"><a href="#行内公式" class="headerlink" title="行内公式"></a>行内公式</h2><figure class="highlight latex"><table><tr><td class="code"><pre><span class="line">1.美元符号 <span class="built_in">$</span>a+b=b+a <span class="built_in">$</span></span><br><span class="line">2.小括号 <span class="keyword">\(</span>a+b=b+a<span class="keyword">\)</span></span><br><span class="line">3.浮动体math环境</span><br><span class="line"><span class="keyword">\begin</span>&#123;math&#125;</span><br><span class="line">a+b=b+a</span><br><span class="line"><span class="keyword">\end</span>&#123;math&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="上下标"><a href="#上下标" class="headerlink" title="上下标"></a>上下标</h2><h3 id="上标"><a href="#上标" class="headerlink" title="上标"></a>上标</h3><ul>
-<li>使用<code>^</code> 符号</li>
-</ul>
-<p>比如<code>2^2</code>的效果是 $2^2$.但是后面只能跟一个字符</p>
-<p>如果需要跟多个字符则需要使用^{}</p>
-<p>比如2^{20}的效果是:  $2^{20}$</p>
-<h3 id="下标"><a href="#下标" class="headerlink" title="下标"></a>下标</h3><p>使用_符号</p>
-<p>比如a_1,a_2,a_3. $a_1,a_2,a_3$. 但是后面也只能跟一个字符</p>
-<p>如果需要跟多个字符则需要使用_{}</p>
-<p>比如a_{20}的效果是:   </p>
-<p>$a_{20}$</p>
-<h2 id="希腊字母"><a href="#希腊字母" class="headerlink" title="希腊字母"></a>希腊字母</h2><figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="built_in">$</span><span class="keyword">\alpha</span><span class="built_in">$</span></span><br><span class="line"><span class="built_in">$</span><span class="keyword">\beta</span><span class="built_in">$</span></span><br><span class="line"><span class="built_in">$</span><span class="keyword">\gamma</span><span class="built_in">$</span></span><br><span class="line"><span class="built_in">$</span><span class="keyword">\epsilon</span><span class="built_in">$</span></span><br><span class="line"><span class="built_in">$</span><span class="keyword">\pi</span><span class="built_in">$</span></span><br><span class="line"><span class="built_in">$</span><span class="keyword">\omega</span><span class="built_in">$</span>	</span><br><span class="line"><span class="built_in">$</span><span class="keyword">\Gamma</span><span class="built_in">$</span></span><br><span class="line"><span class="built_in">$</span><span class="keyword">\Delta</span><span class="built_in">$</span></span><br><span class="line"><span class="built_in">$</span><span class="keyword">\Theta</span><span class="built_in">$</span></span><br><span class="line"><span class="built_in">$</span><span class="keyword">\Pi</span><span class="built_in">$</span></span><br><span class="line"><span class="built_in">$</span><span class="keyword">\Omega</span><span class="built_in">$</span></span><br></pre></td></tr></table></figure>
-
-<p>得到:</p>
-<p>$\alpha$<br>$\beta$<br>$\gamma$<br>$\epsilon$<br>$\pi$<br>$\omega$<br>$\Gamma$<br>$\Delta$<br>$\Theta$<br>$\Pi$<br>$\Omega$</p>
-<h2 id="数学公式-1"><a href="#数学公式-1" class="headerlink" title="数学公式"></a>数学公式</h2><figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="built_in">$</span><span class="keyword">\log</span><span class="built_in">$</span></span><br><span class="line"><span class="built_in">$</span><span class="keyword">\sin</span><span class="built_in">$</span></span><br><span class="line"><span class="built_in">$</span><span class="keyword">\cos</span><span class="built_in">$</span></span><br><span class="line"><span class="built_in">$</span><span class="keyword">\arccos</span><span class="built_in">$</span></span><br><span class="line"><span class="built_in">$</span><span class="keyword">\arcsin</span><span class="built_in">$</span></span><br><span class="line"><span class="built_in">$</span><span class="keyword">\ln</span><span class="built_in">$</span></span><br><span class="line"></span><br><span class="line"><span class="comment">%以及联合使用</span></span><br><span class="line"><span class="built_in">$</span><span class="keyword">\sin</span><span class="built_in">^</span>2x+<span class="keyword">\cos</span><span class="built_in">^</span>2x=1<span class="built_in">$</span></span><br><span class="line"><span class="built_in">$</span><span class="keyword">\sqrt</span>&#123;2&#125;<span class="built_in">$</span></span><br><span class="line"><span class="built_in">$</span><span class="keyword">\sqrt</span>&#123;x<span class="built_in">^</span>2+y<span class="built_in">^</span>2&#125;<span class="built_in">$</span></span><br><span class="line"><span class="built_in">$</span><span class="keyword">\sqrt</span>&#123;2+<span class="keyword">\sqrt</span>&#123;2&#125;&#125;<span class="built_in">$</span></span><br><span class="line"><span class="built_in">$</span><span class="keyword">\sqrt</span>[4]&#123;x&#125;<span class="built_in">$</span></span><br></pre></td></tr></table></figure>
-
-<p>得到:</p>
-<p>$\log$<br>$\sin$<br>$\cos$<br>$\arccos$<br>$\arcsin$<br>$\ln$</p>
-<p>$\sin^2x+\cos^2x=1$<br>$\sqrt{2}$<br>$\sqrt{x^2+y^2}$<br>$\sqrt{2+\sqrt{2}}$<br>$\sqrt[4]{x}$</p>
-<h2 id="分式"><a href="#分式" class="headerlink" title="分式"></a>分式</h2><figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="comment">%两种写法</span></span><br><span class="line">1.大约是原体积的<span class="built_in">$</span>3/4<span class="built_in">$</span></span><br><span class="line">2.大约是原体积的<span class="built_in">$</span><span class="keyword">\frac</span>&#123;3&#125;&#123;4&#125;<span class="built_in">$</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="行间公式"><a href="#行间公式" class="headerlink" title="行间公式"></a>行间公式</h2><figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="comment">%1.</span></span><br><span class="line"><span class="keyword">\[</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">\]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">%不会自动编号</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">\begin</span>&#123;displaymath&#125;</span><br><span class="line">		2x<span class="built_in">^</span>2+5x+3=6	</span><br><span class="line">	<span class="keyword">\end</span>&#123;displaymath&#125;</span><br><span class="line">	</span><br><span class="line"><span class="comment">%会自动编号!这个很重要</span></span><br><span class="line"></span><br><span class="line">	交换律见式<span class="keyword">\ref</span>&#123;eq:commutative&#125;</span><br><span class="line">	<span class="keyword">\begin</span>&#123;equation&#125;</span><br><span class="line">		a+b=b+a <span class="keyword">\label</span>&#123;eq:commutative&#125;</span><br><span class="line">	<span class="keyword">\end</span>&#123;equation&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">%不会自动编号的equation环境</span></span><br><span class="line"><span class="comment">%注意要引用一个宏包</span></span><br><span class="line"><span class="keyword">\usepackage</span>&#123;amsmath&#125;</span><br><span class="line">	<span class="keyword">\begin</span>&#123;equation*&#125;</span><br><span class="line">		a+b=b+a <span class="keyword">\label</span>&#123;eq:commutative&#125;</span><br><span class="line">	<span class="keyword">\end</span>&#123;equation*&#125;</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h1 id="矩阵的生成"><a href="#矩阵的生成" class="headerlink" title="矩阵的生成"></a>矩阵的生成</h1><ul>
-<li>省略号: <code>\dots(水平), \vdots(垂直), \ddots(斜的), adots(需要自己配置)</code></li>
-<li><code>\adot</code>的效果.可以直接用<code>\iddots</code>生成，但要调用<code>mathdots</code>宏包</li>
-</ul>
-<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="comment">%需要导入宏包</span></span><br><span class="line"><span class="keyword">\usepackage</span>&#123;amsmath&#125;</span><br><span class="line"><span class="comment">%正文区</span></span><br><span class="line"><span class="keyword">\begin</span>&#123;matrix&#125;<span class="comment">%&amp;分列 \\分行</span></span><br><span class="line">  0<span class="built_in">&amp;</span>1<span class="keyword">\\</span></span><br><span class="line">  1<span class="built_in">&amp;</span>0</span><br><span class="line"><span class="keyword">\end</span>&#123;matrix&#125;<span class="keyword">\quad</span></span><br><span class="line"><span class="keyword">\]</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">\[</span><span class="keyword">\begin</span>&#123;pmatrix&#125;<span class="comment">%括号包裹的矩阵</span></span><br><span class="line"> 0<span class="built_in">&amp;</span>1<span class="keyword">\\</span></span><br><span class="line">1<span class="built_in">&amp;</span>0</span><br><span class="line"><span class="keyword">\end</span>&#123;pmatrix&#125;</span><br><span class="line"><span class="keyword">\]</span>	</span><br><span class="line"></span><br><span class="line"><span class="keyword">\[</span><span class="keyword">\begin</span>&#123;vmatrix&#125;<span class="comment">%长竖线包裹的矩阵</span></span><br><span class="line">0<span class="built_in">&amp;</span>1<span class="keyword">\\</span></span><br><span class="line">1<span class="built_in">&amp;</span>0</span><br><span class="line"><span class="keyword">\end</span>&#123;vmatrix&#125;</span><br><span class="line"><span class="keyword">\]</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">\[</span><span class="keyword">\begin</span>&#123;bmatrix&#125;<span class="comment">%长中括号包裹的矩阵</span></span><br><span class="line">0<span class="built_in">&amp;</span>1<span class="keyword">\\</span></span><br><span class="line">1<span class="built_in">&amp;</span>0</span><br><span class="line"><span class="keyword">\end</span>&#123;bmatrix&#125;</span><br><span class="line"><span class="keyword">\]</span></span><br><span class="line">------------------------------------------------------------------------</span><br><span class="line"><span class="keyword">\[</span><span class="keyword">\begin</span>&#123;pmatrix&#125;<span class="comment">%括号包裹的矩阵</span></span><br><span class="line">a<span class="built_in">_</span>&#123;11&#125;<span class="built_in">^</span>2<span class="built_in">&amp;</span>a<span class="built_in">_</span>&#123;12&#125;<span class="built_in">^</span>2<span class="built_in">&amp;</span>a<span class="built_in">_</span>&#123;13&#125;<span class="built_in">^</span>2<span class="keyword">\\</span></span><br><span class="line">0<span class="built_in">&amp;</span>a<span class="built_in">_</span>&#123;22&#125;<span class="built_in">&amp;</span>a<span class="built_in">_</span>&#123;33&#125;</span><br><span class="line"><span class="keyword">\end</span>&#123;pmatrix&#125;</span><br><span class="line"><span class="keyword">\]</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">\[</span><span class="keyword">\begin</span>&#123;bmatrix&#125;<span class="comment">%长中括号包裹的矩阵</span></span><br><span class="line">a<span class="built_in">_</span>&#123;11&#125;<span class="built_in">&amp;</span><span class="keyword">\dots</span><span class="built_in">&amp;</span>a<span class="built_in">_</span>&#123;1n&#125;<span class="keyword">\\</span></span><br><span class="line"><span class="built_in">&amp;</span><span class="keyword">\ddots</span><span class="built_in">&amp;</span><span class="keyword">\vdots</span><span class="keyword">\\</span></span><br><span class="line"><span class="keyword">\end</span>&#123;bmatrix&#125;<span class="built_in">_</span>&#123;n <span class="keyword">\times</span> n&#125;</span><br><span class="line"><span class="keyword">\]</span></span><br><span class="line">-------------------------------------------------------------------------</span><br><span class="line"><span class="keyword">\[</span><span class="keyword">\begin</span>&#123;pmatrix&#125;<span class="comment">%分块矩阵(矩阵嵌套)</span></span><br><span class="line"><span class="keyword">\begin</span>&#123;matrix&#125;</span><br><span class="line">1<span class="built_in">&amp;</span>0<span class="keyword">\\</span>0<span class="built_in">&amp;</span>1</span><br><span class="line"><span class="keyword">\end</span>&#123;matrix&#125;</span><br><span class="line"><span class="built_in">&amp;</span> <span class="keyword">\text</span>&#123;<span class="keyword">\Large</span> 0&#125;<span class="keyword">\\</span>  <span class="comment">%生成一个很大的0</span></span><br><span class="line"><span class="keyword">\text</span>&#123;<span class="keyword">\Large</span> 0&#125;<span class="built_in">&amp;</span><span class="keyword">\begin</span>&#123;matrix&#125;</span><br><span class="line">1<span class="built_in">&amp;</span>0<span class="keyword">\\</span>0<span class="built_in">&amp;</span>1</span><br><span class="line"><span class="keyword">\end</span>&#123;matrix&#125;</span><br><span class="line"><span class="keyword">\end</span>&#123;pmatrix&#125;</span><br><span class="line"><span class="keyword">\]</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">\[</span><span class="keyword">\begin</span>&#123;pmatrix&#125;<span class="comment">%括号包裹的矩阵</span></span><br><span class="line">a<span class="built_in">_</span>&#123;11&#125;<span class="built_in">&amp;</span>a<span class="built_in">_</span>&#123;12&#125;<span class="built_in">&amp;</span><span class="keyword">\cdots</span><span class="built_in">&amp;</span>a<span class="built_in">_</span>&#123;ln&#125;<span class="keyword">\\</span></span><br><span class="line"><span class="built_in">&amp;</span>a<span class="built_in">_</span>&#123;22&#125;<span class="built_in">&amp;</span><span class="keyword">\cdots</span><span class="built_in">&amp;</span>a<span class="built_in">_</span>&#123;2n&#125;<span class="keyword">\\</span></span><br><span class="line"><span class="built_in">&amp;</span>		<span class="built_in">&amp;</span><span class="keyword">\dots</span> <span class="built_in">&amp;</span><span class="keyword">\vdots</span> <span class="keyword">\\</span></span><br><span class="line"><span class="keyword">\multicolumn</span>&#123;2&#125;&#123;c&#125;&#123;<span class="keyword">\raisebox</span>&#123;1.3ex&#125;[0pt]&#123;<span class="keyword">\Huge</span> 0&#125;&#125; <span class="comment">%合并行和列;设置大小</span></span><br><span class="line"><span class="built_in">&amp;</span>		<span class="built_in">&amp;</span>a<span class="built_in">_</span>&#123;nn&#125;</span><br><span class="line"><span class="keyword">\end</span>&#123;pmatrix&#125;</span><br><span class="line"><span class="keyword">\]</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">\[</span><span class="keyword">\begin</span>&#123;pmatrix&#125;</span><br><span class="line">1<span class="built_in">&amp;</span><span class="keyword">\frac</span> 12 <span class="built_in">&amp;</span><span class="keyword">\dots</span> <span class="built_in">&amp;</span><span class="keyword">\frac</span> ln <span class="keyword">\\</span></span><br><span class="line"><span class="keyword">\hdotsfor</span>&#123;4&#125;<span class="keyword">\\</span>  <span class="comment">%跨列的省略号：\hdotsfor&#123;&lt;列数&gt;&#125;</span></span><br><span class="line">m<span class="built_in">&amp;</span><span class="keyword">\frac</span> m2<span class="built_in">&amp;</span> <span class="keyword">\dots</span> <span class="built_in">&amp;</span><span class="keyword">\frac</span> mn</span><br><span class="line"><span class="keyword">\end</span>&#123;pmatrix&#125;</span><br><span class="line"><span class="keyword">\]</span></span><br><span class="line">-----------------------------------------------</span><br><span class="line"><span class="comment">%行内小矩阵(smallmatrix)环境</span></span><br><span class="line">复数<span class="built_in">$</span>z=(x,y)<span class="built_in">$</span>也可以用矩阵</span><br><span class="line"><span class="keyword">\begin</span>&#123;math&#125;</span><br><span class="line">   <span class="keyword">\left</span>(<span class="comment">%需手动加上左括号</span></span><br><span class="line">   <span class="keyword">\begin</span>&#123;smallmatrix&#125;</span><br><span class="line">  x<span class="built_in">&amp;</span> -y<span class="keyword">\\</span>y<span class="built_in">&amp;</span>x</span><br><span class="line">   <span class="keyword">\end</span>&#123;smallmatrix&#125;</span><br><span class="line">   <span class="keyword">\right</span>)<span class="comment">%需手动加上右括号</span></span><br><span class="line"><span class="keyword">\end</span>&#123;math&#125;来表示</span><br><span class="line"></span><br><span class="line"><span class="comment">%array环境(类似表格环境tabular)</span></span><br><span class="line"><span class="keyword">\[</span></span><br><span class="line"><span class="keyword">\begin</span>&#123;array&#125;&#123;r|r&#125;</span><br><span class="line"><span class="keyword">\frac</span> 12<span class="built_in">&amp;</span>0<span class="keyword">\\</span></span><br><span class="line"><span class="keyword">\hline</span></span><br><span class="line">0<span class="built_in">&amp;</span> -<span class="keyword">\frac</span> abc<span class="keyword">\\</span></span><br><span class="line"><span class="keyword">\end</span>&#123;array&#125;</span><br><span class="line"><span class="keyword">\]</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<hr>
-<h1 id="多行数学公式"><a href="#多行数学公式" class="headerlink" title="多行数学公式"></a>多行数学公式</h1><figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="comment">% 导言区引入宏包</span></span><br><span class="line"><span class="keyword">\usepackage</span>&#123;amsmath&#125;</span><br><span class="line"><span class="keyword">\usepackage</span>&#123;amssymb&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">% 正文区</span></span><br><span class="line">	<span class="comment">%gather和gather*环境(可以使用\\换行)</span></span><br><span class="line">	<span class="comment">%带编号</span></span><br><span class="line"><span class="keyword">\begin</span>&#123;gather&#125;</span><br><span class="line">	a+b=b+a<span class="keyword">\\</span></span><br><span class="line">	ab  ba</span><br><span class="line"><span class="keyword">\end</span>&#123;gather&#125;</span><br><span class="line">	</span><br><span class="line"><span class="comment">%不带编号</span></span><br><span class="line"><span class="keyword">\begin</span>&#123;gather*&#125;</span><br><span class="line">	3+5=5+3<span class="keyword">\\</span></span><br><span class="line">	3 <span class="keyword">\times</span> 5=5<span class="keyword">\times</span> 3</span><br><span class="line"><span class="keyword">\end</span>&#123;gather*&#125;</span><br><span class="line">	</span><br><span class="line"><span class="comment">%在\\前使用\notetag阻止编号</span></span><br><span class="line"><span class="keyword">\begin</span>&#123;gather&#125;</span><br><span class="line">	3<span class="built_in">^</span>2+4<span class="built_in">^</span>2=5<span class="built_in">^</span>2</span><br><span class="line"><span class="keyword">\end</span>&#123;gather&#125;</span><br><span class="line">	</span><br><span class="line"><span class="comment">%align和align*环境(用&amp;对齐)</span></span><br><span class="line"><span class="comment">%带编号</span></span><br><span class="line"><span class="keyword">\begin</span>&#123;align&#125;</span><br><span class="line">	x <span class="built_in">&amp;</span>=t+<span class="keyword">\cos</span> t+1<span class="keyword">\\</span></span><br><span class="line">	y <span class="built_in">&amp;</span>=2 <span class="keyword">\sin</span> t</span><br><span class="line"><span class="keyword">\end</span>&#123;align&#125;</span><br><span class="line"><span class="comment">%不带编号</span></span><br><span class="line"><span class="keyword">\begin</span>&#123;align*&#125;</span><br><span class="line">x <span class="built_in">&amp;</span>=t+<span class="keyword">\cos</span> t+1<span class="keyword">\\</span></span><br><span class="line">y <span class="built_in">&amp;</span>=2 <span class="keyword">\sin</span> t</span><br><span class="line"><span class="keyword">\end</span>&#123;align*&#125;</span><br><span class="line">	</span><br><span class="line"><span class="comment">%split环境(对齐采用align环境的方式，编号在中间)</span></span><br><span class="line"><span class="keyword">\begin</span>&#123;equation&#125;</span><br><span class="line"><span class="keyword">\begin</span>&#123;split&#125;</span><br><span class="line">	<span class="keyword">\cos</span> 2x <span class="built_in">&amp;</span>=<span class="keyword">\cos</span><span class="built_in">^</span>2 x- <span class="keyword">\sin</span><span class="built_in">^</span>2 x<span class="keyword">\\</span></span><br><span class="line">	<span class="built_in">&amp;</span>=2<span class="keyword">\cos</span><span class="built_in">^</span>2 x-1</span><br><span class="line"><span class="keyword">\end</span>&#123;split&#125;</span><br><span class="line"><span class="keyword">\end</span>&#123;equation&#125;		</span><br><span class="line">	</span><br><span class="line"><span class="comment">%case环境</span></span><br><span class="line"><span class="comment">%每行公式中使用&amp;分隔为两部分</span></span><br><span class="line"><span class="comment">%通常表示值和后面的条件</span></span><br><span class="line"><span class="keyword">\begin</span>&#123;equation&#125;</span><br><span class="line">	D(x)=<span class="keyword">\begin</span>&#123;cases&#125;</span><br><span class="line">	1,<span class="built_in">&amp;</span> <span class="keyword">\text</span>&#123;如果&#125; x <span class="keyword">\in</span> <span class="keyword">\mathbb</span>&#123;Q&#125;;<span class="keyword">\\</span></span><br><span class="line">	0,<span class="built_in">&amp;</span> <span class="keyword">\text</span>&#123;如果&#125; x <span class="keyword">\in</span> <span class="keyword">\mathbb</span>&#123;R&#125;<span class="keyword">\setminus</span><span class="keyword">\mathbb</span>&#123;Q&#125;</span><br><span class="line">	<span class="keyword">\end</span>&#123;cases&#125;</span><br><span class="line"><span class="keyword">\end</span>&#123;equation&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<hr>
-<h1 id="使用zotero实现参考文献的导入"><a href="#使用zotero实现参考文献的导入" class="headerlink" title="使用zotero实现参考文献的导入"></a>使用zotero实现参考文献的导入</h1><ul>
-<li>下载zotero</li>
-<li>在扩展程序中下载 save to zotero</li>
-<li>在文章页面中点击 save to zotero 保存到文库中</li>
-<li>在文库中导出 导出格式为BiBTeX</li>
-<li>用记事本打开导出文件,复制到所写的latex文件中</li>
-<li>ref,改为文章的题目方便查找</li>
-<li>在正文内使用命令<code>\cite</code>选择所引用的文章即可</li>
-<li><strong>注意检查格式!!!</strong></li>
-</ul>
-<p>在参考文献位置输入命令</p>
-<p><code>\bibligraphy&#123;book&#125;</code>生成参考文献</p>
-<hr>
-<h1 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h1><p>新起一页 <code>\newpage</code></p>
-<p><code>\appendix</code> 表示是附录部分</p>
-<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\section</span></span><br><span class="line"><span class="keyword">\begin</span>&#123;lstlisting&#125;[language=matlab] <span class="comment">% 语言可以自己选择</span></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> <span class="comment">%这里面粘贴代码</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">\end</span>&#123;lstlisting&#125;</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <tags>
-        <tag>LaTeX</tag>
-        <tag>数学建模</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>51单片机学习笔记</title>
     <url>/2022/12/22/51%E5%8D%95%E7%89%87%E6%9C%BA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<p>本文是<a href="%5B%E6%97%A0%E9%BC%A0%E6%A0%87%E5%A3%B0%E9%9F%B3__%E6%9C%80%E5%85%A8__%E9%83%AD%E5%A4%A9%E7%A5%A5%E5%8D%81%E5%A4%A9%E5%B8%A6%E4%BD%A0%E7%B2%BE%E9%80%9A51%E5%8D%95%E7%89%87%E6%9C%BA__%E5%B8%A6%E6%A0%87%E9%A2%98__%E5%B8%A6%E7%BD%91%E7%9B%98%E8%B5%84%E6%96%99_%E5%93%94%E5%93%A9%E5%93%94%E5%93%A9_bilibili%5D(https://www.bilibili.com/video/BV1DW411a7mz/?spm_id_from=333.337.search-card.all.click&vd_source=1e56c5282fb34ebc3bc5d2b2b4c8d5a7)">郭天祥老师的课堂</a>笔记</p>
@@ -732,6 +423,704 @@
 <p>![6](51 单片机的学习/6.png)</p>
 <h2 id="软件设计"><a href="#软件设计" class="headerlink" title="软件设计"></a>软件设计</h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;reg52.h&quot;</span></span></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">unsigned</span> <span class="type">int</span> u16;<span class="comment">//对系统默认数据类型进行重定义</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">unsigned</span> <span class="type">char</span> u8;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">uart_init</span><span class="params">(u8 baud)</span></span><br><span class="line">&#123;</span><br><span class="line">	TMOD|=<span class="number">0X20</span>; <span class="comment">//设置计数器工作方式 2</span></span><br><span class="line">	SCON=<span class="number">0X50</span>; <span class="comment">//设置为工作方式 1</span></span><br><span class="line">	PCON=<span class="number">0X80</span>; <span class="comment">//波特率加倍</span></span><br><span class="line">	TH1=baud; <span class="comment">//计数器初始值设置</span></span><br><span class="line">	TL1=baud;</span><br><span class="line">	ES=<span class="number">1</span>; <span class="comment">//打开接收中断</span></span><br><span class="line">	EA=<span class="number">1</span>; <span class="comment">//打开总中断</span></span><br><span class="line">	TR1=<span class="number">1</span>; <span class="comment">//打开计数器</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">uart_init(<span class="number">0XFA</span>);<span class="comment">//波特率为 9600</span></span><br><span class="line">	<span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">        </span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">uart</span><span class="params">()</span> interrupt 4 <span class="comment">//串口通信中断函数</span></span><br><span class="line">&#123;</span><br><span class="line">u8 rec_data;</span><br><span class="line">RI = <span class="number">0</span>; <span class="comment">//清除接收中断标志位</span></span><br><span class="line">rec_data=SBUF; <span class="comment">//存储接收到的数据</span></span><br><span class="line">SBUF=rec_data; <span class="comment">//将接收到的数据放入到发送寄存器</span></span><br><span class="line"><span class="keyword">while</span>(!TI); <span class="comment">//等待发送数据完成</span></span><br><span class="line">TI=<span class="number">0</span>; <span class="comment">//清除发送完成标志位</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+]]></content>
+      <categories>
+        <category>单片机</category>
+      </categories>
+      <tags>
+        <tag>电赛准备</tag>
+        <tag>单片机</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LaTex的基本语法</title>
+    <url>/2022/12/20/LaTex%E7%9A%84%E4%BD%BF%E7%94%A8/</url>
+    <content><![CDATA[<p>本文是B站以下两视频的学习笔记<br><a href="https://www.bilibili.com/video/BV15x411j7k6?p=1&amp;vd_source=1e56c5282fb34ebc3bc5d2b2b4c8d5a7">latex中文教程-15集从入门到精通包</a></p>
+<p><a href="https://www.bilibili.com/video/BV1Zh411y7ps/?spm_id_from=333.337.search-card.all.click&amp;vd_source=1e56c5282fb34ebc3bc5d2b2b4c8d5a7">数模&amp;美赛之LaTeX攻破</a></p>
+<h1 id="LaTeX-的基本框架"><a href="#LaTeX-的基本框架" class="headerlink" title="$LaTeX$的基本框架"></a>$LaTeX$的基本框架</h1><figure class="highlight less"><table><tr><td class="code"><pre><span class="line">%导言区</span><br><span class="line">\<span class="selector-tag">documentclass</span>&#123;<span class="selector-tag">article</span>&#125; %这里有<span class="selector-tag">article</span> <span class="selector-tag">book</span> <span class="selector-tag">letter</span> <span class="selector-tag">report</span>等格式</span><br><span class="line">\<span class="selector-tag">usepackage</span>&#123;<span class="selector-tag">ctex</span>&#125; % 引入中文包,可以在正文区里输入中文</span><br><span class="line">\<span class="selector-tag">author</span>&#123;<span class="selector-tag">Carl</span>&#125;</span><br><span class="line">\<span class="selector-tag">date</span> &#123;\<span class="selector-tag">today</span>&#125;</span><br><span class="line">\<span class="selector-tag">title</span>&#123;<span class="selector-tag">My</span> <span class="selector-tag">first</span> <span class="selector-tag">document</span>&#125;</span><br><span class="line">%正文区<span class="selector-tag">-</span>一个<span class="selector-tag">LaTeX</span>文件中只有一个正文去</span><br><span class="line">\<span class="selector-tag">begin</span>&#123;<span class="selector-tag">document</span>&#125;	</span><br><span class="line">	\<span class="selector-tag">maketitle</span>	%在<span class="selector-tag">letter</span>中无法使用此命令</span><br><span class="line">	</span><br><span class="line">	<span class="selector-tag">hello</span> <span class="selector-tag">world</span></span><br><span class="line">	你好世界</span><br><span class="line">			%这里用空行可以另起一行</span><br><span class="line">	这是一个公式:$<span class="selector-tag">f</span>(x)=<span class="selector-tag">x</span>^<span class="number">2</span>+<span class="number">2</span><span class="selector-tag">x</span>+<span class="number">1</span>$ %单美元符号 接在后面输入公式</span><br><span class="line">	</span><br><span class="line">	这是另一个公式:$$<span class="selector-tag">f</span>(x)=<span class="number">3</span><span class="selector-tag">x</span>^<span class="number">2</span>+<span class="number">2</span><span class="selector-tag">x</span>+<span class="number">1</span>$$ %双美元符号 另起一行输入公式</span><br><span class="line">\<span class="selector-tag">end</span>&#123;<span class="selector-tag">document</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="LaTeX-中文架构的搭建"><a href="#LaTeX-中文架构的搭建" class="headerlink" title="$LaTeX$ 中文架构的搭建"></a>$LaTeX$ 中文架构的搭建</h1><h2 id="首先设置"><a href="#首先设置" class="headerlink" title="首先设置"></a>首先设置</h2><ul>
+<li>选项-构建-XeLaTeX</li>
+<li>编译器-UTF-8</li>
+</ul>
+<h2 id="搭建中文架构"><a href="#搭建中文架构" class="headerlink" title="搭建中文架构"></a>搭建中文架构</h2><p>ctex 宏包和文档类2进一步封装了 CJK、xeCJK、luatexja 等宏包，使得用户在排版中文时 不用再考虑排版引擎等细节。</p>
+<p>ctex 宏包本身用于配合各种文档类排版中文，而 ctex 文档类对 LATEX 的标准文档类进行了封装，对一些排版根据中文排版习惯做了调整，包括 ctexart / ctexrep / ctexbook。ctex 宏包和文档类能够识别操作系统和 TEX 发行版中安装的中文字体，因此基本 无需额外配置即可排版中文文档。<a href="lshort-zh-cn">^1</a></p>
+<p>下面举一个使用 ctex 文档类排版中文的最简例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">\documentclass&#123;ctexart&#125;</span><br><span class="line">\begin&#123;document&#125;</span><br><span class="line">在\LaTeX&#123;&#125;中排版中文。</span><br><span class="line">汉字和English单词混排，通常不需要在中英文之间添加额外的空格。</span><br><span class="line">当然，为了代码的可读性，加上汉字和 English 之间的空格也无妨。</span><br><span class="line">汉字换行时不会引入多余的空格。</span><br><span class="line">\end&#123;document&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="LaTeX-字体字号的设置"><a href="#LaTeX-字体字号的设置" class="headerlink" title="$LaTeX$ 字体字号的设置"></a>$LaTeX$ 字体字号的设置</h1><h2 id="字体设置的两种方式"><a href="#字体设置的两种方式" class="headerlink" title="字体设置的两种方式"></a>字体设置的两种方式</h2><ul>
+<li>字体声明 <code>\texterm&#123;Roman Family&#125;</code></li>
+<li>字体命令<code>&#123;\texterm Roman Family&#125; %这里的大括号表示作用的范围</code></li>
+</ul>
+<h2 id="字体族的设置"><a href="#字体族的设置" class="headerlink" title="字体族的设置"></a>字体族的设置</h2><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+<th align="center"></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>\rmfamily</td>
+<td>\textrm{…}</td>
+<td>roman</td>
+<td align="center">衬线字体（罗马体）</td>
+</tr>
+<tr>
+<td>\sffamily</td>
+<td>\textsf{…}</td>
+<td>sans serif</td>
+<td align="center">无衬线字体</td>
+</tr>
+<tr>
+<td>\ttfamily</td>
+<td>\texttt{…}</td>
+<td>typewriter</td>
+<td align="center">等宽字体</td>
+</tr>
+</tbody></table>
+<h2 id="字体系列的设置-粗细"><a href="#字体系列的设置-粗细" class="headerlink" title="字体系列的设置(粗细)"></a>字体系列的设置(粗细)</h2><table>
+<thead>
+<tr>
+<th>\mdseries</th>
+<th>\textmd{…}</th>
+<th>medium</th>
+<th>正常粗细（中等）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>\bfseries</td>
+<td>\textbf{…}</td>
+<td><strong>bold face</strong></td>
+<td>粗体</td>
+</tr>
+</tbody></table>
+<h2 id="字体形状的设置"><a href="#字体形状的设置" class="headerlink" title="字体形状的设置"></a>字体形状的设置</h2><table>
+<thead>
+<tr>
+<th>\upshape</th>
+<th>\upshape</th>
+<th>upright</th>
+<th>直立体</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>\itshape</td>
+<td>\textit{…}</td>
+<td>italic</td>
+<td>意大利斜体</td>
+</tr>
+<tr>
+<td>\slshape</td>
+<td>\textsl{…}</td>
+<td>slanted</td>
+<td>倾斜体</td>
+</tr>
+<tr>
+<td>\scshape</td>
+<td>\textsc{…}</td>
+<td>SMALL CAPS</td>
+<td>小型大写字母</td>
+</tr>
+</tbody></table>
+<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="comment">%字体字号设置</span></span><br><span class="line"><span class="keyword">\documentclass</span>[10pt]&#123;article&#125;<span class="comment">%10磅是默认正常的字体大小，即下文中的normalsize</span></span><br><span class="line"><span class="keyword">\usepackage</span>&#123;ctex&#125;</span><br><span class="line"><span class="keyword">\newcommand</span>&#123;<span class="keyword">\myfont</span>&#125;&#123;<span class="keyword">\textbf</span>&#123;<span class="keyword">\textsf</span>&#123;Fancy Text&#125;&#125;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">%正文区</span></span><br><span class="line"><span class="keyword">\begin</span>&#123;document&#125;</span><br><span class="line"><span class="comment">%字体族设置(罗马字体、无衬线字体、打字机字体)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">\textrm</span>&#123;Roman Family&#125; <span class="keyword">\textsf</span>&#123;Scan Serif Family&#125;<span class="keyword">\texttt</span>&#123;Typewriter Family&#125;<span class="comment">%\textrm等是字体命令，大括号里是作用到的文字</span></span><br><span class="line"></span><br><span class="line">&#123;<span class="keyword">\rmfamily</span> Roman Family&#125; &#123;<span class="keyword">\sffamily</span> Scan Serif Family&#125;&#123;<span class="keyword">\ttfamily</span> Typewriter Family&#125;<span class="comment">%\rmfamily是字体声明，后面紧跟的文字是作用到的文字</span></span><br><span class="line"></span><br><span class="line">&#123;<span class="keyword">\sffamily</span> Who are you?you find self on everyone around.take you as the same as others!&#125;</span><br><span class="line">&#123;<span class="keyword">\ttfamily</span> Are you aiser than others?&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">%字体系列设置(粗细、宽度)，\textbf可以对字体加粗</span></span><br><span class="line"><span class="keyword">\textmd</span>&#123;Medium Series&#125; <span class="keyword">\textbf</span>&#123;Boldface Series&#125;<span class="comment">%\textmd等是字体命令，大括号里是作用到的文字</span></span><br><span class="line">&#123;<span class="keyword">\mdseries</span> Medium Series&#125; &#123;<span class="keyword">\bfseries</span> Boldface Series&#125;<span class="comment">%字体声明</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">%字体形状(直立、斜体、伪斜体、小型大写)</span></span><br><span class="line"><span class="keyword">\textup</span>&#123;Upright Shape&#125; <span class="keyword">\textit</span>&#123;Italic Shape&#125; <span class="comment">%字体命令</span></span><br><span class="line"><span class="keyword">\textsl</span>&#123;Slanted Shape&#125; <span class="keyword">\textsc</span>&#123;Small Caps Shape&#125;</span><br><span class="line"></span><br><span class="line">&#123;<span class="keyword">\upshape</span> Upright Shape&#125; &#123;<span class="keyword">\itshape</span> Italic Shape &#125;<span class="comment">%字体声明</span></span><br><span class="line">&#123;<span class="keyword">\slshape</span> Slanted Shape&#125;</span><br><span class="line">&#123;<span class="keyword">\scshape</span> Small Caps Shape&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="英文字体大小的设置"><a href="#英文字体大小的设置" class="headerlink" title="英文字体大小的设置"></a>英文字体大小的设置</h2><p>控制文档的参数:<code>\documentclass[11pt]&#123;article&#125;</code>                 </p>
+<table>
+<thead>
+<tr>
+<th>字号</th>
+<th>10pt 选项（默认）</th>
+<th>11pt 选项</th>
+<th>12pt 选项</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>\tiny</td>
+<td>5pt</td>
+<td>6pt</td>
+<td>6pt</td>
+</tr>
+<tr>
+<td>\scriptsize</td>
+<td>7pt</td>
+<td>8pt</td>
+<td>8pt</td>
+</tr>
+<tr>
+<td>\footnotesize</td>
+<td>8pt</td>
+<td>9pt</td>
+<td>10pt</td>
+</tr>
+<tr>
+<td>\small</td>
+<td>9pt</td>
+<td>10pt</td>
+<td>10.95pt</td>
+</tr>
+<tr>
+<td>\normalsize</td>
+<td>10pt</td>
+<td>10.95pt</td>
+<td>12pt</td>
+</tr>
+<tr>
+<td>\large</td>
+<td>12pt</td>
+<td>12pt</td>
+<td>14.4pt</td>
+</tr>
+<tr>
+<td>\Large</td>
+<td>14.4pt</td>
+<td>14.4pt</td>
+<td>17.28pt</td>
+</tr>
+<tr>
+<td>\LARGE</td>
+<td>17.28pt</td>
+<td>17.28pt</td>
+<td>20.74pt</td>
+</tr>
+<tr>
+<td>\huge</td>
+<td>20.74pt</td>
+<td>20.74pt</td>
+<td>24.88pt</td>
+</tr>
+<tr>
+<td>\Huge</td>
+<td>24.88pt</td>
+<td>24.88pt</td>
+<td>24.88pt</td>
+</tr>
+</tbody></table>
+<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="comment">%字体大小</span></span><br><span class="line">&#123;<span class="keyword">\tiny</span>  Hello &#125;<span class="keyword">\\</span></span><br><span class="line">&#123;<span class="keyword">\scriptsize</span>  Hello &#125;<span class="keyword">\\</span></span><br><span class="line">&#123;<span class="keyword">\footnotesize</span>  Hello &#125;<span class="keyword">\\</span></span><br><span class="line">&#123;<span class="keyword">\small</span>  Hello &#125;<span class="keyword">\\</span></span><br><span class="line">&#123;<span class="keyword">\normalsize</span>  Hello &#125;<span class="keyword">\\</span></span><br><span class="line">&#123;<span class="keyword">\large</span>  Hello &#125;<span class="keyword">\\</span></span><br><span class="line">&#123;<span class="keyword">\Large</span>  Hello &#125;<span class="keyword">\\</span></span><br><span class="line">&#123;<span class="keyword">\LARGE</span>  Hello &#125;<span class="keyword">\\</span></span><br><span class="line">&#123;<span class="keyword">\huge</span>  Hello &#125;<span class="keyword">\\</span> </span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="中文字体的设置"><a href="#中文字体的设置" class="headerlink" title="中文字体的设置"></a>中文字体的设置</h2><p>在引入了中文宏包后</p>
+<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line">&#123;<span class="keyword">\songti</span> 宋体&#125; <span class="keyword">\quad</span> &#123;<span class="keyword">\heiti</span> 黑体&#125; <span class="keyword">\quad</span> &#123;<span class="keyword">\fangsong</span> 仿宋&#125; <span class="keyword">\quad</span> &#123;<span class="keyword">\kaiti</span> 楷体&#125;</span><br><span class="line"><span class="comment">%中文的粗细设置</span></span><br><span class="line"><span class="keyword">\textbf</span>&#123;粗体&#125; <span class="keyword">\quad</span> <span class="keyword">\textit</span>&#123;斜体&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="中文字体大小的设置"><a href="#中文字体大小的设置" class="headerlink" title="中文字体大小的设置"></a>中文字体大小的设置</h2><figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\zihao</span>&#123;5&#125; <span class="comment">%里面填字号</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="函数与字体设置分离的思想"><a href="#函数与字体设置分离的思想" class="headerlink" title="函数与字体设置分离的思想"></a>函数与字体设置分离的思想</h2><p>在导言区中设置函数<code>\newcommand&#123;\myfont&#125;&#123;\textbf&#123;\textbf&#125;&#123;\textsf&#123;Fancy Text&#125;&#125;&#125;</code></p>
+<p>在正文中使用命令<code>\myfont</code></p>
+<hr>
+<h1 id="LaTeX-的篇章结构"><a href="#LaTeX-的篇章结构" class="headerlink" title="$LaTeX$ 的篇章结构"></a>$LaTeX$ 的篇章结构</h1><h3 id="标题的设置"><a href="#标题的设置" class="headerlink" title="标题的设置"></a>标题的设置</h3><ul>
+<li><code>\section</code>为一级标题</li>
+<li><code>\subsection</code>为二级标题</li>
+<li><code>\subsubsection</code>为三级标题 ….</li>
+</ul>
+<p>在导言区可以设置标题的格式[^2]</p>
+<p>[^2]:详情见ctext 第七章标题格式的设置</p>
+<h2 id="换行"><a href="#换行" class="headerlink" title="换行"></a>换行</h2><ol>
+<li><strong>空一行</strong>  (推荐使用这个)</li>
+<li>\ \ 两个反斜杠 注意此时首行不缩进</li>
+<li><code>\par</code>使用命令</li>
+</ol>
+<h2 id="ctextbook"><a href="#ctextbook" class="headerlink" title="ctextbook"></a>ctextbook</h2><ul>
+<li><code>\chart</code>设置章节</li>
+<li><code>\tableofcontents</code>设置目录</li>
+</ul>
+<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="comment">%文档基本结构</span></span><br><span class="line"><span class="keyword">\documentclass</span>&#123;article&#125;</span><br><span class="line"><span class="keyword">\title</span>&#123;First Tex File&#125;</span><br><span class="line"><span class="keyword">\author</span>&#123;Carl&#125;</span><br><span class="line"><span class="keyword">\date</span>&#123;<span class="keyword">\today</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">\usepackage</span>&#123;ctex&#125;</span><br><span class="line"><span class="comment">%正文区</span></span><br><span class="line"><span class="keyword">\begin</span>&#123;document&#125;</span><br><span class="line">	<span class="keyword">\maketitle</span><span class="comment">%使得导言区的设置生效</span></span><br><span class="line">	<span class="keyword">\section</span>&#123;引言&#125;</span><br><span class="line">	中国人口模式的转变发生于民国时期 关于民国的进步,我只讲两个过去人们比较忽略的问题。	一是人口模式。如前所述,传统时代人口的增减是王朝兴衰的显示器。</span><br><span class="line">	</span><br><span class="line">	中国人口模式的转变发生于民国时期 关于民国的进步,我只讲两个过去人们比较忽略的问题。	一是人口模式。如前所述,传统时代人口的增减是王朝兴衰的显示器。<span class="keyword">\par</span></span><br><span class="line">	中国人口模式的转变发生于民国时期 关于民国的进步,我只讲两个过去人们比较忽略的问题。	一是人口模式。如前所述,传统时代人口的增减是王朝兴衰的显示器。<span class="keyword">\\</span>中国人口模式的转变发生于民国时期 关于民国的进步,我只讲两个过去人们比较忽略的问题。	一是人口模式。如前所述,传统时代人口的增减是王朝兴衰的显示器。</span><br><span class="line">	<span class="keyword">\section</span>&#123;实验方法&#125;</span><br><span class="line">	<span class="keyword">\section</span>&#123;实验结果&#125;</span><br><span class="line">	<span class="keyword">\subsection</span>&#123;数据&#125;</span><br><span class="line">	<span class="keyword">\subsection</span>&#123;图表&#125;</span><br><span class="line">	<span class="keyword">\subsubsection</span>&#123;实验过程&#125;</span><br><span class="line">	<span class="keyword">\section</span>&#123;结论&#125;</span><br><span class="line">	<span class="keyword">\section</span>&#123;致谢&#125;	</span><br><span class="line">	</span><br><span class="line"><span class="keyword">\end</span>&#123;document&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="特殊符号"><a href="#特殊符号" class="headerlink" title="特殊符号"></a>特殊符号</h1><h2 id="空格"><a href="#空格" class="headerlink" title="空格"></a>空格</h2><ul>
+<li>在英文段落中两个单词直接空一格，注意此时不管几个空格都当作一个空格</li>
+<li>中文段落中，两个中文之间加空格，视作无空格</li>
+<li>在中文英文都有的段落中，中文和因为之间会存在一个空格</li>
+<li>段落首行的缩进是自动产生的！不可以用空格代替!!!</li>
+</ul>
+<p>手动加入空格</p>
+<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\quad</span> <span class="comment">%一个空格</span></span><br><span class="line"><span class="keyword">\qquad</span> <span class="comment">%两个空格</span></span><br><span class="line"><span class="comment">%... 更多可以查询手册</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="控制符"><a href="#控制符" class="headerlink" title="控制符"></a>控制符</h2><figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\#</span> <span class="keyword">\$</span> <span class="keyword">\&#123;</span>  <span class="keyword">\&#125;</span> <span class="keyword">\~</span>&#123;&#125; <span class="keyword">\_</span>&#123;&#125; <span class="keyword">\^</span>&#123;&#125; <span class="keyword">\textbackslash</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="排版符号"><a href="#排版符号" class="headerlink" title="排版符号"></a>排版符号</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">\S \P \dag \ddag \copyright \pounds</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="标志符号"><a href="#标志符号" class="headerlink" title="标志符号"></a>标志符号</h2><figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\ </span>TeX&#123;&#125; <span class="keyword">\ </span>LaTeX&#123;&#125;  <span class="keyword">\ </span>LaTeXe&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">%XlLaTeX用xltxtra宏包提供</span></span><br><span class="line"><span class="keyword">\XlLaTeX</span></span><br><span class="line"></span><br><span class="line"><span class="comment">%其他标志符号见手册</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="引号"><a href="#引号" class="headerlink" title="引号"></a>引号</h2><figure class="highlight latex"><table><tr><td class="code"><pre><span class="line">` <span class="comment">%左单引号 </span></span><br><span class="line">&#x27; <span class="comment">%右单引号 </span></span><br><span class="line">`` <span class="comment">%左双引号 </span></span><br><span class="line">&#x27;&#x27; <span class="comment">%右双引号 </span></span><br></pre></td></tr></table></figure>
+
+<h2 id="连字符"><a href="#连字符" class="headerlink" title="连字符"></a>连字符</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">- -- ---</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="插入图片"><a href="#插入图片" class="headerlink" title="插入图片"></a>插入图片</h1><ul>
+<li><em><strong>texstudio最上方向导里有图片插入，可以不用自己写代码，不过导言区需要加个\usepackage{graphicx}命令</strong></em></li>
+</ul>
+<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="comment">%导言区内</span></span><br><span class="line"><span class="keyword">\usepackage</span>&#123;graphicx&#125; <span class="comment">%导入宏包</span></span><br><span class="line"><span class="keyword">\graphicspath</span>&#123;&#123;figures/&#125;,&#123;pics/&#125;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">% 正文区内</span></span><br><span class="line"><span class="keyword">\includegraphics</span>[设置参数]&#123;图像名字&#125;</span><br><span class="line"><span class="comment">% 这里推荐用 texstudio最上方向导里的图片插入</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="表格的制作"><a href="#表格的制作" class="headerlink" title="表格的制作"></a>表格的制作</h1><ul>
+<li>\\   表示换行</li>
+<li>&amp;    连接不同的列</li>
+<li>l      表示左对齐</li>
+<li>c      表示居中对齐</li>
+<li>r      表示右对齐</li>
+<li>p{宽度}  控制宽度,注意单位</li>
+</ul>
+<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="comment">% 在正文区中</span></span><br><span class="line"><span class="keyword">\begin</span>&#123;tabular&#125;&#123;|l| c| c| c| p&#123;宽度&#125;|&#125;<span class="comment">%会有5列，指定每列的居中形式,|表示每列中间有竖线分开.||表示双竖线</span></span><br><span class="line">	<span class="keyword">\hline</span> <span class="comment">%每行之间由横线分开.\hline \hline 表示双横线</span></span><br><span class="line">	姓名<span class="built_in">&amp;</span>语文<span class="built_in">&amp;</span>数学<span class="built_in">&amp;</span>外语<span class="built_in">&amp;</span>政治<span class="keyword">\\</span><span class="comment">%\\表示换行</span></span><br><span class="line">	<span class="keyword">\hline</span></span><br><span class="line">	张三<span class="built_in">&amp;</span>87<span class="built_in">&amp;</span>120<span class="built_in">&amp;</span>25<span class="built_in">&amp;</span>36<span class="keyword">\\</span></span><br><span class="line">	<span class="keyword">\hline</span></span><br><span class="line">	张1<span class="built_in">&amp;</span>87<span class="built_in">&amp;</span>120<span class="built_in">&amp;</span>25<span class="built_in">&amp;</span>36<span class="keyword">\\</span></span><br><span class="line">	<span class="keyword">\hline</span></span><br><span class="line">	张2<span class="built_in">&amp;</span>87<span class="built_in">&amp;</span>120<span class="built_in">&amp;</span>25<span class="built_in">&amp;</span>36<span class="keyword">\\</span></span><br><span class="line">	<span class="keyword">\hline</span></span><br><span class="line"><span class="keyword">\end</span>&#123;tabular&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="浮动体"><a href="#浮动体" class="headerlink" title="浮动体"></a>浮动体</h1><ul>
+<li>灵活分页</li>
+<li>给图标加标题</li>
+<li>交叉引用</li>
+</ul>
+<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="comment">%图片的浮动体</span></span><br><span class="line"><span class="keyword">\LaTeX</span>&#123;&#125;中<span class="keyword">\TeX</span> 系统的吉祥物--小狮子见图<span class="keyword">\ref</span>&#123;fig-lion&#125; <span class="comment">%交叉引用</span></span><br><span class="line"><span class="keyword">\begin</span>&#123;figure&#125;[htbp] <span class="comment">%[htbp]表示浮动体的排版位置</span></span><br><span class="line">	<span class="keyword">\centering</span> <span class="comment">%使得以下内容居中的命令</span></span><br><span class="line">	<span class="keyword">\includegraphics</span>&#123;two2.jpg&#125; <span class="comment">%插入图片</span></span><br><span class="line">	<span class="comment">%\label命令为浮动体设置标签，\ref引用该标签</span></span><br><span class="line">	<span class="keyword">\caption</span>&#123;<span class="keyword">\TeX</span> 系统的吉祥物---小狮子&#125;<span class="keyword">\label</span>&#123;fig-lion&#125;</span><br><span class="line"><span class="keyword">\end</span>&#123;figure&#125; </span><br><span class="line"></span><br><span class="line"><span class="comment">%表格的浮动体</span></span><br><span class="line">在<span class="keyword">\LaTeX</span>&#123;&#125;中也可以使用表<span class="keyword">\ref</span>&#123;tab-score&#125;所示的表格</span><br><span class="line">	<span class="keyword">\begin</span>&#123;table&#125;[htbp]</span><br><span class="line">		<span class="keyword">\centering</span></span><br><span class="line">		<span class="keyword">\caption</span>&#123;成绩单&#125;<span class="keyword">\label</span>&#123;tab-score&#125;</span><br><span class="line">		<span class="keyword">\begin</span>&#123;tabular&#125;&#123;|l|c|c|c|r|&#125;</span><br><span class="line">			<span class="keyword">\hline</span><span class="comment">%每行之间由横线分开</span></span><br><span class="line">			姓名<span class="built_in">&amp;</span>语文<span class="built_in">&amp;</span>数学<span class="built_in">&amp;</span>外语<span class="built_in">&amp;</span>政治<span class="keyword">\\</span><span class="comment">%\\表示换行</span></span><br><span class="line">			<span class="keyword">\hline</span></span><br><span class="line">			张三<span class="built_in">&amp;</span>87<span class="built_in">&amp;</span>120<span class="built_in">&amp;</span>25<span class="built_in">&amp;</span>36<span class="keyword">\\</span></span><br><span class="line">			<span class="keyword">\hline</span></span><br><span class="line">			张1<span class="built_in">&amp;</span>87<span class="built_in">&amp;</span>120<span class="built_in">&amp;</span>25<span class="built_in">&amp;</span>36<span class="keyword">\\</span></span><br><span class="line">			<span class="keyword">\hline</span></span><br><span class="line">			张2<span class="built_in">&amp;</span>87<span class="built_in">&amp;</span>120<span class="built_in">&amp;</span>25<span class="built_in">&amp;</span>36<span class="keyword">\\</span></span><br><span class="line">			<span class="keyword">\hline</span></span><br><span class="line">		<span class="keyword">\end</span>&#123;tabular&#125;</span><br><span class="line">	<span class="keyword">\end</span>&#123;table&#125;	</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="数学公式"><a href="#数学公式" class="headerlink" title="数学公式"></a>数学公式</h1><p>可以使用软件直接生成公式复制到$LaTeX$中</p>
+<p>软件名: Mathpix</p>
+<h2 id="行内公式"><a href="#行内公式" class="headerlink" title="行内公式"></a>行内公式</h2><figure class="highlight latex"><table><tr><td class="code"><pre><span class="line">1.美元符号 <span class="built_in">$</span>a+b=b+a <span class="built_in">$</span></span><br><span class="line">2.小括号 <span class="keyword">\(</span>a+b=b+a<span class="keyword">\)</span></span><br><span class="line">3.浮动体math环境</span><br><span class="line"><span class="keyword">\begin</span>&#123;math&#125;</span><br><span class="line">a+b=b+a</span><br><span class="line"><span class="keyword">\end</span>&#123;math&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="上下标"><a href="#上下标" class="headerlink" title="上下标"></a>上下标</h2><h3 id="上标"><a href="#上标" class="headerlink" title="上标"></a>上标</h3><ul>
+<li>使用<code>^</code> 符号</li>
+</ul>
+<p>比如<code>2^2</code>的效果是 $2^2$.但是后面只能跟一个字符</p>
+<p>如果需要跟多个字符则需要使用^{}</p>
+<p>比如2^{20}的效果是:  $2^{20}$</p>
+<h3 id="下标"><a href="#下标" class="headerlink" title="下标"></a>下标</h3><p>使用_符号</p>
+<p>比如a_1,a_2,a_3. $a_1,a_2,a_3$. 但是后面也只能跟一个字符</p>
+<p>如果需要跟多个字符则需要使用_{}</p>
+<p>比如a_{20}的效果是:   </p>
+<p>$a_{20}$</p>
+<h2 id="希腊字母"><a href="#希腊字母" class="headerlink" title="希腊字母"></a>希腊字母</h2><figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="built_in">$</span><span class="keyword">\alpha</span><span class="built_in">$</span></span><br><span class="line"><span class="built_in">$</span><span class="keyword">\beta</span><span class="built_in">$</span></span><br><span class="line"><span class="built_in">$</span><span class="keyword">\gamma</span><span class="built_in">$</span></span><br><span class="line"><span class="built_in">$</span><span class="keyword">\epsilon</span><span class="built_in">$</span></span><br><span class="line"><span class="built_in">$</span><span class="keyword">\pi</span><span class="built_in">$</span></span><br><span class="line"><span class="built_in">$</span><span class="keyword">\omega</span><span class="built_in">$</span>	</span><br><span class="line"><span class="built_in">$</span><span class="keyword">\Gamma</span><span class="built_in">$</span></span><br><span class="line"><span class="built_in">$</span><span class="keyword">\Delta</span><span class="built_in">$</span></span><br><span class="line"><span class="built_in">$</span><span class="keyword">\Theta</span><span class="built_in">$</span></span><br><span class="line"><span class="built_in">$</span><span class="keyword">\Pi</span><span class="built_in">$</span></span><br><span class="line"><span class="built_in">$</span><span class="keyword">\Omega</span><span class="built_in">$</span></span><br></pre></td></tr></table></figure>
+
+<p>得到:</p>
+<p>$\alpha$<br>$\beta$<br>$\gamma$<br>$\epsilon$<br>$\pi$<br>$\omega$<br>$\Gamma$<br>$\Delta$<br>$\Theta$<br>$\Pi$<br>$\Omega$</p>
+<h2 id="数学公式-1"><a href="#数学公式-1" class="headerlink" title="数学公式"></a>数学公式</h2><figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="built_in">$</span><span class="keyword">\log</span><span class="built_in">$</span></span><br><span class="line"><span class="built_in">$</span><span class="keyword">\sin</span><span class="built_in">$</span></span><br><span class="line"><span class="built_in">$</span><span class="keyword">\cos</span><span class="built_in">$</span></span><br><span class="line"><span class="built_in">$</span><span class="keyword">\arccos</span><span class="built_in">$</span></span><br><span class="line"><span class="built_in">$</span><span class="keyword">\arcsin</span><span class="built_in">$</span></span><br><span class="line"><span class="built_in">$</span><span class="keyword">\ln</span><span class="built_in">$</span></span><br><span class="line"></span><br><span class="line"><span class="comment">%以及联合使用</span></span><br><span class="line"><span class="built_in">$</span><span class="keyword">\sin</span><span class="built_in">^</span>2x+<span class="keyword">\cos</span><span class="built_in">^</span>2x=1<span class="built_in">$</span></span><br><span class="line"><span class="built_in">$</span><span class="keyword">\sqrt</span>&#123;2&#125;<span class="built_in">$</span></span><br><span class="line"><span class="built_in">$</span><span class="keyword">\sqrt</span>&#123;x<span class="built_in">^</span>2+y<span class="built_in">^</span>2&#125;<span class="built_in">$</span></span><br><span class="line"><span class="built_in">$</span><span class="keyword">\sqrt</span>&#123;2+<span class="keyword">\sqrt</span>&#123;2&#125;&#125;<span class="built_in">$</span></span><br><span class="line"><span class="built_in">$</span><span class="keyword">\sqrt</span>[4]&#123;x&#125;<span class="built_in">$</span></span><br></pre></td></tr></table></figure>
+
+<p>得到:</p>
+<p>$\log$<br>$\sin$<br>$\cos$<br>$\arccos$<br>$\arcsin$<br>$\ln$</p>
+<p>$\sin^2x+\cos^2x=1$<br>$\sqrt{2}$<br>$\sqrt{x^2+y^2}$<br>$\sqrt{2+\sqrt{2}}$<br>$\sqrt[4]{x}$</p>
+<h2 id="分式"><a href="#分式" class="headerlink" title="分式"></a>分式</h2><figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="comment">%两种写法</span></span><br><span class="line">1.大约是原体积的<span class="built_in">$</span>3/4<span class="built_in">$</span></span><br><span class="line">2.大约是原体积的<span class="built_in">$</span><span class="keyword">\frac</span>&#123;3&#125;&#123;4&#125;<span class="built_in">$</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="行间公式"><a href="#行间公式" class="headerlink" title="行间公式"></a>行间公式</h2><figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="comment">%1.</span></span><br><span class="line"><span class="keyword">\[</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">\]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">%不会自动编号</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">\begin</span>&#123;displaymath&#125;</span><br><span class="line">		2x<span class="built_in">^</span>2+5x+3=6	</span><br><span class="line">	<span class="keyword">\end</span>&#123;displaymath&#125;</span><br><span class="line">	</span><br><span class="line"><span class="comment">%会自动编号!这个很重要</span></span><br><span class="line"></span><br><span class="line">	交换律见式<span class="keyword">\ref</span>&#123;eq:commutative&#125;</span><br><span class="line">	<span class="keyword">\begin</span>&#123;equation&#125;</span><br><span class="line">		a+b=b+a <span class="keyword">\label</span>&#123;eq:commutative&#125;</span><br><span class="line">	<span class="keyword">\end</span>&#123;equation&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">%不会自动编号的equation环境</span></span><br><span class="line"><span class="comment">%注意要引用一个宏包</span></span><br><span class="line"><span class="keyword">\usepackage</span>&#123;amsmath&#125;</span><br><span class="line">	<span class="keyword">\begin</span>&#123;equation*&#125;</span><br><span class="line">		a+b=b+a <span class="keyword">\label</span>&#123;eq:commutative&#125;</span><br><span class="line">	<span class="keyword">\end</span>&#123;equation*&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="矩阵的生成"><a href="#矩阵的生成" class="headerlink" title="矩阵的生成"></a>矩阵的生成</h1><ul>
+<li>省略号: <code>\dots(水平), \vdots(垂直), \ddots(斜的), adots(需要自己配置)</code></li>
+<li><code>\adot</code>的效果.可以直接用<code>\iddots</code>生成，但要调用<code>mathdots</code>宏包</li>
+</ul>
+<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="comment">%需要导入宏包</span></span><br><span class="line"><span class="keyword">\usepackage</span>&#123;amsmath&#125;</span><br><span class="line"><span class="comment">%正文区</span></span><br><span class="line"><span class="keyword">\begin</span>&#123;matrix&#125;<span class="comment">%&amp;分列 \\分行</span></span><br><span class="line">  0<span class="built_in">&amp;</span>1<span class="keyword">\\</span></span><br><span class="line">  1<span class="built_in">&amp;</span>0</span><br><span class="line"><span class="keyword">\end</span>&#123;matrix&#125;<span class="keyword">\quad</span></span><br><span class="line"><span class="keyword">\]</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">\[</span><span class="keyword">\begin</span>&#123;pmatrix&#125;<span class="comment">%括号包裹的矩阵</span></span><br><span class="line"> 0<span class="built_in">&amp;</span>1<span class="keyword">\\</span></span><br><span class="line">1<span class="built_in">&amp;</span>0</span><br><span class="line"><span class="keyword">\end</span>&#123;pmatrix&#125;</span><br><span class="line"><span class="keyword">\]</span>	</span><br><span class="line"></span><br><span class="line"><span class="keyword">\[</span><span class="keyword">\begin</span>&#123;vmatrix&#125;<span class="comment">%长竖线包裹的矩阵</span></span><br><span class="line">0<span class="built_in">&amp;</span>1<span class="keyword">\\</span></span><br><span class="line">1<span class="built_in">&amp;</span>0</span><br><span class="line"><span class="keyword">\end</span>&#123;vmatrix&#125;</span><br><span class="line"><span class="keyword">\]</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">\[</span><span class="keyword">\begin</span>&#123;bmatrix&#125;<span class="comment">%长中括号包裹的矩阵</span></span><br><span class="line">0<span class="built_in">&amp;</span>1<span class="keyword">\\</span></span><br><span class="line">1<span class="built_in">&amp;</span>0</span><br><span class="line"><span class="keyword">\end</span>&#123;bmatrix&#125;</span><br><span class="line"><span class="keyword">\]</span></span><br><span class="line">------------------------------------------------------------------------</span><br><span class="line"><span class="keyword">\[</span><span class="keyword">\begin</span>&#123;pmatrix&#125;<span class="comment">%括号包裹的矩阵</span></span><br><span class="line">a<span class="built_in">_</span>&#123;11&#125;<span class="built_in">^</span>2<span class="built_in">&amp;</span>a<span class="built_in">_</span>&#123;12&#125;<span class="built_in">^</span>2<span class="built_in">&amp;</span>a<span class="built_in">_</span>&#123;13&#125;<span class="built_in">^</span>2<span class="keyword">\\</span></span><br><span class="line">0<span class="built_in">&amp;</span>a<span class="built_in">_</span>&#123;22&#125;<span class="built_in">&amp;</span>a<span class="built_in">_</span>&#123;33&#125;</span><br><span class="line"><span class="keyword">\end</span>&#123;pmatrix&#125;</span><br><span class="line"><span class="keyword">\]</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">\[</span><span class="keyword">\begin</span>&#123;bmatrix&#125;<span class="comment">%长中括号包裹的矩阵</span></span><br><span class="line">a<span class="built_in">_</span>&#123;11&#125;<span class="built_in">&amp;</span><span class="keyword">\dots</span><span class="built_in">&amp;</span>a<span class="built_in">_</span>&#123;1n&#125;<span class="keyword">\\</span></span><br><span class="line"><span class="built_in">&amp;</span><span class="keyword">\ddots</span><span class="built_in">&amp;</span><span class="keyword">\vdots</span><span class="keyword">\\</span></span><br><span class="line"><span class="keyword">\end</span>&#123;bmatrix&#125;<span class="built_in">_</span>&#123;n <span class="keyword">\times</span> n&#125;</span><br><span class="line"><span class="keyword">\]</span></span><br><span class="line">-------------------------------------------------------------------------</span><br><span class="line"><span class="keyword">\[</span><span class="keyword">\begin</span>&#123;pmatrix&#125;<span class="comment">%分块矩阵(矩阵嵌套)</span></span><br><span class="line"><span class="keyword">\begin</span>&#123;matrix&#125;</span><br><span class="line">1<span class="built_in">&amp;</span>0<span class="keyword">\\</span>0<span class="built_in">&amp;</span>1</span><br><span class="line"><span class="keyword">\end</span>&#123;matrix&#125;</span><br><span class="line"><span class="built_in">&amp;</span> <span class="keyword">\text</span>&#123;<span class="keyword">\Large</span> 0&#125;<span class="keyword">\\</span>  <span class="comment">%生成一个很大的0</span></span><br><span class="line"><span class="keyword">\text</span>&#123;<span class="keyword">\Large</span> 0&#125;<span class="built_in">&amp;</span><span class="keyword">\begin</span>&#123;matrix&#125;</span><br><span class="line">1<span class="built_in">&amp;</span>0<span class="keyword">\\</span>0<span class="built_in">&amp;</span>1</span><br><span class="line"><span class="keyword">\end</span>&#123;matrix&#125;</span><br><span class="line"><span class="keyword">\end</span>&#123;pmatrix&#125;</span><br><span class="line"><span class="keyword">\]</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">\[</span><span class="keyword">\begin</span>&#123;pmatrix&#125;<span class="comment">%括号包裹的矩阵</span></span><br><span class="line">a<span class="built_in">_</span>&#123;11&#125;<span class="built_in">&amp;</span>a<span class="built_in">_</span>&#123;12&#125;<span class="built_in">&amp;</span><span class="keyword">\cdots</span><span class="built_in">&amp;</span>a<span class="built_in">_</span>&#123;ln&#125;<span class="keyword">\\</span></span><br><span class="line"><span class="built_in">&amp;</span>a<span class="built_in">_</span>&#123;22&#125;<span class="built_in">&amp;</span><span class="keyword">\cdots</span><span class="built_in">&amp;</span>a<span class="built_in">_</span>&#123;2n&#125;<span class="keyword">\\</span></span><br><span class="line"><span class="built_in">&amp;</span>		<span class="built_in">&amp;</span><span class="keyword">\dots</span> <span class="built_in">&amp;</span><span class="keyword">\vdots</span> <span class="keyword">\\</span></span><br><span class="line"><span class="keyword">\multicolumn</span>&#123;2&#125;&#123;c&#125;&#123;<span class="keyword">\raisebox</span>&#123;1.3ex&#125;[0pt]&#123;<span class="keyword">\Huge</span> 0&#125;&#125; <span class="comment">%合并行和列;设置大小</span></span><br><span class="line"><span class="built_in">&amp;</span>		<span class="built_in">&amp;</span>a<span class="built_in">_</span>&#123;nn&#125;</span><br><span class="line"><span class="keyword">\end</span>&#123;pmatrix&#125;</span><br><span class="line"><span class="keyword">\]</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">\[</span><span class="keyword">\begin</span>&#123;pmatrix&#125;</span><br><span class="line">1<span class="built_in">&amp;</span><span class="keyword">\frac</span> 12 <span class="built_in">&amp;</span><span class="keyword">\dots</span> <span class="built_in">&amp;</span><span class="keyword">\frac</span> ln <span class="keyword">\\</span></span><br><span class="line"><span class="keyword">\hdotsfor</span>&#123;4&#125;<span class="keyword">\\</span>  <span class="comment">%跨列的省略号：\hdotsfor&#123;&lt;列数&gt;&#125;</span></span><br><span class="line">m<span class="built_in">&amp;</span><span class="keyword">\frac</span> m2<span class="built_in">&amp;</span> <span class="keyword">\dots</span> <span class="built_in">&amp;</span><span class="keyword">\frac</span> mn</span><br><span class="line"><span class="keyword">\end</span>&#123;pmatrix&#125;</span><br><span class="line"><span class="keyword">\]</span></span><br><span class="line">-----------------------------------------------</span><br><span class="line"><span class="comment">%行内小矩阵(smallmatrix)环境</span></span><br><span class="line">复数<span class="built_in">$</span>z=(x,y)<span class="built_in">$</span>也可以用矩阵</span><br><span class="line"><span class="keyword">\begin</span>&#123;math&#125;</span><br><span class="line">   <span class="keyword">\left</span>(<span class="comment">%需手动加上左括号</span></span><br><span class="line">   <span class="keyword">\begin</span>&#123;smallmatrix&#125;</span><br><span class="line">  x<span class="built_in">&amp;</span> -y<span class="keyword">\\</span>y<span class="built_in">&amp;</span>x</span><br><span class="line">   <span class="keyword">\end</span>&#123;smallmatrix&#125;</span><br><span class="line">   <span class="keyword">\right</span>)<span class="comment">%需手动加上右括号</span></span><br><span class="line"><span class="keyword">\end</span>&#123;math&#125;来表示</span><br><span class="line"></span><br><span class="line"><span class="comment">%array环境(类似表格环境tabular)</span></span><br><span class="line"><span class="keyword">\[</span></span><br><span class="line"><span class="keyword">\begin</span>&#123;array&#125;&#123;r|r&#125;</span><br><span class="line"><span class="keyword">\frac</span> 12<span class="built_in">&amp;</span>0<span class="keyword">\\</span></span><br><span class="line"><span class="keyword">\hline</span></span><br><span class="line">0<span class="built_in">&amp;</span> -<span class="keyword">\frac</span> abc<span class="keyword">\\</span></span><br><span class="line"><span class="keyword">\end</span>&#123;array&#125;</span><br><span class="line"><span class="keyword">\]</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="多行数学公式"><a href="#多行数学公式" class="headerlink" title="多行数学公式"></a>多行数学公式</h1><figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="comment">% 导言区引入宏包</span></span><br><span class="line"><span class="keyword">\usepackage</span>&#123;amsmath&#125;</span><br><span class="line"><span class="keyword">\usepackage</span>&#123;amssymb&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">% 正文区</span></span><br><span class="line">	<span class="comment">%gather和gather*环境(可以使用\\换行)</span></span><br><span class="line">	<span class="comment">%带编号</span></span><br><span class="line"><span class="keyword">\begin</span>&#123;gather&#125;</span><br><span class="line">	a+b=b+a<span class="keyword">\\</span></span><br><span class="line">	ab  ba</span><br><span class="line"><span class="keyword">\end</span>&#123;gather&#125;</span><br><span class="line">	</span><br><span class="line"><span class="comment">%不带编号</span></span><br><span class="line"><span class="keyword">\begin</span>&#123;gather*&#125;</span><br><span class="line">	3+5=5+3<span class="keyword">\\</span></span><br><span class="line">	3 <span class="keyword">\times</span> 5=5<span class="keyword">\times</span> 3</span><br><span class="line"><span class="keyword">\end</span>&#123;gather*&#125;</span><br><span class="line">	</span><br><span class="line"><span class="comment">%在\\前使用\notetag阻止编号</span></span><br><span class="line"><span class="keyword">\begin</span>&#123;gather&#125;</span><br><span class="line">	3<span class="built_in">^</span>2+4<span class="built_in">^</span>2=5<span class="built_in">^</span>2</span><br><span class="line"><span class="keyword">\end</span>&#123;gather&#125;</span><br><span class="line">	</span><br><span class="line"><span class="comment">%align和align*环境(用&amp;对齐)</span></span><br><span class="line"><span class="comment">%带编号</span></span><br><span class="line"><span class="keyword">\begin</span>&#123;align&#125;</span><br><span class="line">	x <span class="built_in">&amp;</span>=t+<span class="keyword">\cos</span> t+1<span class="keyword">\\</span></span><br><span class="line">	y <span class="built_in">&amp;</span>=2 <span class="keyword">\sin</span> t</span><br><span class="line"><span class="keyword">\end</span>&#123;align&#125;</span><br><span class="line"><span class="comment">%不带编号</span></span><br><span class="line"><span class="keyword">\begin</span>&#123;align*&#125;</span><br><span class="line">x <span class="built_in">&amp;</span>=t+<span class="keyword">\cos</span> t+1<span class="keyword">\\</span></span><br><span class="line">y <span class="built_in">&amp;</span>=2 <span class="keyword">\sin</span> t</span><br><span class="line"><span class="keyword">\end</span>&#123;align*&#125;</span><br><span class="line">	</span><br><span class="line"><span class="comment">%split环境(对齐采用align环境的方式，编号在中间)</span></span><br><span class="line"><span class="keyword">\begin</span>&#123;equation&#125;</span><br><span class="line"><span class="keyword">\begin</span>&#123;split&#125;</span><br><span class="line">	<span class="keyword">\cos</span> 2x <span class="built_in">&amp;</span>=<span class="keyword">\cos</span><span class="built_in">^</span>2 x- <span class="keyword">\sin</span><span class="built_in">^</span>2 x<span class="keyword">\\</span></span><br><span class="line">	<span class="built_in">&amp;</span>=2<span class="keyword">\cos</span><span class="built_in">^</span>2 x-1</span><br><span class="line"><span class="keyword">\end</span>&#123;split&#125;</span><br><span class="line"><span class="keyword">\end</span>&#123;equation&#125;		</span><br><span class="line">	</span><br><span class="line"><span class="comment">%case环境</span></span><br><span class="line"><span class="comment">%每行公式中使用&amp;分隔为两部分</span></span><br><span class="line"><span class="comment">%通常表示值和后面的条件</span></span><br><span class="line"><span class="keyword">\begin</span>&#123;equation&#125;</span><br><span class="line">	D(x)=<span class="keyword">\begin</span>&#123;cases&#125;</span><br><span class="line">	1,<span class="built_in">&amp;</span> <span class="keyword">\text</span>&#123;如果&#125; x <span class="keyword">\in</span> <span class="keyword">\mathbb</span>&#123;Q&#125;;<span class="keyword">\\</span></span><br><span class="line">	0,<span class="built_in">&amp;</span> <span class="keyword">\text</span>&#123;如果&#125; x <span class="keyword">\in</span> <span class="keyword">\mathbb</span>&#123;R&#125;<span class="keyword">\setminus</span><span class="keyword">\mathbb</span>&#123;Q&#125;</span><br><span class="line">	<span class="keyword">\end</span>&#123;cases&#125;</span><br><span class="line"><span class="keyword">\end</span>&#123;equation&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="使用zotero实现参考文献的导入"><a href="#使用zotero实现参考文献的导入" class="headerlink" title="使用zotero实现参考文献的导入"></a>使用zotero实现参考文献的导入</h1><ul>
+<li>下载zotero</li>
+<li>在扩展程序中下载 save to zotero</li>
+<li>在文章页面中点击 save to zotero 保存到文库中</li>
+<li>在文库中导出 导出格式为BiBTeX</li>
+<li>用记事本打开导出文件,复制到所写的latex文件中</li>
+<li>ref,改为文章的题目方便查找</li>
+<li>在正文内使用命令<code>\cite</code>选择所引用的文章即可</li>
+<li><strong>注意检查格式!!!</strong></li>
+</ul>
+<p>在参考文献位置输入命令</p>
+<p><code>\bibligraphy&#123;book&#125;</code>生成参考文献</p>
+<hr>
+<h1 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h1><p>新起一页 <code>\newpage</code></p>
+<p><code>\appendix</code> 表示是附录部分</p>
+<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\section</span></span><br><span class="line"><span class="keyword">\begin</span>&#123;lstlisting&#125;[language=matlab] <span class="comment">% 语言可以自己选择</span></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> <span class="comment">%这里面粘贴代码</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">\end</span>&#123;lstlisting&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <tags>
+        <tag>LaTeX</tag>
+        <tag>数学建模</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>STM32学习（入门篇）</title>
+    <url>/2022/12/29/STM32%E5%AD%A6%E4%B9%A0%EF%BC%88%E5%85%A5%E9%97%A8%E7%AF%87%EF%BC%89/</url>
+    <content><![CDATA[<p>本文使用的是野火生产的[STM32-指南针]([关于本项目 — <a href="https://doc.embedfire.com/mcu/stm32/f103zhinanzhe/std/zh/latest/README.html">野火]STM32库开发实战指南——基于野火指南者开发板 文档 (embedfire.com)</a>)，观看野火教程的<a href="%5B3-%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8DAP%E4%BB%BF%E7%9C%9F%E5%99%A8%E4%B8%8B%E8%BD%BD%E7%A8%8B%E5%BA%8F_%E5%93%94%E5%93%A9%E5%93%94%E5%93%A9_bilibili%5D(https://www.bilibili.com/video/BV1Xs411g7Aj?p=1&vd_source=1e56c5282fb34ebc3bc5d2b2b4c8d5a7)">学习视频</a>的学习笔记</p>
+<h1 id="DAP仿真软件的配置"><a href="#DAP仿真软件的配置" class="headerlink" title="DAP仿真软件的配置"></a>DAP仿真软件的配置</h1><p>这里观看这里的教程：[DAP仿真器与串口下载程序 — <a href="https://doc.embedfire.com/stm32_products/must_read/zh/latest/doc/quickstart/DAP/DAP.html">野火]STM32开发板必读说明 文档 (embedfire.com)</a></p>
+<p><img src="https://doc.embedfire.com/stm32_products/must_read/zh/latest/_images/DAP_0.png" alt="../../../_images/DAP_0.png"></p>
+<p>左侧不出现，注意换一个USB口。右侧不出现，DAP插入开发板时，换成SWD</p>
+<p>普通DAP注意connect：under Reset 。Reset 选择HW RESET或者 VECTRESTET </p>
+<p>注意配置，配置好后，DAP仿真器应该亮绿灯。</p>
+<p>编译完成后点击LOAD即可下载程序。</p>
+<hr>
+<h1 id="什么是STM32"><a href="#什么是STM32" class="headerlink" title="什么是STM32"></a>什么是STM32</h1><h2 id="STM32的引脚说明"><a href="#STM32的引脚说明" class="headerlink" title="STM32的引脚说明"></a>STM32的引脚说明</h2><table>
+<thead>
+<tr>
+<th>引脚分类</th>
+<th>引脚说明说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>电源</td>
+<td>(VBAT)、(VDD Vss)、(VDDA VSSA)、(VREF+VREF-)等</td>
+</tr>
+<tr>
+<td>晶振IO</td>
+<td>主晶振IO，RTC晶振IO</td>
+</tr>
+<tr>
+<td>下载IO</td>
+<td>用于JTAG下载的IO:JTMS、JTCK、JTDI、JTDO、NJTRST</td>
+</tr>
+<tr>
+<td>BOOT IO</td>
+<td>BOOTo、BOOT1，用于设置系统的启动方式</td>
+</tr>
+<tr>
+<td>复位IO</td>
+<td>NRST，用于外部复位</td>
+</tr>
+<tr>
+<td></td>
+<td>上面5部分IO组成的系统我们也叫做最小系统</td>
+</tr>
+<tr>
+<td>GPIO</td>
+<td>专用器件接到专用的总线，比如I2C，SPI，SDIO，FSMC，DCMI这些总线的器件需要接到专用的IO</td>
+</tr>
+<tr>
+<td>GPIO</td>
+<td>普通的元器件接到GPIO，比如蜂鸣器，LED，按键等元器件用普通的GPIO即</td>
+</tr>
+<tr>
+<td>GPIO</td>
+<td>如果还有剩下的IO，可根据项目需要引出或者不引出</td>
+</tr>
+</tbody></table>
+<p>具体引脚的功能说明见 数据手册(最好读英文)</p>
+<hr>
+<h1 id="寄存器"><a href="#寄存器" class="headerlink" title="寄存器"></a>寄存器</h1><h2 id="寄存器映射"><a href="#寄存器映射" class="headerlink" title="寄存器映射"></a>寄存器映射</h2><p>意义： 给有特殊意义的地址取了一个别名</p>
+<p>STM32中的 头文件 <code>#include &quot;stm32f10x.h&quot;</code></p>
+<p>以及51单片机中的 头文件<code>#inclde &quot;reg51.h&quot;</code></p>
+<p>中都是存放着寄存器映射</p>
+<h2 id="以GPIOB口为例子"><a href="#以GPIOB口为例子" class="headerlink" title="以GPIOB口为例子"></a>以GPIOB口为例子</h2><p>我们找到GPIOB端口的输出数据寄存器ODR的地址是0x40010C0C</p>
+<blockquote>
+<p>(在官方参考手册的 2.3存储器映像中找到起始位置)</p>
+</blockquote>
+<p>ODR寄存器是32bit，低16bit有效，对应着16个外部IO，写0/1对应的的IO则输出低/高电平。</p>
+<p>通过下面语句将其全部置为一</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">*(<span class="type">unsigned</span> <span class="type">int</span>*)(<span class="number">0x4001</span> <span class="number">0</span>C0C) = <span class="number">0xFFFF</span>;</span><br><span class="line"><span class="comment">// 我们对位操作时通常使用位操作符 |,&amp;的形式 在之后会介绍</span></span><br></pre></td></tr></table></figure>
+
+<p>我们给<code>*(unsigned int*)(0x4001 0C0C)</code>定义一个别名,就是寄存器映射</p>
+<p>上面所讲的头文件实际上就是对 各个特殊意义的地址取了别名后进行封装</p>
+<hr>
+<hr>
+<h1 id="新建工程模板"><a href="#新建工程模板" class="headerlink" title="新建工程模板"></a>新建工程模板</h1><h2 id="点亮一盏灯-简易版"><a href="#点亮一盏灯-简易版" class="headerlink" title="点亮一盏灯(简易版)"></a>点亮一盏灯(简易版)</h2><ol>
+<li>首先看电路原理图</li>
+</ol>
+<p>通过PB0端口来控制绿灯的点亮</p>
+<p>![img](STM32 学习/SVF7QMT2%$O`06832X``8EQ.png)</p>
+<p>PB0 由GPIOB_ODR(output data register) 端口输出寄存器控制</p>
+<ul>
+<li><p>找到 GPIOB的地址为 <code>0X4001 0C00 </code></p>
+</li>
+<li><p>ODR的地址偏移：0C h</p>
+</li>
+<li><p>点亮灯-让最低位输出零</p>
+</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">*(<span class="type">unsigned</span> <span class="type">int</span>)(<span class="number">0X4001</span> <span class="number">0</span>C0C) &amp;= ~(<span class="number">1</span>&lt;&lt;<span class="number">0</span>);</span><br><span class="line"><span class="comment">//这步骤是 让最后一位置零,并且不影响其他位的取值</span></span><br><span class="line"><span class="comment">//注意ODR的复位值：0x0000 0000,不进行这步,灯也会亮,但是为了可读一定要加上这一句</span></span><br></pre></td></tr></table></figure>
+
+<p>但是STM32比51单片机高级的地方在于PB0口既可以当作输入 又可以当作输出,而且默认为输入</p>
+<p>这里我们要将它 <strong>配置IO口为输出</strong></p>
+<p>![image-20221226223404869](STM32 学习/image-20221226223404869.png)</p>
+<p>PB0是0 所以是最后四位</p>
+<p>使用 通用推挽输出模式[0,0]</p>
+<p>模式控制速度这里选择10MHZ</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">*(<span class="type">unsigned</span> <span class="type">int</span>)(<span class="number">0X4001</span> <span class="number">0</span>C00) &amp;= ((<span class="number">1</span>)&lt;&lt;(<span class="number">4</span>*<span class="number">0</span>));</span><br></pre></td></tr></table></figure>
+
+<p>然后我们发现要控制GPIOB打开 还得控制时钟打开</p>
+<p>![](STM32 学习/image-20221226223936675.png)</p>
+<p>由寄存器组起始地址表中,查到RCC的地址是 0x4002 1000</p>
+<p>然后再APB2 外设时钟使能寄存器(RCC_APB2ENR)中看到</p>
+<p>![image-20221226224355093](STM32 学习/image-20221226224355093.png)</p>
+<p>![image-20221226224416328](STM32 学习/image-20221226224416328.png)</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">*(<span class="type">unsigned</span> <span class="type">int</span>)(<span class="number">0X0</span>x4002 <span class="number">1018</span>) &amp;= (<span class="number">1</span>&lt;&lt;<span class="number">3</span>);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">//亮绿灯</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;stm32f10x.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">//打开GPIOB 的时钟 </span></span><br><span class="line">	*(<span class="type">unsigned</span> <span class="type">int</span>*)(<span class="number">0X40021018</span>) |= (<span class="number">1</span>&lt;&lt;<span class="number">3</span>);</span><br><span class="line">	<span class="comment">// 配置IO口为输出</span></span><br><span class="line">	*(<span class="type">unsigned</span> <span class="type">int</span>*)(<span class="number">0X40010C00</span>) |= ((<span class="number">1</span>)&lt;&lt;(<span class="number">4</span>*<span class="number">0</span>));<span class="comment">//4*1-蓝灯 4*5红灯</span></span><br><span class="line">	<span class="comment">// 控制ODR寄存器 让灯亮</span></span><br><span class="line">	*(<span class="type">unsigned</span> <span class="type">int</span>*)(<span class="number">0X40010C0C</span>) &amp;= ~(<span class="number">0</span>&lt;&lt;<span class="number">0</span>)<span class="comment">//&lt;&lt;1-蓝灯,&lt;&lt;5红灯	</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="type">void</span> SystemInit(<span class="type">void</span>)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">// 函数体为空，骗过编译器不报错</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;stm32f10x.h&quot;</span></span></span><br><span class="line"><span class="comment">//闪烁</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">delay</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">int</span> i,j;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;<span class="number">400</span>;i++)</span><br><span class="line">		<span class="keyword">for</span>(j=<span class="number">0</span>;j&lt;<span class="number">400</span>;j++);</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">//打开GPIOB 的时钟 </span></span><br><span class="line">	*(<span class="type">unsigned</span> <span class="type">int</span>*)(<span class="number">0X40021018</span>) |= (<span class="number">1</span>&lt;&lt;<span class="number">3</span>);</span><br><span class="line">	<span class="comment">// 配置IO口为输出</span></span><br><span class="line">	*(<span class="type">unsigned</span> <span class="type">int</span>*)(<span class="number">0X40010C00</span>) |= ((<span class="number">1</span>)&lt;&lt;(<span class="number">4</span>*<span class="number">1</span>));</span><br><span class="line">	<span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">// 控制ODR寄存器 让灯亮</span></span><br><span class="line">		*(<span class="type">unsigned</span> <span class="type">int</span>*)(<span class="number">0X40010C0C</span>) &amp;= ~(<span class="number">1</span>&lt;&lt;<span class="number">1</span>);</span><br><span class="line">		delay();</span><br><span class="line">		<span class="comment">// 控制ODR寄存器 让灯灭</span></span><br><span class="line">		*(<span class="type">unsigned</span> <span class="type">int</span>*)(<span class="number">0X40010C0C</span>) |= (<span class="number">1</span>&lt;&lt;<span class="number">1</span>);</span><br><span class="line">		delay();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">SystemInit</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">// 函数体为空，骗过编译器不报错</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="使用寄存器点亮一盏灯"><a href="#使用寄存器点亮一盏灯" class="headerlink" title="使用寄存器点亮一盏灯"></a>使用寄存器点亮一盏灯</h1><h2 id="读GPIO的系统框图"><a href="#读GPIO的系统框图" class="headerlink" title="读GPIO的系统框图"></a>读GPIO的系统框图</h2><p>![7](STM32 学习/7.png)</p>
+<ul>
+<li><p>上半部分是输入部分</p>
+</li>
+<li><p>下半部分是输出部分</p>
+</li>
+</ul>
+<p>圈2这个位置是选择工作模式</p>
+<p>通常选择推挽工作模式</p>
+<p>开漏输出一般应用在I2C、SMBUS通讯等需要“线与”功能的总线电路中，或者是电平不匹配的场合</p>
+<p>圈3这个位置就是我们的ODR控制输出，也可以通过BSRR 位设置、清除寄存器控制</p>
+<p>输入部分</p>
+<p>首先是一个上拉下拉 在端口配置低寄存器中选择上拉/下拉模式</p>
+<p>然后是TTL 也称为0/1转换器来实现数模转换</p>
+<p>圈5是IDR</p>
+<p>圈6读取数字信号</p>
+<p>圈7读取模拟信号</p>
+<h2 id="自己写寄存器映射到头文件中"><a href="#自己写寄存器映射到头文件中" class="headerlink" title="自己写寄存器映射到头文件中"></a>自己写寄存器映射到头文件中</h2><p>打开头文件</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 定义总线的地址</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> APB2 (unsigned int)0x40010000</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ABH  (unsigned int)0x40020000</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> APB1 (unsigned int)0x40000000</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//根据寄存器偏移确定外设的地址</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> GPIOB (APB2+0x0C00)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> RSS   (ABH +0x1000)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 控制特定的寄存器</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> GPIOB_CRL  *(unsigned int*)(GPIOB+0x00)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> GPIOB_CRH  *(unsigned int*)(GPIOB+0x04)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> GPIOB_ODR  *(unsigned int*)(GPIOB+0x0C)</span></span><br><span class="line">	</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> RCC_APB2ENR *(unsigned int*)(RSS+0x18)</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*片上外设基地址  */</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> PERIPH_BASE         ((unsigned int)0x40000000)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*总线基地址，GPIO都挂载到APB2上 */</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> APB2PERIPH_BASE     (PERIPH_BASE + 0x10000)</span></span><br><span class="line"><span class="comment">/* AHB总线基地址 */</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> AHBPERIPH_BASE      (PERIPH_BASE + 0x20000)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*GPIOB外设基地址*/</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> GPIOB_BASE          (APB2PERIPH_BASE + 0x0C00)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* GPIOB寄存器地址,强制转换成指针 */</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> GPIOB_CRL           *(unsigned int*)(GPIOB_BASE+0x00)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> GPIOB_CRH           *(unsigned int*)(GPIOB_BASE+0x04)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> GPIOB_IDR           *(unsigned int*)(GPIOB_BASE+0x08)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> GPIOB_ODR           *(unsigned int*)(GPIOB_BASE+0x0C)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> GPIOB_BSRR          *(unsigned int*)(GPIOB_BASE+0x10)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> GPIOB_BRR           *(unsigned int*)(GPIOB_BASE+0x14)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> GPIOB_LCKR          *(unsigned int*)(GPIOB_BASE+0x18)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*RCC外设基地址*/</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> RCC_BASE           (AHBPERIPH_BASE + 0x1000)</span></span><br><span class="line"><span class="comment">/*RCC的AHB1时钟使能寄存器地址,强制转换成指针*/</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> RCC_APB2ENR        *(unsigned int*)(RCC_BASE+0x18)</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">//打开GPIOB 的时钟 </span></span><br><span class="line">	RCC_APB2ENR |= (<span class="number">1</span>&lt;&lt;<span class="number">3</span>);</span><br><span class="line">	<span class="comment">// 配置IO口为输出</span></span><br><span class="line">	GPIOB_CRL |= ((<span class="number">1</span>)&lt;&lt;(<span class="number">4</span>*<span class="number">0</span>));</span><br><span class="line">	<span class="comment">// 控制GPIOB_BSRR, GPIOB_BRR寄存器 让灯亮</span></span><br><span class="line">	GPIOB_BRR  |= (<span class="number">1</span>&lt;&lt;<span class="number">0</span>);</span><br><span class="line">	GPIOB_BSRR |= (<span class="number">1</span>&lt;&lt;<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">SystemInit</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">// 函数体为空，骗过编译器不报错</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="构建STM32库函数的雏形"><a href="#构建STM32库函数的雏形" class="headerlink" title="构建STM32库函数的雏形"></a>构建STM32库函数的雏形</h1><h2 id="通过结构体来访问地址"><a href="#通过结构体来访问地址" class="headerlink" title="通过结构体来访问地址"></a>通过结构体来访问地址</h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*片上外设基地址  */</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> PERIPH_BASE         ((unsigned int)0x40000000)</span></span><br><span class="line"><span class="comment">/*总线基地址，GPIO都挂载到APB2上 */</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> APB2PERIPH_BASE     (PERIPH_BASE + 0x10000)</span></span><br><span class="line"><span class="comment">/*GPIOB外设基地址*/</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> GPIOB_BASE          (APB2PERIPH_BASE + 0x0C00)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">unsigned</span> <span class="type">int</span> <span class="type">uint32_t</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">unsigned</span> <span class="type">short</span> <span class="type">uint16_t</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// GPIO 寄存器结构体定义</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">   <span class="type">uint32_t</span> CRL;       <span class="comment">// 端口配置低寄存器，     地址偏移0X00</span></span><br><span class="line">   <span class="type">uint32_t</span> CRH;       <span class="comment">// 端口配置高寄存器，     地址偏移0X04</span></span><br><span class="line">   <span class="type">uint32_t</span> IDR;       <span class="comment">// 端口数据输入寄存器，   地址偏移0X08</span></span><br><span class="line">   <span class="type">uint32_t</span> ODR;       <span class="comment">// 端口数据输出寄存器，   地址偏移0X0C</span></span><br><span class="line">   <span class="type">uint32_t</span> BSRR;      <span class="comment">// 端口位设置/清除寄存器，地址偏移0X10</span></span><br><span class="line">   <span class="type">uint32_t</span> BRR;       <span class="comment">// 端口位清除寄存器，     地址偏移0X14</span></span><br><span class="line">   <span class="type">uint32_t</span> LCKR;      <span class="comment">// 端口配置锁定寄存器，   地址偏移0X18</span></span><br><span class="line">&#125; GPIO_TypeDef;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> GBIO ((GPIO_TypeDef*)GPIOB_BASE)</span></span><br><span class="line"><span class="comment">//之后就可以用 GBIO-&gt;CRL来访问CRL</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="通过建立库函数来控制GPIO"><a href="#通过建立库函数来控制GPIO" class="headerlink" title="通过建立库函数来控制GPIO"></a>通过建立库函数来控制GPIO</h2><ol>
+<li>在工程文件下 新建一个<code>.h</code>的头文件和同名的<code>.c</code>文件 并加到工程文件中</li>
+<li>在新建的<code>.c</code>文件中调用<code>.h</code>文件</li>
+<li><code>.h</code>文件中要采取固定方式书写,防止重复调用</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">ifndef</span> __STM32F10X_GPIO_H</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __STM32F10X_GPIO_H</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;stm32f10x.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">//分别定义每个引脚 置1</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> GPIO_Pin_0              (uint16_t)0x0001)  <span class="comment">/*!&lt; 选择Pin0 (1&lt;&lt;0) */</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> GPIO_Pin_1              ((uint16_t)0x0002)  <span class="comment">/*!&lt; 选择Pin1 (1&lt;&lt;1)*/</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> GPIO_Pin_2              ((uint16_t)0x0004)  <span class="comment">/*!&lt; 选择Pin2 (1&lt;&lt;2)*/</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> GPIO_Pin_3              ((uint16_t)0x0008)  <span class="comment">/*!&lt; 选择Pin3 (1&lt;&lt;3)*/</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> GPIO_Pin_4              ((uint16_t)0x0010)  <span class="comment">/*!&lt; 选择Pin4 */</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> GPIO_Pin_5              ((uint16_t)0x0020)  <span class="comment">/*!&lt; 选择Pin5 */</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> GPIO_Pin_6              ((uint16_t)0x0040)  <span class="comment">/*!&lt; 选择Pin6 */</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> GPIO_Pin_7              ((uint16_t)0x0080)  <span class="comment">/*!&lt; 选择Pin7 */</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> GPIO_Pin_8              ((uint16_t)0x0100)  <span class="comment">/*!&lt; 选择Pin8 */</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> GPIO_Pin_9              ((uint16_t)0x0200)  <span class="comment">/*!&lt; 选择Pin9 */</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> GPIO_Pin_10             ((uint16_t)0x0400)  <span class="comment">/*!&lt; 选择Pin10 */</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> GPIO_Pin_11             ((uint16_t)0x0800)  <span class="comment">/*!&lt; 选择Pin11 */</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> GPIO_Pin_12             ((uint16_t)0x1000)  <span class="comment">/*!&lt; 选择Pin12 */</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> GPIO_Pin_13             ((uint16_t)0x2000)  <span class="comment">/*!&lt; 选择Pin13 */</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> GPIO_Pin_14             ((uint16_t)0x4000)  <span class="comment">/*!&lt; 选择Pin14 */</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> GPIO_Pin_15             ((uint16_t)0x8000)  <span class="comment">/*!&lt; 选择Pin15 */</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> GPIO_Pin_All            ((uint16_t)0xFFFF)  <span class="comment">/*!&lt; 选择全部引脚 */</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">//后面可以加函数声明</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span><span class="comment">/*__STM32F10X_GPIO_H*/</span></span></span><br></pre></td></tr></table></figure>
+
+<p>在<code>.c</code>文件中写函数</p>
+<ol start="4">
+<li>最后只需在<code>main.c</code>声明 <code>#include XX.h</code>即可使用函数</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="构建初始化函数"><a href="#构建初始化函数" class="headerlink" title="构建初始化函数"></a>构建初始化函数</h2><ol>
+<li>定义结构体存放初始化的配置</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="type">uint16_t</span> GPIO_Pin;      <span class="comment">/*!&lt; 选择要配置的GPIO引脚 */</span></span><br><span class="line"></span><br><span class="line">    <span class="type">uint16_t</span> GPIO_Speed;    <span class="comment">/*!&lt; 选择GPIO引脚的速率 */</span></span><br><span class="line"></span><br><span class="line">    <span class="type">uint16_t</span> GPIO_Mode;     <span class="comment">/*!&lt; 选择GPIO引脚的工作模式 */</span></span><br><span class="line">&#125; GPIO_InitTypeDef;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>定义枚举类型 对每一个模式进行赋值</li>
+</ol>
+<p><img src="https://doc.embedfire.com/mcu/stm32/f103zhinanzhe/std/zh/latest/_images/Writel004.png" alt="端口配置低寄存器"></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* GPIO输出速率枚举定义</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">enum</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    GPIO_Speed_10MHz = <span class="number">1</span>,         <span class="comment">// 10MHZ        (01)b</span></span><br><span class="line">    GPIO_Speed_2MHz,              <span class="comment">// 2MHZ         (10)b</span></span><br><span class="line">    GPIO_Speed_50MHz              <span class="comment">// 50MHZ        (11)b</span></span><br><span class="line">&#125; GPIOSpeed_TypeDef;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* GPIO工作模式枚举定义</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">enum</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    GPIO_Mode_AIN = <span class="number">0x0</span>,           <span class="comment">// 模拟输入     (0000 0000)b</span></span><br><span class="line">    GPIO_Mode_IN_FLOATING = <span class="number">0x04</span>,  <span class="comment">// 浮空输入     (0000 0100)b</span></span><br><span class="line">    GPIO_Mode_IPD = <span class="number">0x28</span>,          <span class="comment">// 下拉输入     (0010 1000)b</span></span><br><span class="line">    GPIO_Mode_IPU = <span class="number">0x48</span>,          <span class="comment">// 上拉输入     (0100 1000)b</span></span><br><span class="line"></span><br><span class="line">    GPIO_Mode_Out_OD = <span class="number">0x14</span>,       <span class="comment">// 开漏输出     (0001 0100)b</span></span><br><span class="line">    GPIO_Mode_Out_PP = <span class="number">0x10</span>,       <span class="comment">// 推挽输出     (0001 0000)b</span></span><br><span class="line">    GPIO_Mode_AF_OD = <span class="number">0x1C</span>,        <span class="comment">// 复用开漏输出  (0001 1100)b</span></span><br><span class="line">    GPIO_Mode_AF_PP = <span class="number">0x18</span>         <span class="comment">// 复用推挽输出  (0001 1000)b</span></span><br><span class="line">&#125; GPIOMode_TypeDef;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>定义GPIO初始化函数,来实现寄存器配置</li>
+</ol>
+<p><img src="https://doc.embedfire.com/mcu/stm32/f103zhinanzhe/std/zh/latest/_images/Writel006.png" alt="GPIO引脚工作模式真值表分析"></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">*函数功能：初始化引脚模式</span></span><br><span class="line"><span class="comment">*参数说明：GPIOx，该参数为GPIO_TypeDef类型的指针，指向GPIO端口的地址</span></span><br><span class="line"><span class="comment">*         GPIO_InitTypeDef:GPIO_InitTypeDef结构体指针，指向初始化变量</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">GPIO_Init</span><span class="params">(GPIO_TypeDef* GPIOx, GPIO_InitTypeDef* GPIO_InitStruct)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">uint32_t</span> currentmode =<span class="number">0x00</span>,currentpin = <span class="number">0x00</span>,pinpos = <span class="number">0x00</span>,pos = <span class="number">0x00</span>;</span><br><span class="line">    <span class="type">uint32_t</span> tmpreg = <span class="number">0x00</span>, pinmask = <span class="number">0x00</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/*---------------- GPIO 模式配置 -------------------*/</span></span><br><span class="line">    <span class="comment">// 把输入参数GPIO_Mode的低四位暂存在currentmode</span></span><br><span class="line">    currentmode = ((<span class="type">uint32_t</span>)GPIO_InitStruct-&gt;GPIO_Mode) &amp;</span><br><span class="line">                ((<span class="type">uint32_t</span>)<span class="number">0x0F</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// bit4是1表示输出，bit4是0则是输入</span></span><br><span class="line">    <span class="comment">// 判断bit4是1还是0，即首选判断是输入还是输出模式</span></span><br><span class="line">    <span class="keyword">if</span> ((((<span class="type">uint32_t</span>)GPIO_InitStruct-&gt;GPIO_Mode) &amp;</span><br><span class="line">            ((<span class="type">uint32_t</span>)<span class="number">0x10</span>)) != <span class="number">0x00</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// 输出模式则要设置输出速度</span></span><br><span class="line">        currentmode |= (<span class="type">uint32_t</span>)GPIO_InitStruct-&gt;GPIO_Speed;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/*-----GPIO CRL 寄存器配置 CRL寄存器控制着低8位IO- ----*/</span></span><br><span class="line">    <span class="comment">// 配置端口低8位，即Pin0~Pin7</span></span><br><span class="line">    <span class="keyword">if</span> (((<span class="type">uint32_t</span>)GPIO_InitStruct-&gt;GPIO_Pin &amp;</span><br><span class="line">            ((<span class="type">uint32_t</span>)<span class="number">0x00FF</span>)) != <span class="number">0x00</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// 先备份CRL寄存器的值</span></span><br><span class="line">        tmpreg = GPIOx-&gt;CRL;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 循环，从Pin0开始配对，找出具体的Pin</span></span><br><span class="line">        <span class="keyword">for</span> (pinpos = <span class="number">0x00</span>; pinpos &lt; <span class="number">0x08</span>; pinpos++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">// pos的值为1左移pinpos位</span></span><br><span class="line">            pos = ((<span class="type">uint32_t</span>)<span class="number">0x01</span>) &lt;&lt; pinpos;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 令pos与输入参数GPIO_PIN作位与运算</span></span><br><span class="line">            currentpin = (GPIO_InitStruct-&gt;GPIO_Pin) &amp; pos;</span><br><span class="line"></span><br><span class="line">            <span class="comment">//若currentpin=pos,则找到使用的引脚</span></span><br><span class="line">            <span class="keyword">if</span> (currentpin == pos)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="comment">//pinpos的值左移两位(乘以4),因为寄存器中4个位配置一个引脚</span></span><br><span class="line">                pos = pinpos &lt;&lt; <span class="number">2</span>;</span><br><span class="line">                <span class="comment">//把控制这个引脚的4个寄存器位清零，其它寄存器位不变</span></span><br><span class="line">                pinmask = ((<span class="type">uint32_t</span>)<span class="number">0x0F</span>) &lt;&lt; pos;</span><br><span class="line">                tmpreg &amp;= ~pinmask;</span><br><span class="line"></span><br><span class="line">                <span class="comment">// 向寄存器写入将要配置的引脚的模式</span></span><br><span class="line">                tmpreg |= (currentmode &lt;&lt; pos);</span><br><span class="line"></span><br><span class="line">                <span class="comment">// 判断是否为下拉输入模式</span></span><br><span class="line">                <span class="keyword">if</span> (GPIO_InitStruct-&gt;GPIO_Mode == GPIO_Mode_IPD)</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="comment">// 下拉输入模式,引脚默认置0,对BRR寄存器写1对引脚置0</span></span><br><span class="line">                    GPIOx-&gt;BRR = (((<span class="type">uint32_t</span>)<span class="number">0x01</span>) &lt;&lt; pinpos);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="comment">// 判断是否为上拉输入模式</span></span><br><span class="line">                    <span class="keyword">if</span> (GPIO_InitStruct-&gt;GPIO_Mode == GPIO_Mode_IPU)</span><br><span class="line">                    &#123;</span><br><span class="line">                        <span class="comment">// 上拉输入模式,引脚默认值为1,对BSRR寄存器写1对引脚置1</span></span><br><span class="line">                        GPIOx-&gt;BSRR = (((<span class="type">uint32_t</span>)<span class="number">0x01</span>) &lt;&lt; pinpos);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 把前面处理后的暂存值写入到CRL寄存器之中</span></span><br><span class="line">        GPIOx-&gt;CRL = tmpreg;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/*--------GPIO CRH 寄存器配置 CRH寄存器控制着高8位IO- -----*/</span></span><br><span class="line">    <span class="comment">// 配置端口高8位，即Pin8~Pin15</span></span><br><span class="line">    <span class="keyword">if</span> (GPIO_InitStruct-&gt;GPIO_Pin &gt; <span class="number">0x00FF</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// // 先备份CRH寄存器的值</span></span><br><span class="line">        tmpreg = GPIOx-&gt;CRH;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 循环，从Pin8开始配对，找出具体的Pin</span></span><br><span class="line">        <span class="keyword">for</span> (pinpos = <span class="number">0x00</span>; pinpos &lt; <span class="number">0x08</span>; pinpos++)</span><br><span class="line">        &#123;</span><br><span class="line">            pos = (((<span class="type">uint32_t</span>)<span class="number">0x01</span>) &lt;&lt; (pinpos + <span class="number">0x08</span>));</span><br><span class="line"></span><br><span class="line">            <span class="comment">// pos与输入参数GPIO_PIN作位与运算</span></span><br><span class="line">            currentpin = ((GPIO_InitStruct-&gt;GPIO_Pin) &amp; pos);</span><br><span class="line"></span><br><span class="line">            <span class="comment">//若currentpin=pos,则找到使用的引脚</span></span><br><span class="line">            <span class="keyword">if</span> (currentpin == pos)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="comment">//pinpos的值左移两位(乘以4),因为寄存器中4个位配置一个引脚</span></span><br><span class="line">                pos = pinpos &lt;&lt; <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">                <span class="comment">//把控制这个引脚的4个寄存器位清零，其它寄存器位不变</span></span><br><span class="line">                pinmask = ((<span class="type">uint32_t</span>)<span class="number">0x0F</span>) &lt;&lt; pos;</span><br><span class="line">                tmpreg &amp;= ~pinmask;</span><br><span class="line"></span><br><span class="line">                <span class="comment">// 向寄存器写入将要配置的引脚的模式</span></span><br><span class="line">                tmpreg |= (currentmode &lt;&lt; pos);</span><br><span class="line"></span><br><span class="line">                <span class="comment">// 判断是否为下拉输入模式</span></span><br><span class="line">                <span class="keyword">if</span> (GPIO_InitStruct-&gt;GPIO_Mode == GPIO_Mode_IPD)</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="comment">// 下拉输入模式,引脚默认置0,对BRR寄存器写1可对引脚置0</span></span><br><span class="line">                    GPIOx-&gt;BRR = (((<span class="type">uint32_t</span>)<span class="number">0x01</span>) &lt;&lt; (pinpos + <span class="number">0x08</span>));</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">// 判断是否为上拉输入模式</span></span><br><span class="line">                <span class="keyword">if</span> (GPIO_InitStruct-&gt;GPIO_Mode == GPIO_Mode_IPU)</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="comment">// 上拉输入模式,引脚默认值为1,对BSRR寄存器写1可对引脚置1</span></span><br><span class="line">                    GPIOx-&gt;BSRR = (((<span class="type">uint32_t</span>)<span class="number">0x01</span>) &lt;&lt; (pinpos + <span class="number">0x08</span>));</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 把前面处理后的暂存值写入到CRH寄存器之中</span></span><br><span class="line">        GPIOx-&gt;CRH = tmpreg;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="提高代码的可移植性"><a href="#提高代码的可移植性" class="headerlink" title="提高代码的可移植性"></a>提高代码的可移植性</h2><p>涉及到GPIO端口时候利用 宏来进行替换</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> LED_G_GPIO_PORT GPIOB <span class="comment">//将点亮的端口用宏替代</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> LED_G_CLK_ENABLE (RCC-&gt;APB2ENR |=((1)&lt;&lt;3)) <span class="comment">//点亮对应端口的时钟</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> LED_G_GPIO_PIN GPIO_pin_0 <span class="comment">//LED_G对应PB0是第一个引脚</span></span></span><br></pre></td></tr></table></figure>
+
+<p>将后面的代码用宏来替代</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>直接操作内存-&gt;寄存器映射-&gt;利用寄存器结构体方便访问结构体成员-&gt;加强可读性(编写函数)-&gt;定义初始化结构体(将所有要配置的参数枚举出来)-&gt;利用宏定义增强可移植性</p>
+<hr>
+<h1 id="固件库编程"><a href="#固件库编程" class="headerlink" title="固件库编程"></a>固件库编程</h1><h2 id="分析固件库内容"><a href="#分析固件库内容" class="headerlink" title="分析固件库内容"></a>分析固件库内容</h2><ol>
+<li>汇编语言编写的启动文件(简单)</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">startup_stm32f10x_hd.c: 设置堆栈指针,设置PC指针,初始化中断向量表,配置系统时钟,对用C库函数,进入C语言的环境</span><br><span class="line">hd,表示大小</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://doc.embedfire.com/mcu/stm32/f103zhinanzhe/std/zh/latest/_images/StdPer01.png" alt="详细说明见表"></p>
+<ol start="2">
+<li>时钟配置文件(简单)</li>
+</ol>
+<p>system_stm32f10zx.c: 把系统时钟HSE=8M, 经过PLL 倍频为PLL=72M</p>
+<ol start="3">
+<li><strong>stm32f10x.h</strong> </li>
+</ol>
+<p>ST生产的外设相关的: 实现寄存器映射</p>
+<p>XXX: GPIO,USRAT,I2C,SPI,FSMC</p>
+<p>stm32f10x_XX.h :存放外设初始化结构体,外设初始化结构体成员的参数列表,外设固件库函数声明</p>
+<p>stm32f10x_XX.c :外设驱动函数库文件</p>
+<ol start="4">
+<li><strong>core_cm.h</strong></li>
+</ol>
+<p>内核映射: 内核相关的寄存器映射</p>
+<p>core_cm.c: 内核外设的驱动固件库</p>
+<p>NVIC(嵌套向量中断控制器), SysTick(系统滴答定时器)</p>
+<p>misc.h</p>
+<p>misc.c</p>
+<ol start="5">
+<li>在main函数里面定义使用的<strong>头文件</strong></li>
+</ol>
+<p>为了方便定义了 头文件配置文件: 实现外设所以的文件的声明</p>
+<p><strong>stm32f10x_conf.h</strong> </p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">使用什么外设 就取消什么注释</span><br><span class="line"><span class="comment">//stm32f10x_XX.h</span></span><br><span class="line"><span class="comment">//stm32f10x_XX.h</span></span><br><span class="line"><span class="comment">//stm32f10x_XX.h</span></span><br><span class="line"><span class="comment">//stm32f10x_XX.h</span></span><br><span class="line"><span class="comment">//stm32f10x_XX.h</span></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<ol start="6">
+<li>专门存放中断服务函数的C文件</li>
+</ol>
+<p>stm32f10x_it.h</p>
+<p>stm32f10x_it.c</p>
+<p>这个函数可以随意放在其他的地方,并不一定要放到stm32f10x_it.c 中</p>
+<h2 id="固件库的内容"><a href="#固件库的内容" class="headerlink" title="固件库的内容"></a>固件库的内容</h2><p>看固件库的头文件来分析函数的作用</p>
+<hr>
+<h1 id="建立带固件库的工程模板"><a href="#建立带固件库的工程模板" class="headerlink" title="建立带固件库的工程模板"></a>建立带固件库的工程模板</h1><p>基本上看着视频操作，或者书本就可</p>
+<p>但是有一点特别注意</p>
+<p>![8](STM32 学习/8.png)</p>
+<p>将这个版本设置成5，不然不仅编译慢还疯狂报错</p>
+<hr>
+<h1 id="利用固件库编程点亮LED"><a href="#利用固件库编程点亮LED" class="headerlink" title="利用固件库编程点亮LED"></a>利用固件库编程点亮LED</h1><h2 id="点灯"><a href="#点灯" class="headerlink" title="点灯"></a>点灯</h2><p>1.主函数内容</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;stm32f10x.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;bsp_led.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">	LED_GPIO_Config();                      <span class="comment">//初始化函数</span></span><br><span class="line">	</span><br><span class="line">	GPIO_SetBits(LED_G_PORT, LED_G_PIN);    <span class="comment">//set函数将引脚上的 置为1</span></span><br><span class="line">	GPIO_ResetBits(LED_G_PORT, LED_G_PIN);  <span class="comment">//reset函数将引脚上的 置为1</span></span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>2.bsp_led.c文件</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;bsp_led.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">LED_GPIO_Config</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">	GPIO_InitTypeDef GPIO_initstruct; <span class="comment">//定义一个结构体初始化绿灯的内容</span></span><br><span class="line">	</span><br><span class="line">	RCC_APB2PeriphClockCmd(LED_G_CLK, ENABLE); <span class="comment">//打开绿灯的时钟</span></span><br><span class="line">	</span><br><span class="line">	GPIO_initstruct.GPIO_Mode = GPIO_Mode_Out_PP;  <span class="comment">//定义绿灯为推挽输出</span></span><br><span class="line">	GPIO_initstruct.GPIO_Pin = LED_G_PIN;          <span class="comment">//将引脚对应为绿灯的引脚</span></span><br><span class="line">	GPIO_initstruct.GPIO_Speed = GPIO_Speed_50MHz; <span class="comment">//定义速度为50M</span></span><br><span class="line">	</span><br><span class="line">	GPIO_Init(GPIOB, &amp;GPIO_initstruct);            <span class="comment">//使用初始化函数配置到GPIO_CLR</span></span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>3.bsp_led.h</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">ifndef</span> __BEP_LED_H</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __BEP_LED_H</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;stm32f10x.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">//绿灯定义</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> LED_G_PIN  GPIO_Pin_0                    <span class="comment">// 宏定义绿灯的管脚</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> LED_G_PORT GPIOB                         <span class="comment">// 宏定义绿灯的端口</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> LED_G_CLK  RCC_APB2Periph_GPIOB          <span class="comment">//宏定义绿灯的时钟</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span> <span class="comment">/*__BEP_LED_H*/</span></span></span><br></pre></td></tr></table></figure>
+
+<h2 id="实现流水灯"><a href="#实现流水灯" class="headerlink" title="实现流水灯"></a>实现流水灯</h2><ol>
+<li>主函数</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;stm32f10x.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;bsp_led.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">delay</span><span class="params">(count)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">for</span>(;count!= <span class="number">0</span>; count--);</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">	LED_GPIO_G_Config();                      <span class="comment">//初始化函数</span></span><br><span class="line">	LED_GPIO_B_Config();</span><br><span class="line">	LED_GPIO_R_Config();</span><br><span class="line">	<span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		LED_RED;</span><br><span class="line">		delay(<span class="number">0x2FFFFF</span>);</span><br><span class="line">		LED_GREEN;</span><br><span class="line">		delay(<span class="number">0x2FFFFF</span>);</span><br><span class="line">		LED_BLUE;</span><br><span class="line">		delay(<span class="number">0x2FFFFF</span>);</span><br><span class="line">		LED_YELLOW;</span><br><span class="line">		delay(<span class="number">0x2FFFFF</span>);</span><br><span class="line">		LED_PURPLE;</span><br><span class="line">		delay(<span class="number">0x2FFFFF</span>);</span><br><span class="line">		LED_CYAN;</span><br><span class="line">		delay(<span class="number">0x2FFFFF</span>);</span><br><span class="line">		LED_WHITE;</span><br><span class="line">		delay(<span class="number">0x2FFFFF</span>);</span><br><span class="line">		LED_RGBOFF;</span><br><span class="line">		delay(<span class="number">0x2FFFFF</span>);</span><br><span class="line">	&#125;	</span><br><span class="line"></span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>bsp_led.c</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;bsp_led.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">LED_GPIO_G_Config</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">	GPIO_InitTypeDef GPIO_G_initstruct;</span><br><span class="line">	</span><br><span class="line">	RCC_APB2PeriphClockCmd(LED_G_CLK, ENABLE);</span><br><span class="line">	</span><br><span class="line">	GPIO_G_initstruct.GPIO_Mode = GPIO_Mode_Out_PP;</span><br><span class="line">	GPIO_G_initstruct.GPIO_Pin = LED_G_PIN; </span><br><span class="line">	GPIO_G_initstruct.GPIO_Speed = GPIO_Speed_50MHz;</span><br><span class="line">	</span><br><span class="line">	GPIO_Init(GPIOB, &amp;GPIO_G_initstruct);</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">LED_GPIO_B_Config</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">	GPIO_InitTypeDef GPIO_B_initstruct;</span><br><span class="line">	</span><br><span class="line">	RCC_APB2PeriphClockCmd(LED_B_CLK, ENABLE);</span><br><span class="line">	</span><br><span class="line">	GPIO_B_initstruct.GPIO_Mode = GPIO_Mode_Out_PP;</span><br><span class="line">	GPIO_B_initstruct.GPIO_Pin = LED_B_PIN; </span><br><span class="line">	GPIO_B_initstruct.GPIO_Speed = GPIO_Speed_50MHz;</span><br><span class="line">	</span><br><span class="line">	GPIO_Init(GPIOB, &amp;GPIO_B_initstruct);</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">LED_GPIO_R_Config</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">	GPIO_InitTypeDef GPIO_R_initstruct;</span><br><span class="line">	</span><br><span class="line">	RCC_APB2PeriphClockCmd(LED_R_CLK, ENABLE);</span><br><span class="line">	</span><br><span class="line">	GPIO_R_initstruct.GPIO_Mode = GPIO_Mode_Out_PP;</span><br><span class="line">	GPIO_R_initstruct.GPIO_Pin = LED_R_PIN; </span><br><span class="line">	GPIO_R_initstruct.GPIO_Speed = GPIO_Speed_50MHz;</span><br><span class="line">	</span><br><span class="line">	GPIO_Init(GPIOB, &amp;GPIO_R_initstruct);</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>bsp_led.h</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">ifndef</span> __BEP_LED_H</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __BEP_LED_H</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;stm32f10x.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">//绿灯定义</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> LED_G_PIN  GPIO_Pin_0</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> LED_G_PORT GPIOB</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> LED_G_CLK  RCC_APB2Periph_GPIOB</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//蓝灯定义</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> LED_B_PIN  GPIO_Pin_1 <span class="comment">//只有端口不同的区别</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> LED_B_PORT GPIOB</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> LED_B_CLK  RCC_APB2Periph_GPIOB</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//红灯定义</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> LED_R_PIN  GPIO_Pin_5</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> LED_R_PORT GPIOB</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> LED_R_CLK  RCC_APB2Periph_GPIOB</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ON  1</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> OFF 0</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//开绿灯</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> LED_G(a) <span class="keyword">if</span>(a) GPIO_ResetBits(LED_G_PORT, LED_G_PIN); <span class="keyword">else</span> GPIO_SetBits(LED_G_PORT, LED_G_PIN); </span></span><br><span class="line"><span class="comment">//开蓝灯</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> LED_B(a) <span class="keyword">if</span>(a) GPIO_ResetBits(LED_B_PORT, LED_B_PIN); <span class="keyword">else</span> GPIO_SetBits(LED_B_PORT, LED_B_PIN); </span></span><br><span class="line"><span class="comment">//开蓝灯</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> LED_R(a) <span class="keyword">if</span>(a) GPIO_ResetBits(LED_R_PORT, LED_R_PIN); <span class="keyword">else</span> GPIO_SetBits(LED_R_PORT, LED_R_PIN); </span></span><br><span class="line"></span><br><span class="line"><span class="comment">//显示红色</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> LED_RED  \</span></span><br><span class="line"><span class="meta">                    LED_R(ON);\</span></span><br><span class="line"><span class="meta">                    LED_G(OFF);\</span></span><br><span class="line"><span class="meta">                    LED_B(OFF);</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//绿</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> LED_GREEN       \</span></span><br><span class="line"><span class="meta">                    LED_R(OFF);\</span></span><br><span class="line"><span class="meta">                    LED_G(ON);\</span></span><br><span class="line"><span class="meta">                    LED_B(OFF);</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//蓝</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> LED_BLUE    \</span></span><br><span class="line"><span class="meta">                    LED_R(OFF);\</span></span><br><span class="line"><span class="meta">                    LED_G(OFF);\</span></span><br><span class="line"><span class="meta">                    LED_B(ON);</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//黄(红+绿)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> LED_YELLOW  \</span></span><br><span class="line"><span class="meta">                    LED_R(ON);\</span></span><br><span class="line"><span class="meta">                    LED_G(ON);\</span></span><br><span class="line"><span class="meta">                    LED_B(OFF);</span></span><br><span class="line"><span class="comment">//紫(红+蓝)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> LED_PURPLE  \</span></span><br><span class="line"><span class="meta">                    LED_R(ON);\</span></span><br><span class="line"><span class="meta">                    LED_G(OFF);\</span></span><br><span class="line"><span class="meta">                    LED_B(ON);</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//青(绿+蓝)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> LED_CYAN \</span></span><br><span class="line"><span class="meta">                    LED_R(OFF);\</span></span><br><span class="line"><span class="meta">                    LED_G(ON);\</span></span><br><span class="line"><span class="meta">                    LED_B(ON);</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//白(红+绿+蓝)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> LED_WHITE   \</span></span><br><span class="line"><span class="meta">                    LED_R(ON);\</span></span><br><span class="line"><span class="meta">                    LED_G(ON);\</span></span><br><span class="line"><span class="meta">                    LED_B(ON);</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//黑(全部关闭)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> LED_RGBOFF  \</span></span><br><span class="line"><span class="meta">                    LED_R(OFF);\</span></span><br><span class="line"><span class="meta">                    LED_G(OFF);\</span></span><br><span class="line"><span class="meta">                    LED_B(OFF);</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span> <span class="comment">/*__BEP_LED_H*/</span></span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="GPIO输入-按键检测"><a href="#GPIO输入-按键检测" class="headerlink" title="GPIO输入- 按键检测"></a>GPIO输入- 按键检测</h1><h2 id="硬件设计"><a href="#硬件设计" class="headerlink" title="硬件设计"></a>硬件设计</h2><p><img src="https://doc.embedfire.com/mcu/stm32/f103zhinanzhe/std/zh/latest/_images/GPIOin003.png" alt="按键原理图"></p>
+<p>这里采用了连接<strong>电容</strong>的方式来<strong>物理消抖</strong></p>
+<p>R57和R15的作用都是保护电路</p>
+<p>如果按键按下就会 读到高电平 按键不按下的时候会得到低电平</p>
+<h2 id="软件设计"><a href="#软件设计" class="headerlink" title="软件设计"></a>软件设计</h2><ol>
+<li>对引脚进行初始化</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">//在.h文件中</span></span><br><span class="line"><span class="comment">//KEY1宏定义</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> KEY1_G_PIN  GPIO_Pin_0</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> KEY1_G_PORT GPIOA</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> KEY1_G_CLK  RCC_APB2Periph_GPIOA</span></span><br><span class="line"><span class="comment">//--------------------------------------------</span></span><br><span class="line"><span class="comment">//在.c文件中</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">KEY1_GPIO_G_Config</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">	GPIO_InitTypeDef GPIO_KEY1_initstruct; <span class="comment">//定义KEY1的结构体</span></span><br><span class="line">	</span><br><span class="line">	RCC_APB2PeriphClockCmd(KEY1_G_CLK, ENABLE); <span class="comment">//打开KEY1对应的时钟</span></span><br><span class="line">	</span><br><span class="line">	GPIO_KEY1_initstruct.GPIO_Mode = GPIO_Mode_IN_FLOATING; <span class="comment">//设置模式为浮空输入模式</span></span><br><span class="line">	GPIO_KEY1_initstruct.GPIO_Pin = KEY1_G_PIN;   <span class="comment">//设置KEY1对应的引脚</span></span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	GPIO_Init(KEY1_G_PORT, &amp;GPIO_KEY1_initstruct); <span class="comment">//调用初始化函数配置到寄存器中</span></span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>编写按键检测函数</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">uint8_t</span> <span class="title function_">KEY_Scan</span><span class="params">(GPIO_TypeDef* GPIOx, <span class="type">uint16_t</span> GPIO_Pin)</span> <span class="comment">//传入对应的端口和引脚</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">if</span>(GPIO_ReadInputDataBit(GPIOx, GPIO_Pin) == KEY_ON ) <span class="comment">//是否按下 按下为1</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">while</span>(GPIO_ReadInputDataBit(GPIOx, GPIO_Pin) == KEY_ON);<span class="comment">//松手检测</span></span><br><span class="line">		<span class="keyword">return</span> KEY_ON;  <span class="comment">//返回按下</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">return</span> KEY_OFF; <span class="comment">//返回没有按下</span></span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>灯状态变化函数</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">LED_G_TOGGLE; <span class="comment">//宏定义函数 相当于对 对应位取反</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> LED_G_TOGGLE &#123;LED_G_PORT-&gt;ODR ^= LED_G_PIN ;&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="编写好的文件"><a href="#编写好的文件" class="headerlink" title="编写好的文件"></a>编写好的文件</h2><ol>
+<li>main 函数中</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;stm32f10x.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;bsp_led.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;keyscan.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">delay</span><span class="params">(count)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">for</span>(;count!= <span class="number">0</span>; count--);</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">	LED_GPIO_G_Config();                      <span class="comment">//初始化LED灯</span></span><br><span class="line">	LED_GPIO_B_Config();</span><br><span class="line">	LED_GPIO_R_Config();</span><br><span class="line">	LED_RGBOFF;        <span class="comment">//亮黑灯,相当于把所有灯关上</span></span><br><span class="line">	</span><br><span class="line">	KEY1_GPIO_Config();                     <span class="comment">//初始化按键1</span></span><br><span class="line">	KEY2_GPIO_Config();                     <span class="comment">//初始化按键2</span></span><br><span class="line">	<span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(KEY_Scan( KEY1_PORT, KEY1_PIN) == KEY_ON) <span class="comment">//检测按键1是否按下</span></span><br><span class="line">		&#123;</span><br><span class="line">			LED_G_TOGGLE; </span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">if</span>(KEY_Scan( KEY2_PORT, KEY2_PIN) == KEY_ON)<span class="comment">//检测按键2是否按下</span></span><br><span class="line">		&#123;</span><br><span class="line">			LED_B_TOGGLE; </span><br><span class="line">		&#125;</span><br><span class="line">	&#125;	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>bsp_key.h  文件中</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">ifndef</span> __BEP_KEY_H</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __BEP_KEY_H</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;stm32f10x.h&quot;</span></span></span><br><span class="line"><span class="comment">//KEY1定义</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> KEY1_PIN  GPIO_Pin_0</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> KEY1_PORT GPIOA</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> KEY1_CLK  RCC_APB2Periph_GPIOA</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//KEY2定义</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> KEY2_PIN  GPIO_Pin_13</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> KEY2_PORT GPIOC</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> KEY2_CLK  RCC_APB2Periph_GPIOC</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> KEY_ON  1 <span class="comment">//把按下宏定义为1</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> KEY_OFF 0 <span class="comment">//把未按下宏定义为0</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">//函数的声明</span></span><br><span class="line"><span class="type">uint8_t</span> <span class="title function_">KEY_Scan</span><span class="params">(GPIO_TypeDef* GPIOx, <span class="type">uint16_t</span> GPIO_Pin)</span>;</span><br><span class="line"><span class="type">void</span> <span class="title function_">KEY1_GPIO_Config</span><span class="params">(<span class="type">void</span>)</span>;</span><br><span class="line"><span class="type">void</span> <span class="title function_">KEY2_GPIO_Config</span><span class="params">(<span class="type">void</span>)</span>;</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span><span class="comment">/*__BEP_KEY_H */</span></span></span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>bsp_key.c 文件中</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;keyscan.h&quot;</span></span></span><br><span class="line"><span class="comment">//按键1初始化函数</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">KEY1_GPIO_Config</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">	GPIO_InitTypeDef GPIO_KEY1_initstruct; <span class="comment">//定义按键1对应的结构体</span></span><br><span class="line">	</span><br><span class="line">	RCC_APB2PeriphClockCmd(KEY1_CLK, ENABLE); <span class="comment">//打开按键1对应的时钟</span></span><br><span class="line">	</span><br><span class="line">	GPIO_KEY1_initstruct.GPIO_Mode = GPIO_Mode_IN_FLOATING; <span class="comment">//将模式设置为浮空输入模式</span></span><br><span class="line">	GPIO_KEY1_initstruct.GPIO_Pin = KEY1_PIN; <span class="comment">//设置按键1对应管脚</span></span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	GPIO_Init(KEY1_PORT, &amp;GPIO_KEY1_initstruct); <span class="comment">//调用初始化函数,穿入对应的端口中</span></span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//按键2初始化函数</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">KEY2_GPIO_Config</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">	GPIO_InitTypeDef GPIO_KEY2_initstruct;</span><br><span class="line">	</span><br><span class="line">	RCC_APB2PeriphClockCmd(KEY2_CLK, ENABLE);</span><br><span class="line">	</span><br><span class="line">	GPIO_KEY2_initstruct.GPIO_Mode = GPIO_Mode_IN_FLOATING;</span><br><span class="line">	GPIO_KEY2_initstruct.GPIO_Pin = KEY2_PIN; </span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	GPIO_Init(KEY2_PORT, &amp;GPIO_KEY2_initstruct);</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">uint8_t</span> <span class="title function_">KEY_Scan</span><span class="params">(GPIO_TypeDef* GPIOx, <span class="type">uint16_t</span> GPIO_Pin)</span> <span class="comment">//按键检测函数</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">if</span>(GPIO_ReadInputDataBit(GPIOx, GPIO_Pin) == KEY_ON ) <span class="comment">//判断按键是否按下</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">while</span>(GPIO_ReadInputDataBit(GPIOx, GPIO_Pin) == KEY_ON);<span class="comment">//松手检测</span></span><br><span class="line">		<span class="keyword">return</span> KEY_ON;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">return</span> KEY_OFF;</span><br><span class="line">&#125;+-</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="GPIO的输入与输出"><a href="#GPIO的输入与输出" class="headerlink" title="GPIO的输入与输出"></a>GPIO的输入与输出</h1><h2 id="类比51-总线操作和位操作"><a href="#类比51-总线操作和位操作" class="headerlink" title="类比51 总线操作和位操作"></a>类比51 总线操作和位操作</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//在51单片机中,让LED1输出低电平有两个操作</span><br><span class="line">P0=0xFE; //这是总线操作,直接操作P0端口</span><br><span class="line">P0^0=0;  //这是位操作,控制LED1对应的端口</span><br></pre></td></tr></table></figure>
+
+<p>在STM32中 <code>GPIOB-&gt;ODR $= (0&lt;&lt;0) </code> 就类似于51单片机中的总线操作</p>
+<p>51单片机中通过关键字sbit来实现位定义， STM32没有这样的关键字，而是通过访问位带别名区来实现.</p>
+<h2 id="位带操作"><a href="#位带操作" class="headerlink" title="位带操作"></a>位带操作</h2><p>STM32中，有两个位置可以实现此操作，分别是部分片上外设和部分片上SRAM.</p>
+<p><img src="https://doc.embedfire.com/mcu/stm32/f103zhinanzhe/std/zh/latest/_images/GPIObi002.png" alt="STM32位带示意图"></p>
+<ol>
+<li>外设外带区的地址为：0X40000000~0X40100000，大小为1MB</li>
+</ol>
+<p>这1MB的大小在103系列大/中/小容量型号的单片机中包含了片上外设的全部寄存器， </p>
+<p>这些寄存器的地址为：0X40000000-0X40029FFF。</p>
+<p>外设位带区经过膨胀后的位带别名区地址为：0X42000000-0X43FFFFFF， </p>
+<p>这个地址仍然在CM3 片上外设的地址空间中</p>
+<ol start="2">
+<li>SRAM的位带区的地址为：0X2000 0000<del>X2010 0000，大小为1MB，经过膨胀后的位带别名区地址为：0X2200 0000</del>0X23FF FFFF， 大小为32MB。这个位操作用得比较少</li>
+</ol>
+<h2 id="位带地区和外设别名取的转换："><a href="#位带地区和外设别名取的转换：" class="headerlink" title="位带地区和外设别名取的转换："></a>位带地区和外设别名取的转换：</h2><p>关键：1个位膨胀成32个位</p>
+<h4 id="外设位带别名区地址"><a href="#外设位带别名区地址" class="headerlink" title="外设位带别名区地址"></a>外设位带别名区地址</h4><figure class="highlight c"><table><tr><td class="code"><pre><span class="line">AliasAddr= =<span class="number">0x42000000</span>+ (A<span class="number">-0x40000000</span>)*<span class="number">8</span>*<span class="number">4</span> +n*<span class="number">4</span></span><br></pre></td></tr></table></figure>
+
+<p>0X42000000是外设位带别名区的起始地址，0x40000000是外设位带区的起始地址，（A-0x40000000）表示该比特前面有多少个字节， 一个字节有8位，所以<em>8，一个位膨胀后是4个字节，所以</em>4，n表示该比特在A地址的序号，因为一个位经过膨胀后是四个字节，所以也*4。</p>
+<h4 id="SRAM位带别名区地址"><a href="#SRAM位带别名区地址" class="headerlink" title="SRAM位带别名区地址"></a>SRAM位带别名区地址</h4><figure class="highlight c"><table><tr><td class="code"><pre><span class="line">AliasAddr= =<span class="number">0x22000000</span>+ (A<span class="number">-0x20000000</span>)*<span class="number">8</span>*<span class="number">4</span> +n*<span class="number">4</span></span><br></pre></td></tr></table></figure>
+
+<p>统一公式：</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 把“位带地址+位序号”转换成别名地址的宏</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> BITBAND(addr, bitnum) ((addr &amp; 0xF0000000)+0x02000000+((addr &amp; 0x00FFFFFF)&lt;&lt;5)+(bitnum&lt;&lt;2))</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="软件实现"><a href="#软件实现" class="headerlink" title="软件实现"></a>软件实现</h2><p>LED的电亮</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">//在配置好环境后,即时钟打开,模式调整好后</span></span><br><span class="line"><span class="comment">//只需要将最后一步,点灯改为位操作</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> GPIOB_ODR (GPIO_BASE + 0x0C)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> PBout(n) ((GPIOB_ODR &amp; 0xF0000000)+0x02000000+(( GPIOB_ODR &amp; 0x00FFFFFF)&lt;&lt;5)+(n&lt;&lt;2))</span></span><br><span class="line"></span><br><span class="line">PBout(<span class="number">0</span>)=<span class="number">0</span>; <span class="comment">//开灯</span></span><br><span class="line">PBout(<span class="number">0</span>)=<span class="number">1</span>; <span class="comment">//关灯</span></span><br><span class="line"><span class="comment">//这里是绿灯,改为其他灯只需改成其他灯的初始化文件,如何将n改为1-&gt;蓝灯,n=5-&gt;红灯</span></span><br></pre></td></tr></table></figure>
+
+<p>KEY 的检测</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">//在配置好环境后,即时钟打开,模式调整好后</span></span><br><span class="line"><span class="comment">//只需要将最后一步,检测改为位操作</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> GPIOA_IDR (GPIOA_BASE + 0x08)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> PAin(n) ((GPIOA_IDR &amp; 0xF0000000)+0x02000000+(( GPIOA_IDR &amp; 0x00FFFFFF)&lt;&lt;5)+(n&lt;&lt;2))</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(PAin(n) == KEY_ON)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">while</span>(PAin(n) == KEY_ON);</span><br><span class="line">	LED_G_TEDDLE;<span class="comment">//此处写控制灯的电位发生反转</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="启动文件-了解"><a href="#启动文件-了解" class="headerlink" title="启动文件(了解)"></a>启动文件(了解)</h1><p><img src="https://doc.embedfire.com/mcu/stm32/f103zhinanzhe/std/zh/latest/_images/StdPer01.png" alt="详细说明见表"></p>
+<p>此处以最常用的hd为例,讲解启动文件</p>
+<p>参考资料 中文手册 第九章, 开发手册(英文)</p>
+<p>启动文件是上电之后第一个执行的文件</p>
+<h2 id="启动文件的作用"><a href="#启动文件的作用" class="headerlink" title="启动文件的作用"></a>启动文件的作用</h2><ol>
+<li>初始化堆栈指针()</li>
+<li>设置PC指针(程序每执行一步,PC指针加一)</li>
+</ol>
+<p>让PC指针 = Reset handler</p>
+<ol start="3">
+<li>初始化中断向量表</li>
+<li>配置系统时钟</li>
+<li>调用C库函数_main,最终到C的世界</li>
+</ol>
+<h2 id="启动文件的内容"><a href="#启动文件的内容" class="headerlink" title="启动文件的内容"></a>启动文件的内容</h2><p><img src="https://doc.embedfire.com/mcu/stm32/f103zhinanzhe/std/zh/latest/_images/Startu01.png" alt="启动文件使用的ARM汇编指令汇总"></p>
+<ol>
+<li>配置栈 - 放变量(局部变量) 函数调用的</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Stack_Size      EQU     0x00000400                         ;1k</span><br><span class="line"></span><br><span class="line">                AREA    STACK, NOINIT, READWRITE, ALIGN=3 ;分配1KB空间 不初始化 可读可写 8字节对齐 </span><br><span class="line">Stack_Mem       SPACE   Stack_Size                        </span><br><span class="line">__initial_sp    ;紧跟着SPCE语句,表示出栈</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>配置堆 - 主要用于动态内存的分配, malloc()</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Heap_Size     EQU     0x00000200 ;512Byte</span><br><span class="line"></span><br><span class="line">            AREA    HEAP, NOINIT, READWRITE, ALIGN=3 </span><br><span class="line">__heap_base</span><br><span class="line">Heap_Mem      SPACE   Heap_Size ;分配空间</span><br><span class="line">__heap_limit</span><br><span class="line"></span><br><span class="line">PRESERVE 8 ;表示当前堆栈以8字节对齐</span><br><span class="line">TUHUMB     ;兼容老版本?</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>初始化中断向量表</li>
+</ol>
+<p>当内核响应了一个发生的异常,对应的异常服务例程(ESR)执行. 根据每个向量(数字)对应一个异常,每个向量表对应一个地址,通过这个地址来访问中断服务程序.</p>
+<p>数字越小,中断优先级越高</p>
+<p>灰色代表内核,白色代表外设</p>
+<p><img src="https://doc.embedfire.com/mcu/stm32/f103zhinanzhe/std/zh/latest/_images/Startu02.png" alt="F103向量表"></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">AREA    RESET, DATA, READONLY</span><br><span class="line">EXPORT  __Vectors       ; </span><br><span class="line">EXPORT  __Vectors_End  </span><br><span class="line">EXPORT  __Vectors_Size</span><br><span class="line"></span><br><span class="line">; 函数名对应的就是地址</span><br><span class="line">__Vectors  DCD   __initial_sp        ;栈顶地址</span><br><span class="line">        DCD   Reset_Handler       ;复位程序地址</span><br><span class="line">        DCD   NMI_Handler         ;不可屏蔽中断 和上面的表一致</span><br><span class="line">        DCD   HardFault_Handler</span><br><span class="line">        DCD   MemManage_Handler</span><br><span class="line">        DCD   BusFault_Handler</span><br><span class="line">        DCD   UsageFault_Handler</span><br><span class="line">        DCD   0                    ; 0 表示保留</span><br><span class="line">        DCD   0</span><br><span class="line">        DCD   0</span><br><span class="line">        DCD   0</span><br><span class="line">        DCD   SVC_Handler</span><br><span class="line">        DCD   DebugMon_Handler</span><br><span class="line">        DCD   0</span><br><span class="line">        DCD   PendSV_Handler</span><br><span class="line">        DCD   SysTick_Handler</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">;外部中断开始</span><br><span class="line">        DCD   WWDG_IRQHandler</span><br><span class="line">        DCD   PVD_IRQHandler</span><br><span class="line">        DCD   TAMPER_IRQHandler</span><br><span class="line"></span><br><span class="line">;限于篇幅，中间代码省略</span><br><span class="line">        DCD   DMA2_Channel2_IRQHandler</span><br><span class="line">        DCD   DMA2_Channel3_IRQHandler</span><br><span class="line">        DCD   DMA2_Channel4_5_IRQHandler</span><br><span class="line">__Vectors_End</span><br><span class="line">__Vectors_Size EQU __Vectors_End - __Vectors</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>复位程序</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">AREA |.text|, CODE, READONLY</span><br></pre></td></tr></table></figure>
+
+<p>定义一个名称为.text的代码段，可读。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Reset_Handler PROC ;定义子程序</span><br><span class="line">            EXPORT  Reset_Handler    [WEAK] ;弱定义, 这个可以由C语言实现,如果用户没定义</span><br><span class="line">            IMPORT  SystemInit       ;插入 相对于C中的extern </span><br><span class="line">            IMPORT  __main           ;插入 C库函数- 初始化堆栈 最终调用我们写的main函数 实现从汇编到C语言的世界</span><br><span class="line"></span><br><span class="line">            LDR     R0, =SystemInit  ;系统时钟配置函数,用户配置</span><br><span class="line">            BLX     R0               ;BX执行完返回</span><br><span class="line">            LDR     R0, =__main</span><br><span class="line">            BX      R0               ;BX执行完不用返回</span><br><span class="line">            ENDP    ;结束子程序,于PROC一起使用</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://doc.embedfire.com/mcu/stm32/f103zhinanzhe/std/zh/latest/_images/Startu03.png" alt="CM4内核的指令"></p>
+<ol start="5">
+<li>中断服务函数</li>
+</ol>
+<p>都是可以自己修改的,因为是[weak]弱定义,如果我们自己写了会执行我们自己写的,如果没有的写的话就会执行汇编语言自己写的,这里注意 如果我们自己写的话 函数名一定要写对!!!!!</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">NMI_Handler     PROC    ;系统异常</span><br><span class="line">                EXPORT  NMI_Handler           [WEAK]</span><br><span class="line">                B       .  ;这个表示可以无限循环,可以被其他函数调用 这函数可以在C语言中实现</span><br><span class="line">                ENDP</span><br><span class="line"></span><br><span class="line">;限于篇幅，中间代码省略</span><br><span class="line">SysTick_Handler PROC</span><br><span class="line">                EXPORT  SysTick_Handler       [WEAK]</span><br><span class="line">                B       .</span><br><span class="line">                ENDP</span><br><span class="line"></span><br><span class="line">Default_Handler PROC    ;外部中断</span><br><span class="line">                EXPORT  WWDG_IRQHandler       [WEAK]</span><br><span class="line">                EXPORT  PVD_IRQHandler        [WEAK]</span><br><span class="line">                EXPORT  TAMP_STAMP_IRQHandler [WEAK]</span><br><span class="line"></span><br><span class="line">;限于篇幅，中间代码省略</span><br><span class="line">LTDC_IRQHandler</span><br><span class="line">LTDC_ER_IRQHandler</span><br><span class="line">DMA2D_IRQHandler</span><br><span class="line">                B       .</span><br><span class="line">                ENDP</span><br></pre></td></tr></table></figure>
+
+<ol start="6">
+<li>堆栈的初始化</li>
+</ol>
+<p>程序的开头我们分配了堆和栈的大小,以及起始地址和结束地址</p>
+<p>这里是用C语言来实现初始化的</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1 ALIGN</span><br><span class="line"></span><br><span class="line">ALIGN：对指令或者数据存放的地址进行对齐，后面会跟一个立即数。缺省表示4字节对齐。</span><br><span class="line">;------------------------------------------------------</span><br><span class="line">;用户栈和堆初始化,由C库函数_main来完成</span><br><span class="line">IF      :DEF:__MICROLIB  ;这个宏在KEIL里面开启,开发环境ide;TARGET-MICROLIB 这个勾勾上</span><br><span class="line"></span><br><span class="line">EXPORT  __initial_sp ;知道栈和堆的地址</span><br><span class="line">EXPORT  __heap_base </span><br><span class="line">EXPORT  __heap_limit</span><br><span class="line"> </span><br><span class="line">ELSE ;如果</span><br><span class="line"></span><br><span class="line">IMPORT  __use_two_region_memory  ; 这个函数由用户自己实现</span><br><span class="line">EXPORT  __user_initial_stackheap </span><br><span class="line"></span><br><span class="line">__user_initial_stackheap</span><br><span class="line"></span><br><span class="line">LDR     R0, =  Heap_Mem                   ;这是CPU的暂存寄存器,CPU执行程序用的</span><br><span class="line">LDR     R1, =(Stack_Mem + Stack_Size)</span><br><span class="line">LDR     R2, = (Heap_Mem +  Heap_Size)</span><br><span class="line">LDR     R3, = Stack_Mem</span><br><span class="line">BX      LR</span><br><span class="line"></span><br><span class="line">ALIGN</span><br><span class="line"></span><br><span class="line">ENDIF</span><br></pre></td></tr></table></figure>
+
+<h2 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h2><ul>
+<li><p>分配栈,堆的空间</p>
+</li>
+<li><p>中断向量表 </p>
+</li>
+<li><p>复位程序- 系统上电执行的第一个程序</p>
+</li>
+<li><p>中断服务程序,防止用户中断服务程序编写错误,进入无限循环</p>
+</li>
+<li><p>用户堆和栈的初始化</p>
+</li>
+<li><p>最后就进入到c的世界                    </p>
+</li>
+</ul>
 ]]></content>
       <categories>
         <category>单片机</category>
