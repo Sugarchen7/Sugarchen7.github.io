@@ -1131,6 +1131,61 @@
       </tags>
   </entry>
   <entry>
+    <title>网站搭建以及优化改造</title>
+    <url>/2022/12/17/%E5%A6%82%E4%BD%95%E7%94%A8hexo%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%BD%91%E7%AB%99%E5%B9%B6%E4%BB%A5Next%E4%B8%BB%E9%A2%98%E4%B8%BA%E4%BE%8B%E6%9D%A5%E8%BF%9B%E8%A1%8C%E4%BC%98%E5%8C%96%E6%94%B9%E9%80%A0/</url>
+    <content><![CDATA[<h1 id="为什么我想搭建一个博客"><a href="#为什么我想搭建一个博客" class="headerlink" title="为什么我想搭建一个博客"></a>为什么我想搭建一个博客</h1><p>这里可以看这个视频:<a href="%5B%E4%B8%BA%E4%BB%80%E4%B9%88%E7%A8%8B%E5%BA%8F%E5%91%98%E5%BF%85%E9%A1%BB%E5%86%99%E6%8A%80%E6%9C%AF%E5%8D%9A%E5%AE%A2?%E4%BB%A5%E5%8F%8A%E5%A6%82%E4%BD%95%E5%86%99?%E5%8D%9A%E5%AE%A2%E5%9C%A8%E9%9D%A2%E8%AF%95%E6%97%B6%E7%9A%84%E5%8A%A0%E5%88%86%E5%8F%AF%E4%B8%8D%E6%98%AF%E4%B8%80%E7%82%B9%E7%82%B9,%E5%88%AB%E5%86%8D%E7%8A%B9%E8%B1%AB%E4%BA%86,%E5%BF%AB%E8%A1%8C%E5%8A%A8%E8%B5%B7%E6%9D%A5!_%E5%93%94%E5%93%A9%E5%93%94%E5%93%A9_bilibili%5D(https://www.bilibili.com/video/BV1Px411d74c/?spm_id_from=333.880.my_history.page.click&vd_source=1e56c5282fb34ebc3bc5d2b2b4c8d5a7)">为什么程序员必须写技术博客?以及如何写?博客在面试时的加分可不是一点点,别再犹豫了,快行动起来!</a> 建议配套视频同步搭建博客</p>
+<h1 id="如何用hexo搭建一个网站"><a href="#如何用hexo搭建一个网站" class="headerlink" title="如何用hexo搭建一个网站"></a>如何用hexo搭建一个网站</h1><h2 id="需要下载的工具"><a href="#需要下载的工具" class="headerlink" title="需要下载的工具"></a>需要下载的工具</h2><p>node：javascript运行环境</p>
+<p>vscode：代码编辑器</p>
+<p>git：版本控制工具</p>
+<h2 id="hexo的安装"><a href="#hexo的安装" class="headerlink" title="hexo的安装"></a>hexo的安装</h2><p>按下 win+R，输入cmd，打开系统的终端，输入</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install -g cnpm --registry=http://registry.npm.taobao.org	#安装淘宝的cnpm 管理器</span><br><span class="line">cnpm -v	#查看cnpm版本</span><br><span class="line">cnpm install -g hexo-cli    #安装hexo框架</span><br><span class="line">hexo -v	#查看hexo版本</span><br></pre></td></tr></table></figure>
+
+<h4 id="初始化博客"><a href="#初始化博客" class="headerlink" title="初始化博客"></a>初始化博客</h4><p>按下 win+R，输入cmd，打开系统的终端，输入</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mkdir blog	#创建blog目录</span><br><span class="line">cd blog	 #进入blog目录</span><br><span class="line">hexo init 	#生成博客 初始化博客</span><br></pre></td></tr></table></figure>
+
+<h4 id="预览博客"><a href="#预览博客" class="headerlink" title="预览博客"></a>预览博客</h4><p>在终端处输入</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo s</span><br></pre></td></tr></table></figure>
+
+<p>此时 可以在 <a href="http://localhost:4000/">http://localhost:4000/</a> 本地访问地址,这里面会生成一个默认的文章</p>
+<h4 id="创建一篇新的文章"><a href="#创建一篇新的文章" class="headerlink" title="创建一篇新的文章"></a>创建一篇新的文章</h4><p>一般用终端 在blog目录下输入:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo n &quot;我的第一篇文章&quot; #创建新的文章 &quot;里面是文章名称&quot;</span><br></pre></td></tr></table></figure>
+
+<h4 id="将blog远程部署到GitHub上"><a href="#将blog远程部署到GitHub上" class="headerlink" title="将blog远程部署到GitHub上"></a>将blog远程部署到GitHub上</h4><p>这样可以使别人在别人的电脑上就可以浏览你的博客</p>
+<ul>
+<li>创建一个GitHub账号</li>
+<li>Github创建一个新的仓库: 此时的仓库名必须是:YourGithubName.github.io</li>
+<li>按下 win+R，输入cmd，打开系统的终端，输入<code>cd blog</code>进入blog文件下</li>
+<li>输入<code>cnpm install --save hexo-deployer-git #在blog目录下安装git部署插件</code></li>
+<li>输入<code>_config.yml </code>#配置_config.yml ,一般使用记事本或者VSCODE打开 这里推荐VScode</li>
+</ul>
+<p>找到最后的位置</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Deployment</span><br><span class="line">## Docs: https://hexo.io/docs/deployment.html</span><br><span class="line">deploy:</span><br><span class="line"> 		type: git</span><br><span class="line">		repo: https://github.com/YourGithubName/YourGithubName.github.io.git</span><br><span class="line"> 		branch: main </span><br></pre></td></tr></table></figure>
+
+<p>划重点!!!!!注意缩进 并且:后面有一个空格!!!!</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 在部署博客前,win10用户注意!先输入</span><br><span class="line">git config --global user.email &quot;xxx&quot; #GitHub上的邮箱账号</span><br><span class="line">git config --global user.name &quot;xxx&quot;	#GitHub的名字</span><br><span class="line"># 然后再</span><br><span class="line">hexo d	#部署到Github仓库里</span><br><span class="line">https://YourGithubName.github.io/  #访问这个地址可以查看博客</span><br></pre></td></tr></table></figure>
+
+<p>之后更改了_config.yml的内容,需要重新部署到远程,只需要执行下面的操作</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo c	#清理一下</span><br><span class="line">hexo g	#生成</span><br><span class="line">hexo d	#部署到远程Github仓库</span><br><span class="line">https://YourGithubName.github.io/  #查看博客</span><br></pre></td></tr></table></figure>
+
+<p>一般部署成功后会收到一个邮件,然后等一会儿刷新就可以看到了!</p>
+<hr>
+<h1 id="如何美化博客"><a href="#如何美化博客" class="headerlink" title="如何美化博客"></a>如何美化博客</h1><ul>
+<li>本文使用的美化主题是butterfly,真的很好看!狠狠地安利了!!!!</li>
+</ul>
+<p>安装教程直接看官方教程就行,还会实时更新!!!</p>
+<p>这里是链接: <a href="https://butterfly.js.org/posts/21cfbf15/">官方教程</a></p>
+<p>这里也有: <a href="%5B%E4%BD%BF%E7%94%A8Hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%89%8B%E6%91%B8%E6%89%8B%E6%95%99%E5%AD%A6(7)%7C%E4%B8%BB%E9%A2%98%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8_%E5%93%94%E5%93%A9%E5%93%94%E5%93%A9_bilibili%5D(https://www.bilibili.com/video/BV1d64y1q7KS/?spm_id_from=333.788&vd_source=1e56c5282fb34ebc3bc5d2b2b4c8d5a7)">配套视频</a></p>
+<p><strong>真的很详细!!!</strong></p>
+]]></content>
+      <categories>
+        <category>博客搭建</category>
+      </categories>
+      <tags>
+        <tag>分享</tag>
+        <tag>博客搭建</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>如何使用Markdown+ Typora</title>
     <url>/2022/12/18/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8Markdown-Typora/</url>
     <content><![CDATA[<h1 id="如何使用Markdown-Typora"><a href="#如何使用Markdown-Typora" class="headerlink" title="如何使用Markdown+ Typora"></a>如何使用Markdown+ Typora</h1><h2 id="简要介绍"><a href="#简要介绍" class="headerlink" title="简要介绍"></a>简要介绍</h2><p><strong>Markdown</strong> 是一种轻量型标记语言, 是一种语法. 以 <code>.md</code> 结尾的文本文件就是 Markdown 文件. 相较于 <strong>Word</strong>, 它更加像是 <strong>HTML</strong> 语言或是 $\LaTeX$, 并不是最淳朴的那种”所见即所得”. 它处处透露着一种极简主义. 高效简洁清晰的同时, 又很简单. 看起来舒服, 语法简单, 尤其在处理纯文本上有很大的优势. </p>
@@ -1394,61 +1449,6 @@
       <tags>
         <tag>Tyraro</tag>
         <tag>Markdown</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>网站搭建以及优化改造</title>
-    <url>/2022/12/17/%E5%A6%82%E4%BD%95%E7%94%A8hexo%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%BD%91%E7%AB%99%E5%B9%B6%E4%BB%A5Next%E4%B8%BB%E9%A2%98%E4%B8%BA%E4%BE%8B%E6%9D%A5%E8%BF%9B%E8%A1%8C%E4%BC%98%E5%8C%96%E6%94%B9%E9%80%A0/</url>
-    <content><![CDATA[<h1 id="为什么我想搭建一个博客"><a href="#为什么我想搭建一个博客" class="headerlink" title="为什么我想搭建一个博客"></a>为什么我想搭建一个博客</h1><p>这里可以看这个视频:<a href="%5B%E4%B8%BA%E4%BB%80%E4%B9%88%E7%A8%8B%E5%BA%8F%E5%91%98%E5%BF%85%E9%A1%BB%E5%86%99%E6%8A%80%E6%9C%AF%E5%8D%9A%E5%AE%A2?%E4%BB%A5%E5%8F%8A%E5%A6%82%E4%BD%95%E5%86%99?%E5%8D%9A%E5%AE%A2%E5%9C%A8%E9%9D%A2%E8%AF%95%E6%97%B6%E7%9A%84%E5%8A%A0%E5%88%86%E5%8F%AF%E4%B8%8D%E6%98%AF%E4%B8%80%E7%82%B9%E7%82%B9,%E5%88%AB%E5%86%8D%E7%8A%B9%E8%B1%AB%E4%BA%86,%E5%BF%AB%E8%A1%8C%E5%8A%A8%E8%B5%B7%E6%9D%A5!_%E5%93%94%E5%93%A9%E5%93%94%E5%93%A9_bilibili%5D(https://www.bilibili.com/video/BV1Px411d74c/?spm_id_from=333.880.my_history.page.click&vd_source=1e56c5282fb34ebc3bc5d2b2b4c8d5a7)">为什么程序员必须写技术博客?以及如何写?博客在面试时的加分可不是一点点,别再犹豫了,快行动起来!</a> 建议配套视频同步搭建博客</p>
-<h1 id="如何用hexo搭建一个网站"><a href="#如何用hexo搭建一个网站" class="headerlink" title="如何用hexo搭建一个网站"></a>如何用hexo搭建一个网站</h1><h2 id="需要下载的工具"><a href="#需要下载的工具" class="headerlink" title="需要下载的工具"></a>需要下载的工具</h2><p>node：javascript运行环境</p>
-<p>vscode：代码编辑器</p>
-<p>git：版本控制工具</p>
-<h2 id="hexo的安装"><a href="#hexo的安装" class="headerlink" title="hexo的安装"></a>hexo的安装</h2><p>按下 win+R，输入cmd，打开系统的终端，输入</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install -g cnpm --registry=http://registry.npm.taobao.org	#安装淘宝的cnpm 管理器</span><br><span class="line">cnpm -v	#查看cnpm版本</span><br><span class="line">cnpm install -g hexo-cli    #安装hexo框架</span><br><span class="line">hexo -v	#查看hexo版本</span><br></pre></td></tr></table></figure>
-
-<h4 id="初始化博客"><a href="#初始化博客" class="headerlink" title="初始化博客"></a>初始化博客</h4><p>按下 win+R，输入cmd，打开系统的终端，输入</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mkdir blog	#创建blog目录</span><br><span class="line">cd blog	 #进入blog目录</span><br><span class="line">hexo init 	#生成博客 初始化博客</span><br></pre></td></tr></table></figure>
-
-<h4 id="预览博客"><a href="#预览博客" class="headerlink" title="预览博客"></a>预览博客</h4><p>在终端处输入</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo s</span><br></pre></td></tr></table></figure>
-
-<p>此时 可以在 <a href="http://localhost:4000/">http://localhost:4000/</a> 本地访问地址,这里面会生成一个默认的文章</p>
-<h4 id="创建一篇新的文章"><a href="#创建一篇新的文章" class="headerlink" title="创建一篇新的文章"></a>创建一篇新的文章</h4><p>一般用终端 在blog目录下输入:</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo n &quot;我的第一篇文章&quot; #创建新的文章 &quot;里面是文章名称&quot;</span><br></pre></td></tr></table></figure>
-
-<h4 id="将blog远程部署到GitHub上"><a href="#将blog远程部署到GitHub上" class="headerlink" title="将blog远程部署到GitHub上"></a>将blog远程部署到GitHub上</h4><p>这样可以使别人在别人的电脑上就可以浏览你的博客</p>
-<ul>
-<li>创建一个GitHub账号</li>
-<li>Github创建一个新的仓库: 此时的仓库名必须是:YourGithubName.github.io</li>
-<li>按下 win+R，输入cmd，打开系统的终端，输入<code>cd blog</code>进入blog文件下</li>
-<li>输入<code>cnpm install --save hexo-deployer-git #在blog目录下安装git部署插件</code></li>
-<li>输入<code>_config.yml </code>#配置_config.yml ,一般使用记事本或者VSCODE打开 这里推荐VScode</li>
-</ul>
-<p>找到最后的位置</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Deployment</span><br><span class="line">## Docs: https://hexo.io/docs/deployment.html</span><br><span class="line">deploy:</span><br><span class="line"> 		type: git</span><br><span class="line">		repo: https://github.com/YourGithubName/YourGithubName.github.io.git</span><br><span class="line"> 		branch: main </span><br></pre></td></tr></table></figure>
-
-<p>划重点!!!!!注意缩进 并且:后面有一个空格!!!!</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 在部署博客前,win10用户注意!先输入</span><br><span class="line">git config --global user.email &quot;xxx&quot; #GitHub上的邮箱账号</span><br><span class="line">git config --global user.name &quot;xxx&quot;	#GitHub的名字</span><br><span class="line"># 然后再</span><br><span class="line">hexo d	#部署到Github仓库里</span><br><span class="line">https://YourGithubName.github.io/  #访问这个地址可以查看博客</span><br></pre></td></tr></table></figure>
-
-<p>之后更改了_config.yml的内容,需要重新部署到远程,只需要执行下面的操作</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo c	#清理一下</span><br><span class="line">hexo g	#生成</span><br><span class="line">hexo d	#部署到远程Github仓库</span><br><span class="line">https://YourGithubName.github.io/  #查看博客</span><br></pre></td></tr></table></figure>
-
-<p>一般部署成功后会收到一个邮件,然后等一会儿刷新就可以看到了!</p>
-<hr>
-<h1 id="如何美化博客"><a href="#如何美化博客" class="headerlink" title="如何美化博客"></a>如何美化博客</h1><ul>
-<li>本文使用的美化主题是butterfly,真的很好看!狠狠地安利了!!!!</li>
-</ul>
-<p>安装教程直接看官方教程就行,还会实时更新!!!</p>
-<p>这里是链接: <a href="https://butterfly.js.org/posts/21cfbf15/">官方教程</a></p>
-<p>这里也有: <a href="%5B%E4%BD%BF%E7%94%A8Hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%89%8B%E6%91%B8%E6%89%8B%E6%95%99%E5%AD%A6(7)%7C%E4%B8%BB%E9%A2%98%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8_%E5%93%94%E5%93%A9%E5%93%94%E5%93%A9_bilibili%5D(https://www.bilibili.com/video/BV1d64y1q7KS/?spm_id_from=333.788&vd_source=1e56c5282fb34ebc3bc5d2b2b4c8d5a7)">配套视频</a></p>
-<p><strong>真的很详细!!!</strong></p>
-]]></content>
-      <categories>
-        <category>博客搭建</category>
-      </categories>
-      <tags>
-        <tag>分享</tag>
-        <tag>博客搭建</tag>
       </tags>
   </entry>
   <entry>
